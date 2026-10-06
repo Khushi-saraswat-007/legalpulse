@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LegalPulse risk report (produced by reasoning, consumed by frontend)",
+  "type": "object",
+  "required": ["contract_id", "changes", "graph", "risks"],
+  "properties": {
+    "contract_id": {"type": "string"},
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["change_type", "summary"],
+        "properties": {
+          "old_clause_id": {"type": ["string", "null"]},
+          "new_clause_id": {"type": ["string", "null"]},
+          "change_type": {"enum": ["modified", "added", "deleted", "split", "merged", "renumbered", "unchanged"]},
+          "summary": {"type": "string"}
+        }
+      }
+    },
+    "graph": {
+      "type": "object",
+      "required": ["nodes", "edges"],
+      "properties": {
+        "nodes": {"type": "array", "items": {"type": "object", "required": ["id", "type", "label"]}},
+        "edges": {"type": "array", "items": {"type": "object", "required": ["source", "target", "type"]}}
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rank", "severity", "trigger_clause", "impacted_clauses", "explanation"],
+        "properties": {
+          "rank": {"type": "integer"},
+          "severity": {"enum": ["low", "medium", "high", "critical"]},
+          "score": {"type": "number"},
+          "trigger_clause": {"type": "string"},
+          "impacted_clauses": {"type": "array", "items": {"type": "string"}},
+          "explanation": {"type": "string"}
+        }
+      }
+    }
+  }
+}

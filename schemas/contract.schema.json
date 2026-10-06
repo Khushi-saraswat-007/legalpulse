@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LegalPulse contract output (produced by nlp_core)",
+  "type": "object",
+  "required": ["contract_id", "version", "clauses"],
+  "properties": {
+    "contract_id": {"type": "string"},
+    "version": {"type": "string"},
+    "clauses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["clause_id", "number", "text"],
+        "properties": {
+          "clause_id": {"type": "string"},
+          "number": {"type": "string"},
+          "heading": {"type": "string"},
+          "text": {"type": "string"},
+          "parties": {"type": "array", "items": {"type": "string"}},
+          "obligation_type": {"type": "string"},
+          "deadline": {"type": ["string", "null"]},
+          "defined_terms": {"type": "array", "items": {"type": "string"}},
+          "references": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "contradictions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["clause_a", "clause_b", "label", "score"],
+        "properties": {
+          "clause_a": {"type": "string"},
+          "clause_b": {"type": "string"},
+          "label": {"enum": ["entailment", "contradiction", "neutral"]},
+          "score": {"type": "number"},
+          "explanation": {"type": "string"}
+        }
+      }
+    }
+  }
+}

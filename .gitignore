@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+*.db
+node_modules/
+dist/
+.ipynb_checkpoints/
+data/raw/
+data/models/
+.DS_Store

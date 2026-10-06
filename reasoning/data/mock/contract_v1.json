@@ -1,0 +1,11 @@
+{
+  "contract_id": "c001", "version": "v1",
+  "clauses": [
+    {"clause_id": "c001_1", "number": "1", "heading": "Definitions", "text": "\"Effective Date\" means the date of signing.", "parties": ["Supplier", "Buyer"], "obligation_type": "definition", "deadline": null, "defined_terms": ["Effective Date"], "references": []},
+    {"clause_id": "c001_5", "number": "5", "heading": "Payment", "text": "Buyer shall pay invoices within 30 days of the Effective Date.", "parties": ["Buyer"], "obligation_type": "payment", "deadline": "30 days", "defined_terms": ["Effective Date"], "references": []},
+    {"clause_id": "c001_9", "number": "9", "heading": "Penalty", "text": "A penalty applies if payment under Clause 5 is late.", "parties": ["Buyer"], "obligation_type": "penalty", "deadline": null, "defined_terms": [], "references": ["c001_5"]},
+    {"clause_id": "c001_12", "number": "12", "heading": "Termination", "text": "Either party may terminate with 30 days notice. Clause 9 penalties survive termination.", "parties": ["Supplier", "Buyer"], "obligation_type": "termination", "deadline": "30 days", "defined_terms": [], "references": ["c001_9"]},
+    {"clause_id": "c001_14", "number": "14", "heading": "Governing Law", "text": "This agreement is governed by the laws of India.", "parties": [], "obligation_type": "governing_law", "deadline": null, "defined_terms": [], "references": []}
+  ],
+  "contradictions": []
+}
