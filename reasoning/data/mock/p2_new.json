@@ -1,0 +1,175 @@
+{
+  "contract_id": "p2",
+  "version": "v2",
+  "clauses": [
+    {
+      "clause_id": "p2v2_1",
+      "number": "1",
+      "heading": "Definitions",
+      "text": "\"Services\" means the services in Schedule A. \"Fees\" means the amounts set out in Schedule B.",
+      "parties": [
+        "Provider",
+        "Client"
+      ],
+      "obligation_type": "definition",
+      "deadline": null,
+      "defined_terms": [
+        "Services",
+        "Fees"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "p2v2_2",
+      "number": "2",
+      "heading": "Services",
+      "text": "Provider shall perform the Services with reasonable skill and care.",
+      "parties": [
+        "Provider"
+      ],
+      "obligation_type": "services",
+      "deadline": null,
+      "defined_terms": [
+        "Services"
+      ],
+      "references": [
+        "p2v2_1"
+      ]
+    },
+    {
+      "clause_id": "p2v2_3",
+      "number": "3",
+      "heading": "Fees",
+      "text": "Client shall pay the Fees monthly in arrears.",
+      "parties": [
+        "Client"
+      ],
+      "obligation_type": "payment",
+      "deadline": "monthly",
+      "defined_terms": [
+        "Fees"
+      ],
+      "references": [
+        "p2v2_1"
+      ]
+    },
+    {
+      "clause_id": "p2v2_4",
+      "number": "4",
+      "heading": "Intellectual Property",
+      "text": "All work product created under this agreement belongs to Client.",
+      "parties": [
+        "Provider",
+        "Client"
+      ],
+      "obligation_type": "ip",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p2v2_5",
+      "number": "5",
+      "heading": "Confidentiality",
+      "text": "Provider shall keep all Client data confidential.",
+      "parties": [
+        "Provider"
+      ],
+      "obligation_type": "confidentiality",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p2v2_6",
+      "number": "6",
+      "heading": "Insurance",
+      "text": "Provider shall maintain liability insurance of at least 2,500,000 rupees.",
+      "parties": [
+        "Provider"
+      ],
+      "obligation_type": "insurance",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p2v2_7",
+      "number": "7",
+      "heading": "Subcontracting",
+      "text": "Provider may not subcontract the Services without Client's written consent.",
+      "parties": [
+        "Provider",
+        "Client"
+      ],
+      "obligation_type": "subcontracting",
+      "deadline": null,
+      "defined_terms": [
+        "Services"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "p2v2_8",
+      "number": "8",
+      "heading": "Records and Audit",
+      "text": "Provider shall keep accurate records of all Services for 5 years, and Client may audit those records once a year on 14 days notice.",
+      "parties": [
+        "Provider",
+        "Client"
+      ],
+      "obligation_type": "records",
+      "deadline": "5 years",
+      "defined_terms": [
+        "Services"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "p2v2_9",
+      "number": "9",
+      "heading": "Termination",
+      "text": "Either party may terminate on 60 days notice. Fees due under Clause 3 for work already done remain payable.",
+      "parties": [
+        "Provider",
+        "Client"
+      ],
+      "obligation_type": "termination",
+      "deadline": "60 days",
+      "defined_terms": [
+        "Fees"
+      ],
+      "references": [
+        "p2v2_3"
+      ]
+    },
+    {
+      "clause_id": "p2v2_10",
+      "number": "10",
+      "heading": "Governing Law",
+      "text": "This agreement is governed by Indian law.",
+      "parties": [
+        "Provider",
+        "Client"
+      ],
+      "obligation_type": "governing_law",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p2v2_11",
+      "number": "11",
+      "heading": "Non-Solicitation",
+      "text": "Client shall not hire Provider's employees during this agreement and for 12 months after it ends.",
+      "parties": [
+        "Client"
+      ],
+      "obligation_type": "non_solicitation",
+      "deadline": "12 months",
+      "defined_terms": [],
+      "references": []
+    }
+  ],
+  "contradictions": []
+}

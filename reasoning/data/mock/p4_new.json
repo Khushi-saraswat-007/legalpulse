@@ -1,0 +1,177 @@
+{
+  "contract_id": "p4",
+  "version": "v2",
+  "clauses": [
+    {
+      "clause_id": "p4v2_1",
+      "number": "1",
+      "heading": "Definitions",
+      "text": "\"Software\" means the licensed program. \"Licence Fee\" means the annual fee. \"Territory\" means India.",
+      "parties": [
+        "Licensor",
+        "Licensee"
+      ],
+      "obligation_type": "definition",
+      "deadline": null,
+      "defined_terms": [
+        "Software",
+        "Licence Fee",
+        "Territory"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "p4v2_2",
+      "number": "2",
+      "heading": "Grant",
+      "text": "Licensor grants Licensee an exclusive licence to use the Software in the Territory.",
+      "parties": [
+        "Licensor",
+        "Licensee"
+      ],
+      "obligation_type": "grant",
+      "deadline": null,
+      "defined_terms": [
+        "Software",
+        "Territory"
+      ],
+      "references": [
+        "p4v2_1"
+      ]
+    },
+    {
+      "clause_id": "p4v2_3",
+      "number": "3",
+      "heading": "Licence Fee",
+      "text": "Within 15 days of receiving an invoice, Licensee shall pay the annual Licence Fee.",
+      "parties": [
+        "Licensee"
+      ],
+      "obligation_type": "payment",
+      "deadline": "15 days",
+      "defined_terms": [
+        "Licence Fee"
+      ],
+      "references": [
+        "p4v2_1"
+      ]
+    },
+    {
+      "clause_id": "p4v2_4",
+      "number": "4",
+      "heading": "Restrictions",
+      "text": "Licensee shall not copy or modify the Software.",
+      "parties": [
+        "Licensee"
+      ],
+      "obligation_type": "restriction",
+      "deadline": null,
+      "defined_terms": [
+        "Software"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "p4v2_5",
+      "number": "5",
+      "heading": "Support",
+      "text": "Licensor shall provide support 24 hours a day for the licence term.",
+      "parties": [
+        "Licensor"
+      ],
+      "obligation_type": "support",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p4v2_6",
+      "number": "6",
+      "heading": "Updates",
+      "text": "Licensee is entitled to all updates, at an additional charge.",
+      "parties": [
+        "Licensor",
+        "Licensee"
+      ],
+      "obligation_type": "updates",
+      "deadline": null,
+      "defined_terms": [],
+      "references": [
+        "p4v2_3"
+      ]
+    },
+    {
+      "clause_id": "p4v2_7",
+      "number": "7",
+      "heading": "Data Protection",
+      "text": "Licensor shall delete Licensee data within 30 days of termination.",
+      "parties": [
+        "Licensor"
+      ],
+      "obligation_type": "data_protection",
+      "deadline": "30 days",
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p4v2_8",
+      "number": "8",
+      "heading": "Indemnity",
+      "text": "Licensor shall indemnify Licensee against third-party intellectual property claims, except as provided in Clause 4.",
+      "parties": [
+        "Licensor"
+      ],
+      "obligation_type": "indemnity",
+      "deadline": null,
+      "defined_terms": [],
+      "references": [
+        "p4v2_4"
+      ]
+    },
+    {
+      "clause_id": "p4v2_9",
+      "number": "9",
+      "heading": "Termination",
+      "text": "Licensor may terminate this agreement if Licensee breaches Clause 4.",
+      "parties": [
+        "Licensor"
+      ],
+      "obligation_type": "termination",
+      "deadline": null,
+      "defined_terms": [],
+      "references": [
+        "p4v2_4"
+      ]
+    },
+    {
+      "clause_id": "p4v2_10",
+      "number": "10",
+      "heading": "Governing Law",
+      "text": "This agreement is governed by the laws of India.",
+      "parties": [
+        "Licensor",
+        "Licensee"
+      ],
+      "obligation_type": "governing_law",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p4v2_11",
+      "number": "11",
+      "heading": "Termination Protection",
+      "text": "Notwithstanding anything in Clause 9, Licensor may not terminate this agreement during the first 12 months.",
+      "parties": [
+        "Licensor"
+      ],
+      "obligation_type": "termination",
+      "deadline": "12 months",
+      "defined_terms": [],
+      "references": [
+        "p4v2_9"
+      ]
+    }
+  ],
+  "contradictions": []
+}
