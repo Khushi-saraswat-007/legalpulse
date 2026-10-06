@@ -1,0 +1,154 @@
+{
+  "pair": "p3",
+  "description": "Lease: deletion, reversal of a rule, and an added clause that creates a contradiction",
+  "changes": [
+    {
+      "old": [
+        "p3v1_1"
+      ],
+      "new": [
+        "p3v2_1"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "p3v1_2"
+      ],
+      "new": [
+        "p3v2_2"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "p3v1_3"
+      ],
+      "new": [
+        "p3v2_3"
+      ],
+      "change_type": "modified",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "rent 25,000 -> 30,000"
+    },
+    {
+      "old": [
+        "p3v1_4"
+      ],
+      "new": [
+        "p3v2_4"
+      ],
+      "change_type": "modified",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "deposit 2 -> 3 months"
+    },
+    {
+      "old": [
+        "p3v1_5"
+      ],
+      "new": [
+        "p3v2_5"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "text unchanged, depends on rent clause"
+    },
+    {
+      "old": [
+        "p3v1_6"
+      ],
+      "new": [
+        "p3v2_6"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": true,
+      "note": "reworded, same meaning"
+    },
+    {
+      "old": [
+        "p3v1_7"
+      ],
+      "new": [
+        "p3v2_7"
+      ],
+      "change_type": "modified",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "sublet: consent required -> notice only (reverses the rule)"
+    },
+    {
+      "old": [
+        "p3v1_8"
+      ],
+      "new": [],
+      "change_type": "deleted",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "landlord entry right removed"
+    },
+    {
+      "old": [
+        "p3v1_9"
+      ],
+      "new": [
+        "p3v2_8"
+      ],
+      "change_type": "renumbered",
+      "renumbered": true,
+      "reworded_only": false,
+      "note": "renumbered only"
+    },
+    {
+      "old": [
+        "p3v1_10"
+      ],
+      "new": [
+        "p3v2_9"
+      ],
+      "change_type": "modified",
+      "renumbered": true,
+      "reworded_only": false,
+      "note": "extra restriction added AND renumbered 10 -> 9"
+    },
+    {
+      "old": [
+        "p3v1_11"
+      ],
+      "new": [
+        "p3v2_10"
+      ],
+      "change_type": "renumbered",
+      "renumbered": true,
+      "reworded_only": false,
+      "note": "renumbered only"
+    },
+    {
+      "old": [],
+      "new": [
+        "p3v2_11"
+      ],
+      "change_type": "added",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "early termination clause; contradicts clause 9"
+    }
+  ],
+  "expected_impacts": {
+    "p3v2_3": [
+      "p3v2_4",
+      "p3v2_5",
+      "p3v2_9"
+    ]
+  },
+  "expected_impacts_note": "If the key clause changes, these clauses MUST appear in trace_impact output (recall check, not an exhaustive list)."
+}

@@ -1,0 +1,162 @@
+{
+  "contract_id": "p2",
+  "version": "v1",
+  "clauses": [
+    {
+      "clause_id": "p2v1_1",
+      "number": "1",
+      "heading": "Definitions",
+      "text": "\"Services\" means the services in Schedule A. \"Fees\" means the amounts set out in Schedule B.",
+      "parties": [
+        "Provider",
+        "Client"
+      ],
+      "obligation_type": "definition",
+      "deadline": null,
+      "defined_terms": [
+        "Services",
+        "Fees"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "p2v1_2",
+      "number": "2",
+      "heading": "Services",
+      "text": "Provider shall perform the Services with reasonable skill and care.",
+      "parties": [
+        "Provider"
+      ],
+      "obligation_type": "services",
+      "deadline": null,
+      "defined_terms": [
+        "Services"
+      ],
+      "references": [
+        "p2v1_1"
+      ]
+    },
+    {
+      "clause_id": "p2v1_3",
+      "number": "3",
+      "heading": "Fees",
+      "text": "Client shall pay the Fees monthly in advance.",
+      "parties": [
+        "Client"
+      ],
+      "obligation_type": "payment",
+      "deadline": "monthly",
+      "defined_terms": [
+        "Fees"
+      ],
+      "references": [
+        "p2v1_1"
+      ]
+    },
+    {
+      "clause_id": "p2v1_4",
+      "number": "4",
+      "heading": "IP and Confidentiality",
+      "text": "All work product created under this agreement belongs to Client. Provider shall keep all Client data confidential.",
+      "parties": [
+        "Provider",
+        "Client"
+      ],
+      "obligation_type": "ip",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p2v1_5",
+      "number": "5",
+      "heading": "Insurance",
+      "text": "Provider shall maintain liability insurance of at least 1,000,000 rupees.",
+      "parties": [
+        "Provider"
+      ],
+      "obligation_type": "insurance",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p2v1_6",
+      "number": "6",
+      "heading": "Subcontracting",
+      "text": "Provider may not subcontract the Services without Client's written consent.",
+      "parties": [
+        "Provider",
+        "Client"
+      ],
+      "obligation_type": "subcontracting",
+      "deadline": null,
+      "defined_terms": [
+        "Services"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "p2v1_7",
+      "number": "7",
+      "heading": "Audit Rights",
+      "text": "Client may audit Provider's records once a year on 14 days notice.",
+      "parties": [
+        "Provider",
+        "Client"
+      ],
+      "obligation_type": "audit",
+      "deadline": "14 days",
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p2v1_8",
+      "number": "8",
+      "heading": "Records",
+      "text": "Provider shall keep accurate records of all Services for 5 years.",
+      "parties": [
+        "Provider"
+      ],
+      "obligation_type": "records",
+      "deadline": "5 years",
+      "defined_terms": [
+        "Services"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "p2v1_9",
+      "number": "9",
+      "heading": "Termination",
+      "text": "Either party may terminate on 60 days notice. Fees due under Clause 3 for work already done remain payable.",
+      "parties": [
+        "Provider",
+        "Client"
+      ],
+      "obligation_type": "termination",
+      "deadline": "60 days",
+      "defined_terms": [
+        "Fees"
+      ],
+      "references": [
+        "p2v1_3"
+      ]
+    },
+    {
+      "clause_id": "p2v1_10",
+      "number": "10",
+      "heading": "Governing Law",
+      "text": "This agreement is governed by Indian law.",
+      "parties": [
+        "Provider",
+        "Client"
+      ],
+      "obligation_type": "governing_law",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    }
+  ],
+  "contradictions": []
+}

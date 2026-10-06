@@ -1,0 +1,144 @@
+{
+  "pair": "p4",
+  "description": "Software licence: subtle one-word changes and exception/override clauses",
+  "changes": [
+    {
+      "old": [
+        "p4v1_1"
+      ],
+      "new": [
+        "p4v2_1"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "p4v1_2"
+      ],
+      "new": [
+        "p4v2_2"
+      ],
+      "change_type": "modified",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "ONE WORD: non-exclusive -> exclusive (hard positive: high text overlap, big legal change)"
+    },
+    {
+      "old": [
+        "p4v1_3"
+      ],
+      "new": [
+        "p4v2_3"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": true,
+      "note": "reworded, same meaning"
+    },
+    {
+      "old": [
+        "p4v1_4"
+      ],
+      "new": [
+        "p4v2_4"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "p4v1_5"
+      ],
+      "new": [
+        "p4v2_5"
+      ],
+      "change_type": "modified",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "business hours -> 24 hours a day"
+    },
+    {
+      "old": [
+        "p4v1_6"
+      ],
+      "new": [
+        "p4v2_6"
+      ],
+      "change_type": "modified",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "free updates -> paid updates (meaning flipped, high overlap)"
+    },
+    {
+      "old": [
+        "p4v1_7"
+      ],
+      "new": [
+        "p4v2_7"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "p4v1_8"
+      ],
+      "new": [
+        "p4v2_8"
+      ],
+      "change_type": "modified",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "indemnity now has an 'except as provided' carve-out"
+    },
+    {
+      "old": [
+        "p4v1_9"
+      ],
+      "new": [
+        "p4v2_9"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "p4v1_10"
+      ],
+      "new": [
+        "p4v2_10"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [],
+      "new": [
+        "p4v2_11"
+      ],
+      "change_type": "added",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "'notwithstanding' override of clause 9"
+    }
+  ],
+  "expected_impacts": {
+    "p4v2_4": [
+      "p4v2_8",
+      "p4v2_9",
+      "p4v2_11"
+    ]
+  },
+  "expected_impacts_note": "If the key clause changes, these clauses MUST appear in trace_impact output (recall check, not an exhaustive list)."
+}

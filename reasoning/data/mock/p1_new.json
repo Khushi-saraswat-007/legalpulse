@@ -1,0 +1,190 @@
+{
+  "contract_id": "p1",
+  "version": "v2",
+  "clauses": [
+    {
+      "clause_id": "p1v2_1",
+      "number": "1",
+      "heading": "Definitions",
+      "text": "\"Effective Date\" means the date of signing. \"Delivery Date\" means the date set out in the purchase order.",
+      "parties": [
+        "Supplier",
+        "Buyer"
+      ],
+      "obligation_type": "definition",
+      "deadline": null,
+      "defined_terms": [
+        "Effective Date",
+        "Delivery Date"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "p1v2_2",
+      "number": "2",
+      "heading": "Term",
+      "text": "This agreement runs for 2 years from the Effective Date.",
+      "parties": [
+        "Supplier",
+        "Buyer"
+      ],
+      "obligation_type": "term",
+      "deadline": "2 years",
+      "defined_terms": [
+        "Effective Date"
+      ],
+      "references": [
+        "p1v2_1"
+      ]
+    },
+    {
+      "clause_id": "p1v2_3",
+      "number": "3",
+      "heading": "Delivery",
+      "text": "On or before the Delivery Date, Supplier must deliver the goods.",
+      "parties": [
+        "Supplier"
+      ],
+      "obligation_type": "delivery",
+      "deadline": null,
+      "defined_terms": [
+        "Delivery Date"
+      ],
+      "references": [
+        "p1v2_1"
+      ]
+    },
+    {
+      "clause_id": "p1v2_4",
+      "number": "4",
+      "heading": "Price",
+      "text": "The price per unit is fixed for the Term and may not be increased.",
+      "parties": [
+        "Supplier",
+        "Buyer"
+      ],
+      "obligation_type": "price",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p1v2_5",
+      "number": "5",
+      "heading": "Payment",
+      "text": "Buyer shall pay each invoice within 60 days of the invoice date.",
+      "parties": [
+        "Buyer"
+      ],
+      "obligation_type": "payment",
+      "deadline": "60 days",
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p1v2_6",
+      "number": "6",
+      "heading": "Late Payment",
+      "text": "If Buyer fails to pay under Clause 5, interest of 2% per month applies to the overdue amount.",
+      "parties": [
+        "Buyer"
+      ],
+      "obligation_type": "penalty",
+      "deadline": null,
+      "defined_terms": [],
+      "references": [
+        "p1v2_5"
+      ]
+    },
+    {
+      "clause_id": "p1v2_7",
+      "number": "7",
+      "heading": "Warranty",
+      "text": "Supplier warrants that the goods are free from defects for 24 months from the Delivery Date.",
+      "parties": [
+        "Supplier"
+      ],
+      "obligation_type": "warranty",
+      "deadline": "24 months",
+      "defined_terms": [
+        "Delivery Date"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "p1v2_8",
+      "number": "8",
+      "heading": "Confidentiality",
+      "text": "Confidential Information shall be kept secret by each party for 3 years after this agreement ends.",
+      "parties": [
+        "Supplier",
+        "Buyer"
+      ],
+      "obligation_type": "confidentiality",
+      "deadline": "3 years",
+      "defined_terms": [
+        "Confidential Information"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "p1v2_9",
+      "number": "9",
+      "heading": "Termination",
+      "text": "Either party may terminate this agreement by giving 90 days written notice. Interest accrued under Clause 6 survives termination.",
+      "parties": [
+        "Supplier",
+        "Buyer"
+      ],
+      "obligation_type": "termination",
+      "deadline": "90 days",
+      "defined_terms": [],
+      "references": [
+        "p1v2_6"
+      ]
+    },
+    {
+      "clause_id": "p1v2_10",
+      "number": "10",
+      "heading": "Dispute Resolution",
+      "text": "Disputes shall be settled by arbitration in Delhi.",
+      "parties": [
+        "Supplier",
+        "Buyer"
+      ],
+      "obligation_type": "dispute_resolution",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p1v2_11",
+      "number": "11",
+      "heading": "Governing Law",
+      "text": "This agreement is governed by the laws of India.",
+      "parties": [
+        "Supplier",
+        "Buyer"
+      ],
+      "obligation_type": "governing_law",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p1v2_12",
+      "number": "12",
+      "heading": "Force Majeure",
+      "text": "Neither party is liable for delay caused by events beyond its reasonable control.",
+      "parties": [
+        "Supplier",
+        "Buyer"
+      ],
+      "obligation_type": "force_majeure",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    }
+  ],
+  "contradictions": []
+}

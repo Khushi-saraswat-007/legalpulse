@@ -1,0 +1,169 @@
+{
+  "pair": "p1",
+  "description": "Supply agreement: modified, reworded, deleted, added, renumbered",
+  "changes": [
+    {
+      "old": [
+        "p1v1_1"
+      ],
+      "new": [
+        "p1v2_1"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "p1v1_2"
+      ],
+      "new": [
+        "p1v2_2"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "p1v1_3"
+      ],
+      "new": [
+        "p1v2_3"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": true,
+      "note": "reworded, same meaning (hard negative for the aligner)"
+    },
+    {
+      "old": [
+        "p1v1_4"
+      ],
+      "new": [
+        "p1v2_4"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "p1v1_5"
+      ],
+      "new": [
+        "p1v2_5"
+      ],
+      "change_type": "modified",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "payment period 30 -> 60 days"
+    },
+    {
+      "old": [
+        "p1v1_6"
+      ],
+      "new": [
+        "p1v2_6"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "text unchanged but depends on clause 5 (impact test)"
+    },
+    {
+      "old": [
+        "p1v1_7"
+      ],
+      "new": [
+        "p1v2_7"
+      ],
+      "change_type": "modified",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "warranty 12 -> 24 months"
+    },
+    {
+      "old": [
+        "p1v1_8"
+      ],
+      "new": [
+        "p1v2_8"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": true,
+      "note": "reworded, same meaning"
+    },
+    {
+      "old": [
+        "p1v1_9"
+      ],
+      "new": [],
+      "change_type": "deleted",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "liability cap removed"
+    },
+    {
+      "old": [
+        "p1v1_10"
+      ],
+      "new": [
+        "p1v2_9"
+      ],
+      "change_type": "modified",
+      "renumbered": true,
+      "reworded_only": false,
+      "note": "notice period 30 -> 90 days AND renumbered 10 -> 9"
+    },
+    {
+      "old": [
+        "p1v1_11"
+      ],
+      "new": [
+        "p1v2_10"
+      ],
+      "change_type": "renumbered",
+      "renumbered": true,
+      "reworded_only": false,
+      "note": "renumbered only"
+    },
+    {
+      "old": [
+        "p1v1_12"
+      ],
+      "new": [
+        "p1v2_11"
+      ],
+      "change_type": "renumbered",
+      "renumbered": true,
+      "reworded_only": false,
+      "note": "renumbered only"
+    },
+    {
+      "old": [],
+      "new": [
+        "p1v2_12"
+      ],
+      "change_type": "added",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "new force majeure clause"
+    }
+  ],
+  "expected_impacts": {
+    "p1v2_5": [
+      "p1v2_6",
+      "p1v2_9"
+    ],
+    "p1v2_7": [
+      "p1v2_1",
+      "p1v2_3"
+    ]
+  },
+  "expected_impacts_note": "If the key clause changes, these clauses MUST appear in trace_impact output (recall check, not an exhaustive list)."
+}
