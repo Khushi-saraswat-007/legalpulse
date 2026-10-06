@@ -1,0 +1,132 @@
+{
+  "pair": "p2",
+  "description": "Service agreement: one split and one merge",
+  "changes": [
+    {
+      "old": [
+        "p2v1_1"
+      ],
+      "new": [
+        "p2v2_1"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "p2v1_2"
+      ],
+      "new": [
+        "p2v2_2"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "p2v1_3"
+      ],
+      "new": [
+        "p2v2_3"
+      ],
+      "change_type": "modified",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "payment in advance -> in arrears"
+    },
+    {
+      "old": [
+        "p2v1_4"
+      ],
+      "new": [
+        "p2v2_4",
+        "p2v2_5"
+      ],
+      "change_type": "split",
+      "renumbered": true,
+      "reworded_only": false,
+      "note": "IP and confidentiality split into two clauses"
+    },
+    {
+      "old": [
+        "p2v1_5"
+      ],
+      "new": [
+        "p2v2_6"
+      ],
+      "change_type": "modified",
+      "renumbered": true,
+      "reworded_only": false,
+      "note": "insurance 1,000,000 -> 2,500,000 AND renumbered 5 -> 6"
+    },
+    {
+      "old": [
+        "p2v1_6"
+      ],
+      "new": [
+        "p2v2_7"
+      ],
+      "change_type": "renumbered",
+      "renumbered": true,
+      "reworded_only": false,
+      "note": "renumbered only"
+    },
+    {
+      "old": [
+        "p2v1_7",
+        "p2v1_8"
+      ],
+      "new": [
+        "p2v2_8"
+      ],
+      "change_type": "merged",
+      "renumbered": true,
+      "reworded_only": false,
+      "note": "audit rights and records merged"
+    },
+    {
+      "old": [
+        "p2v1_9"
+      ],
+      "new": [
+        "p2v2_9"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical, still cites clause 3"
+    },
+    {
+      "old": [
+        "p2v1_10"
+      ],
+      "new": [
+        "p2v2_10"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [],
+      "new": [
+        "p2v2_11"
+      ],
+      "change_type": "added",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "new non-solicitation clause"
+    }
+  ],
+  "expected_impacts": {
+    "p2v2_3": [
+      "p2v2_9"
+    ]
+  },
+  "expected_impacts_note": "If the key clause changes, these clauses MUST appear in trace_impact output (recall check, not an exhaustive list)."
+}

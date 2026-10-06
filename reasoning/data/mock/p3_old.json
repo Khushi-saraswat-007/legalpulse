@@ -1,0 +1,181 @@
+{
+  "contract_id": "p3",
+  "version": "v1",
+  "clauses": [
+    {
+      "clause_id": "p3v1_1",
+      "number": "1",
+      "heading": "Definitions",
+      "text": "\"Rent\" means the monthly rent. \"Lease Start Date\" means the date the Tenant takes possession.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "definition",
+      "deadline": null,
+      "defined_terms": [
+        "Rent",
+        "Lease Start Date"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "p3v1_2",
+      "number": "2",
+      "heading": "Term",
+      "text": "This lease runs for 11 months from the Lease Start Date.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "term",
+      "deadline": "11 months",
+      "defined_terms": [
+        "Lease Start Date"
+      ],
+      "references": [
+        "p3v1_1"
+      ]
+    },
+    {
+      "clause_id": "p3v1_3",
+      "number": "3",
+      "heading": "Rent",
+      "text": "Tenant shall pay Rent of 25,000 rupees monthly, on or before the 5th of each month.",
+      "parties": [
+        "Tenant"
+      ],
+      "obligation_type": "payment",
+      "deadline": "5th of each month",
+      "defined_terms": [
+        "Rent"
+      ],
+      "references": [
+        "p3v1_1"
+      ]
+    },
+    {
+      "clause_id": "p3v1_4",
+      "number": "4",
+      "heading": "Security Deposit",
+      "text": "Tenant shall pay a security deposit equal to 2 months of Rent, refunded within 30 days after the lease ends.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "deposit",
+      "deadline": "30 days",
+      "defined_terms": [
+        "Rent"
+      ],
+      "references": [
+        "p3v1_3"
+      ]
+    },
+    {
+      "clause_id": "p3v1_5",
+      "number": "5",
+      "heading": "Late Fee",
+      "text": "If Rent is not paid by the date in Clause 3, a late fee of 500 rupees per day applies.",
+      "parties": [
+        "Tenant"
+      ],
+      "obligation_type": "penalty",
+      "deadline": null,
+      "defined_terms": [
+        "Rent"
+      ],
+      "references": [
+        "p3v1_3"
+      ]
+    },
+    {
+      "clause_id": "p3v1_6",
+      "number": "6",
+      "heading": "Maintenance",
+      "text": "Landlord handles structural repairs. Tenant handles minor repairs.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "maintenance",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p3v1_7",
+      "number": "7",
+      "heading": "Subletting",
+      "text": "Tenant may not sublet the premises without Landlord's written consent.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "subletting",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p3v1_8",
+      "number": "8",
+      "heading": "Entry",
+      "text": "Landlord may enter the premises on 24 hours notice.",
+      "parties": [
+        "Landlord"
+      ],
+      "obligation_type": "access",
+      "deadline": "24 hours",
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p3v1_9",
+      "number": "9",
+      "heading": "Renewal",
+      "text": "This lease may be renewed by mutual agreement at least 30 days before it expires.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "renewal",
+      "deadline": "30 days",
+      "defined_terms": [],
+      "references": [
+        "p3v1_2"
+      ]
+    },
+    {
+      "clause_id": "p3v1_10",
+      "number": "10",
+      "heading": "Termination",
+      "text": "Either party may terminate this lease with 30 days notice. The deposit is refunded as set out in Clause 4.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "termination",
+      "deadline": "30 days",
+      "defined_terms": [],
+      "references": [
+        "p3v1_4"
+      ]
+    },
+    {
+      "clause_id": "p3v1_11",
+      "number": "11",
+      "heading": "Governing Law",
+      "text": "This lease is governed by the laws of India.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "governing_law",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    }
+  ],
+  "contradictions": []
+}

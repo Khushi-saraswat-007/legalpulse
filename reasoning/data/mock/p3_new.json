@@ -1,0 +1,189 @@
+{
+  "contract_id": "p3",
+  "version": "v2",
+  "clauses": [
+    {
+      "clause_id": "p3v2_1",
+      "number": "1",
+      "heading": "Definitions",
+      "text": "\"Rent\" means the monthly rent. \"Lease Start Date\" means the date the Tenant takes possession.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "definition",
+      "deadline": null,
+      "defined_terms": [
+        "Rent",
+        "Lease Start Date"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "p3v2_2",
+      "number": "2",
+      "heading": "Term",
+      "text": "This lease runs for 11 months from the Lease Start Date.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "term",
+      "deadline": "11 months",
+      "defined_terms": [
+        "Lease Start Date"
+      ],
+      "references": [
+        "p3v2_1"
+      ]
+    },
+    {
+      "clause_id": "p3v2_3",
+      "number": "3",
+      "heading": "Rent",
+      "text": "Tenant shall pay Rent of 30,000 rupees monthly, on or before the 5th of each month.",
+      "parties": [
+        "Tenant"
+      ],
+      "obligation_type": "payment",
+      "deadline": "5th of each month",
+      "defined_terms": [
+        "Rent"
+      ],
+      "references": [
+        "p3v2_1"
+      ]
+    },
+    {
+      "clause_id": "p3v2_4",
+      "number": "4",
+      "heading": "Security Deposit",
+      "text": "Tenant shall pay a security deposit equal to 3 months of Rent, refunded within 30 days after the lease ends.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "deposit",
+      "deadline": "30 days",
+      "defined_terms": [
+        "Rent"
+      ],
+      "references": [
+        "p3v2_3"
+      ]
+    },
+    {
+      "clause_id": "p3v2_5",
+      "number": "5",
+      "heading": "Late Fee",
+      "text": "If Rent is not paid by the date in Clause 3, a late fee of 500 rupees per day applies.",
+      "parties": [
+        "Tenant"
+      ],
+      "obligation_type": "penalty",
+      "deadline": null,
+      "defined_terms": [
+        "Rent"
+      ],
+      "references": [
+        "p3v2_3"
+      ]
+    },
+    {
+      "clause_id": "p3v2_6",
+      "number": "6",
+      "heading": "Maintenance",
+      "text": "Structural repairs are the Landlord's responsibility; minor repairs are the Tenant's responsibility.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "maintenance",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p3v2_7",
+      "number": "7",
+      "heading": "Subletting",
+      "text": "Tenant may sublet the premises by giving Landlord written notice.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "subletting",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p3v2_8",
+      "number": "8",
+      "heading": "Renewal",
+      "text": "This lease may be renewed by mutual agreement at least 30 days before it expires.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "renewal",
+      "deadline": "30 days",
+      "defined_terms": [],
+      "references": [
+        "p3v2_2"
+      ]
+    },
+    {
+      "clause_id": "p3v2_9",
+      "number": "9",
+      "heading": "Termination",
+      "text": "Either party may terminate this lease with 30 days notice. The deposit is refunded as set out in Clause 4. Tenant may not terminate during the first 6 months.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "termination",
+      "deadline": "30 days",
+      "defined_terms": [],
+      "references": [
+        "p3v2_4"
+      ]
+    },
+    {
+      "clause_id": "p3v2_10",
+      "number": "10",
+      "heading": "Governing Law",
+      "text": "This lease is governed by the laws of India.",
+      "parties": [
+        "Landlord",
+        "Tenant"
+      ],
+      "obligation_type": "governing_law",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "p3v2_11",
+      "number": "11",
+      "heading": "Early Termination",
+      "text": "Tenant may terminate this lease at any time without notice.",
+      "parties": [
+        "Tenant"
+      ],
+      "obligation_type": "termination",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    }
+  ],
+  "contradictions": [
+    {
+      "clause_a": "p3v2_9",
+      "clause_b": "p3v2_11",
+      "label": "contradiction",
+      "score": 0.9,
+      "explanation": "Clause 9 bars the Tenant from terminating in the first 6 months and requires 30 days notice; clause 11 allows termination at any time without notice."
+    }
+  ]
+}
