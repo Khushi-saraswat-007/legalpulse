@@ -1,0 +1,36 @@
+{
+  "embedder": "bow",
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1": 1.0,
+  "type_accuracy": 0.978,
+  "per_pair": {
+    "p1": {
+      "matched": 13,
+      "predicted": 13,
+      "truth": 13,
+      "type_correct": 13
+    },
+    "p2": {
+      "matched": 10,
+      "predicted": 10,
+      "truth": 10,
+      "type_correct": 10
+    },
+    "p3": {
+      "matched": 12,
+      "predicted": 12,
+      "truth": 12,
+      "type_correct": 11
+    },
+    "p4": {
+      "matched": 11,
+      "predicted": 11,
+      "truth": 11,
+      "type_correct": 11
+    }
+  },
+  "errors": [
+    "p3: wrong type for ['p3v1_6']->['p3v2_6']: truth=unchanged pred=modified"
+  ]
+}
