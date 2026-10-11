@@ -1,0 +1,55 @@
+{
+  "contract_id": "c001",
+  "changes": [
+    {
+      "old_clause_id": "c001_12",
+      "new_clause_id": "c002_12",
+      "change_type": "modified",
+      "summary": "Notice period extended from 30 to 90 days"
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "c002_12",
+        "type": "clause",
+        "label": "Termination"
+      },
+      {
+        "id": "c002_9",
+        "type": "clause",
+        "label": "Penalty"
+      },
+      {
+        "id": "c002_5",
+        "type": "clause",
+        "label": "Payment"
+      }
+    ],
+    "edges": [
+      {
+        "source": "c002_12",
+        "target": "c002_9",
+        "type": "cross_reference"
+      },
+      {
+        "source": "c002_9",
+        "target": "c002_5",
+        "type": "cross_reference"
+      }
+    ]
+  },
+  "risks": [
+    {
+      "rank": 1,
+      "severity": "high",
+      "score": 0.62,
+      "trigger_clause": "c002_12",
+      "impacted_clauses": [
+        "c002_9",
+        "c002_5"
+      ],
+      "explanation": "Longer notice period keeps penalty clause 9 active for 60 more days."
+    }
+  ]
+}
