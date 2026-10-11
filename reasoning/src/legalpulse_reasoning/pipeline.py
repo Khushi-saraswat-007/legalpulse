@@ -5,19 +5,25 @@ from .risk.scorer import score_risk
 from .comparison.aligner import align_versions
 
 
-def run(old_contract: dict, new_contract: dict) -> dict:
-    changes = align_versions(old_contract, new_contract)
+def run(old_contract: dict, new_contract: dict, embedder=None) -> dict:
+    changes = align_versions(old_contract, new_contract, embedder)
     g = build_graph(new_contract)
     flagged = {c for p in new_contract.get("contradictions", [])
                if p["label"] == "contradiction" for c in (p["clause_a"], p["clause_b"])}
     risks = []
     for ch in changes:
-        if ch["change_type"] == "unchanged" or not ch.get("new_clause_id"):
+        new_ids = ch.get("new_clause_ids") or []
+        if ch["change_type"] == "unchanged" or not new_ids:
             continue
-        impacted = trace_impact(g, ch["new_clause_id"])
-        s = score_risk(ch, impacted, ch["new_clause_id"] in flagged)
+        impacted = {}
+        for nid in new_ids:
+            for r in trace_impact(g, nid):
+                if r["clause_id"] not in new_ids and r["clause_id"] not in impacted:
+                    impacted[r["clause_id"]] = r
+        impacted = sorted(impacted.values(), key=lambda r: -r["score"])
+        s = score_risk(ch, impacted, any(n in flagged for n in new_ids))
         risks.append({"severity": s["severity"], "score": s["score"],
-                      "trigger_clause": ch["new_clause_id"],
+                      "trigger_clause": new_ids[0],
                       "impacted_clauses": [i["clause_id"] for i in impacted],
                       "explanation": f"{ch['summary']} (score parts: {s['components']})"})
     risks.sort(key=lambda r: -r["score"])
