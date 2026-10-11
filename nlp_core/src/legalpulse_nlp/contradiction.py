@@ -16,7 +16,7 @@ import re
 from collections import Counter
 from itertools import combinations
 
-from . import config
+from . import config, metadata
 from .nli import NLIBackend, HFNLIBackend
 
 _TOKEN = re.compile(r"[a-z0-9]+")
@@ -65,11 +65,46 @@ def candidate_pairs(clauses: list[dict]) -> list[tuple[int, int, float]]:
 
 
 # ------------------------------------------------------------------ exception handling
+# Words allowed between an exception marker and the clause it points at, e.g.
+# "Notwithstanding ANYTHING IN Clause 9", "subject to THE PROVISIONS OF Clause 9".
+_MARKER_FILLER = {"anything", "in", "of", "the", "provisions", "provision", "to", "contrary", "contained",
+                  "herein", "this", "agreement", "contract", "under", "set", "out", "stated", "specified",
+                  "provided", "as"}
+_WORD = re.compile(r"\s*([A-Za-z]+)\b")
+_TARGET_TOKEN = re.compile(r"\d+(?:\.\d+)*(\([a-z]\))?")   # group 1 = optional "(b)" sub-clause suffix
+
+
+def _marker_targets(text: str) -> dict[str, str]:
+    """{clause number: marker} for every exception marker whose target clause is identifiable.
+
+    A marker is bound to a clause only if, right after the marker, there are nothing but filler
+    words (no comma / semicolon / other words) followed by "Clause(s) N [and M ...]".
+    Anything else -> the target is unknown -> nothing is bound (the pair then goes to NLI).
+    """
+    targets: dict[str, str] = {}
+    for m in _EXC.finditer(text):
+        pos = m.end()
+        while True:
+            w = _WORD.match(text, pos)
+            if not w or w.group(1).lower() not in _MARKER_FILLER:
+                break
+            pos = w.end()
+        while pos < len(text) and text[pos].isspace():
+            pos += 1
+        ref = metadata._REF.match(text, pos)
+        if ref:
+            for tok in _TARGET_TOKEN.finditer(ref.group("body")):
+                if tok.group(1) is None:      # "9(b)" is a sub-clause, not clause 9: never bind it
+                    targets.setdefault(tok.group(0), m.group(0).lower())
+    return targets
+
+
 def is_explicit_carveout(a: dict, b: dict) -> str | None:
-    """If one clause uses an exception marker AND cites the other, return a description."""
+    """If one clause uses an exception marker that points at the other clause (exact clause
+    number), return a description; otherwise None."""
     for x, y in ((a, b), (b, a)):
-        if y["clause_id"] in x.get("references", []) and _EXC.search(x["text"]):
-            marker = _EXC.search(x["text"]).group(0).lower()
+        marker = _marker_targets(x["text"]).get(y["number"])
+        if marker and y["clause_id"] in x.get("references", []):
             return (f"Clause {x['number']} deliberately qualifies Clause {y['number']} "
                     f"('{marker}'), so this is treated as an override, not an accidental conflict.")
     return None
