@@ -10,8 +10,11 @@ EDGE_WEIGHTS = {
 MAX_DEPTH = 3           # how many hops a change may propagate
 MIN_IMPACT_SCORE = 0.2  # ignore weaker impacts
 
-# Version comparison thresholds (tune on labeled pairs)
-SIM_MATCH_THRESHOLD = 0.80
-SIM_SPLIT_MERGE_THRESHOLD = 0.60
+# Version comparison thresholds (tune on labeled pairs; see evaluate_alignment.py)
+SIM_MATCH_THRESHOLD = 0.80   # cosine similarity needed to call two clauses "the same clause"
+HEADING_BONUS = 0.15         # added to the match score when headings are identical
+SIM_HEADING_MIN = 0.50       # same heading + at least this similarity is also accepted as a match
+SIM_PART_MIN = 0.40          # a clause must be at least this similar to count as a split/merge part
+SPLIT_MERGE_MARGIN = 0.10    # combined parts must beat the best single part by this much
 
 SEVERITY_BANDS = [(0.75, "critical"), (0.5, "high"), (0.25, "medium"), (0.0, "low")]
