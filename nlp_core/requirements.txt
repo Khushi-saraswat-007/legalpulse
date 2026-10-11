@@ -1,10 +1,1 @@
-# Core (Module 1 + rule-based baseline): CPU only, light
-pdfplumber>=0.11
-python-docx>=1.1
-jsonschema>=4.20
-pytest>=8.0
-# Module 2 pretrained NLI model (only needed for HFNLIBackend; ~150 MB download for the default model)
-torch>=2.2
-transformers>=4.40
-# reportlab is only needed to regenerate PDF fixtures: python tests/make_fixtures.py
-reportlab>=4.0
+pandas
