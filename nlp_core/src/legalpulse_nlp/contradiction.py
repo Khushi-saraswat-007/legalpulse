@@ -69,7 +69,7 @@ def candidate_pairs(clauses: list[dict]) -> list[tuple[int, int, float]]:
 # "Notwithstanding ANYTHING IN Clause 9", "subject to THE PROVISIONS OF Clause 9".
 _MARKER_FILLER = {"anything", "in", "of", "the", "provisions", "provision", "to", "contrary", "contained",
                   "herein", "this", "agreement", "contract", "under", "set", "out", "stated", "specified",
-                  "provided", "as"}
+                  "provided", "as", "terms", "conditions", "and"}
 _WORD = re.compile(r"\s*([A-Za-z]+)\b")
 _TARGET_TOKEN = re.compile(r"\d+(?:\.\d+)*(\([a-z]\))?")   # group 1 = optional "(b)" sub-clause suffix
 
