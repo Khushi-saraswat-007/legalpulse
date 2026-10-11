@@ -126,3 +126,31 @@ def test_subclause_in_a_list_only_drops_that_entry():
     c8 = mk(8, "Subject to Clauses 3 and 5(a), Tenant may sublet part of the premises.", cites=(3, 5))
     assert is_explicit_carveout(c3, c8)                   # plain "3" still bound
     assert is_explicit_carveout(c5, c8) is None           # "5(a)" is not clause 5
+
+# 10 (gap: filler words) ----------------------------------------------------------------
+def test_subject_to_the_terms_of_clause_9_binds_to_9():
+    c9 = mk(9, "Buyer may withhold payment during a dispute.")
+    c7 = mk(7, "Subject to the terms of Clause 9, Buyer shall pay the amount due within 30 days.", cites=(9,))
+    assert is_explicit_carveout(c9, c7)
+    assert pair(7, 9) not in reached_nli([c9, c7])
+
+
+def test_terms_filler_does_not_over_bind_past_a_content_word():
+    c9 = mk(9, "Buyer may withhold payment during a dispute.")
+    c7 = mk(7, "Subject to the terms of the Licence, Buyer shall pay the sum due under Clause 9.", cites=(9,))
+    assert is_explicit_carveout(c9, c7) is None
+    assert pair(7, 9) in reached_nli([c9, c7])
+
+
+def test_subject_to_terms_and_conditions_of_clause_9_binds_to_9():
+    c9 = mk(9, "Buyer may withhold payment during a dispute.")
+    c7 = mk(7, "Subject to the terms and conditions of Clause 9, Buyer shall pay the amount due within 30 days.", cites=(9,))
+    assert is_explicit_carveout(c9, c7)
+    assert pair(7, 9) not in reached_nli([c9, c7])
+
+
+def test_subject_to_applicable_law_and_clause_9_is_not_bound():
+    c9 = mk(9, "Buyer may withhold payment during a dispute.")
+    c7 = mk(7, "Subject to applicable law and Clause 9, Buyer shall pay the amount due within 30 days.", cites=(9,))
+    assert is_explicit_carveout(c9, c7) is None
+    assert pair(7, 9) in reached_nli([c9, c7])
