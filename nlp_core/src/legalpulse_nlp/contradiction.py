@@ -43,6 +43,12 @@ def _cos(a: dict[str, float], b: dict[str, float]) -> float:
         a, b = b, a
     return sum(x * b.get(t, 0.0) for t, x in a.items())
 
+#def candidate_pair's helper function
+def _heading_only(c: dict) -> bool:
+    """Parent clause like '4. Termination' whose text is just its heading."""
+    h = (c.get("heading") or "").strip()
+    return bool(h) and (c.get("text") or "").strip() == h
+
 
 def candidate_pairs(clauses: list[dict]) -> list[tuple[int, int, float]]:
     """Indices (i, j, priority) of clause pairs worth sending to the NLI model."""
@@ -51,6 +57,8 @@ def candidate_pairs(clauses: list[dict]) -> list[tuple[int, int, float]]:
     out = []
     for i, j in combinations(range(len(clauses)), 2):
         a, b = clauses[i], clauses[j]
+        if _heading_only(a) or _heading_only(b):
+            continue
         if a.get("obligation_type") in config.SKIP_TYPES_FOR_PAIRS or b.get("obligation_type") in config.SKIP_TYPES_FOR_PAIRS:
             continue
         sim = _cos(vecs[i], vecs[j])

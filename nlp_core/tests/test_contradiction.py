@@ -91,3 +91,16 @@ def test_model_loading_failure_is_clear():
     be = HFNLIBackend("definitely/not-a-real-model-xyz")
     with pytest.raises(NLIModelError):
         be.predict([("a", "b")])
+
+
+def test_heading_only_parent_clause_is_not_paired():
+    from legalpulse_nlp.contradiction import candidate_pairs
+    def c(cid, num, heading, text):
+        return {"clause_id": cid, "number": num, "heading": heading, "text": text,
+                "obligation_type": "termination", "defined_terms": [], "references": []}
+    clauses = [c("c_4", "4", "Termination", "Termination"),
+               c("c_4.1", "4.1", "", "Either party may terminate with 30 days notice."),
+               c("c_4.2", "4.2", "", "Either party may terminate for material breach.")]
+    pairs = {(i, j) for i, j, _ in candidate_pairs(clauses)}
+    assert not any(0 in p for p in pairs)   # the heading-only parent is never paired
+    assert (1, 2) in pairs                  # real sibling clauses still are
