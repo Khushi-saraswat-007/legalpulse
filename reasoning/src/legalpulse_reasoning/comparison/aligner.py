@@ -65,7 +65,7 @@ def _combo_proposals(src_emb, part_texts, S, embedder, by_new):
         sims = embedder.encode([part_texts[a] + " " + part_texts[b] for a, b in keys]) @ src_emb[s]
         winner = None
         for (a, b), c in zip(keys, sims):
-            rules, single = pairs[(a, b)], max(col[a], col[b])
+            rules, single = pairs[(a, b)], col[best]      # compare with the BEST match overall, not just these two
             ok = (("top" in rules and c >= config.SIM_MATCH_THRESHOLD and c - single >= config.SPLIT_MERGE_MARGIN)
                   or ("adj" in rules and c >= config.ADJ_MIN_COMBINED and c - single >= config.ADJ_MARGIN))
             if ok:
