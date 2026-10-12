@@ -8,7 +8,8 @@ Algorithm
      any single one does (margin test), it is a SPLIT; the mirror case is a MERGE.
   3. One-to-one matching of the remaining clauses (Hungarian algorithm). A pair is accepted if
      similarity >= SIM_MATCH_THRESHOLD, or the headings are identical and similarity >= SIM_HEADING_MIN.
-  4. Unmatched old clauses are DELETED, unmatched new clauses are ADDED.
+  4. Leftovers whose words are almost entirely contained in a neighbouring matched clause are
+     absorbed (-> merged / split); the remaining leftovers are DELETED (old) or ADDED (new).
   5. Each matched pair is classified: modified (meaning changed) / renumbered (only the number
      changed) / unchanged.
 """
@@ -18,7 +19,7 @@ from scipy.optimize import linear_sum_assignment
 
 from .. import config
 from .embedders import get_default_embedder
-from .textdiff import meaning_changed, summarize_change
+from .textdiff import meaning_changed, summarize_change, content_words
 
 
 def _change(old, new, change_type, summary, renumbered=False):
@@ -33,24 +34,45 @@ def _change(old, new, change_type, summary, renumbered=False):
     }
 
 
-def _combo_proposals(src_emb, parts_emb_fn, src_texts, part_texts, S, embedder, by_new):
-    """Propose (source index, (part j, part k), combined_sim, margin) for split (by_new=False)
-    or merge (by_new=True). For a split, `source` = old clauses and `parts` = new clauses."""
+def _combo_proposals(src_emb, part_texts, S, embedder, by_new):
+    """Propose (source index, (part a, part b), combined_sim) for splits (by_new=False: one OLD clause
+    explained by two NEW clauses) or merges (by_new=True: one NEW clause explained by two OLD clauses).
+
+    Two kinds of candidate pairs are tried for every source clause:
+      * any two of its top-4 most similar parts      (must beat the best single part by SPLIT_MERGE_MARGIN)
+      * its best part plus that part's neighbour     (must reproduce the source very closely; this catches
+        uneven splits/merges where one half is tiny and its own similarity is too low to be a candidate)
+    """
     proposals = []
     n_src = S.shape[1] if by_new else S.shape[0]
+    n_parts = len(part_texts)
     for s in range(n_src):
         col = S[:, s] if by_new else S[s, :]
-        cand = [int(p) for p in np.argsort(-col)[:4] if col[p] >= config.SIM_PART_MIN]
-        if len(cand) < 2:
+        order = [int(p) for p in np.argsort(-col)]
+        best = order[0]
+        if col[best] < config.SIM_PART_MIN:
             continue
-        best_single = max(col[p] for p in cand)
-        pairs = [tuple(sorted(pr)) for pr in combinations(cand, 2)]
-        texts = [part_texts[a] + " " + part_texts[b] for a, b in pairs]
-        sims = embedder.encode(texts) @ src_emb[s]
-        k = int(np.argmax(sims))
-        c, margin = float(sims[k]), float(sims[k] - best_single)
-        if c >= config.SIM_MATCH_THRESHOLD and margin >= config.SPLIT_MERGE_MARGIN:
-            proposals.append((s, pairs[k], c, margin))
+        cand = [p for p in order[:4] if col[p] >= config.SIM_PART_MIN]
+        pairs = {}                               # candidate pair -> which rules it may qualify under
+        for pr in combinations(cand, 2):
+            pairs.setdefault(tuple(sorted(pr)), set()).add("top")
+        for nb in (best - 1, best + 1):
+            if 0 <= nb < n_parts:
+                pairs.setdefault(tuple(sorted((best, nb))), set()).add("adj")
+        keys = list(pairs)
+        if not keys:
+            continue
+        sims = embedder.encode([part_texts[a] + " " + part_texts[b] for a, b in keys]) @ src_emb[s]
+        winner = None
+        for (a, b), c in zip(keys, sims):
+            rules, single = pairs[(a, b)], max(col[a], col[b])
+            ok = (("top" in rules and c >= config.SIM_MATCH_THRESHOLD and c - single >= config.SPLIT_MERGE_MARGIN)
+                  or ("adj" in rules and c >= config.ADJ_MIN_COMBINED and c - single >= config.ADJ_MARGIN))
+            if ok:
+                if winner is None or c > winner[2]:
+                    winner = (s, (a, b), float(c))
+        if winner:
+            proposals.append(winner)
     return proposals
 
 
@@ -69,9 +91,9 @@ def align_versions(old_contract: dict, new_contract: dict, embedder=None) -> lis
     # --- split / merge pre-pass ---
     props = []
     if old and new:
-        for i, (a, b), c, m in _combo_proposals(Eo, None, o_txt, n_txt, S, embedder, by_new=False):
+        for i, (a, b), c in _combo_proposals(Eo, n_txt, S, embedder, by_new=False):
             props.append(("split", c, [i], [a, b]))
-        for j, (a, b), c, m in _combo_proposals(En, None, n_txt, o_txt, S, embedder, by_new=True):
+        for j, (a, b), c in _combo_proposals(En, o_txt, S, embedder, by_new=True):
             props.append(("merged", c, [a, b], [j]))
     for kind, c, oi, nj in sorted(props, key=lambda p: -p[1]):
         if used_o & set(oi) or used_n & set(nj):
@@ -84,30 +106,67 @@ def align_versions(old_contract: dict, new_contract: dict, embedder=None) -> lis
         changes.append(_change(oc, nc, kind, summary, True))
 
     # --- one-to-one matching of the rest ---
+    def same_head(i, j):
+        h = old[i].get("heading", "").strip().lower()
+        return h != "" and h == new[j].get("heading", "").strip().lower()
+
+    matches = {}                                     # old index -> new index
     ro = [i for i in range(len(old)) if i not in used_o]
     rn = [j for j in range(len(new)) if j not in used_n]
     if ro and rn:
         score = np.zeros((len(ro), len(rn)))
         for a, i in enumerate(ro):
             for b, j in enumerate(rn):
-                same_head = old[i].get("heading", "").strip().lower() == new[j].get("heading", "").strip().lower() != ""
-                score[a, b] = S[i, j] + (config.HEADING_BONUS if same_head else 0.0)
+                score[a, b] = S[i, j] + (config.HEADING_BONUS if same_head(i, j) else 0.0)
         rows, cols = linear_sum_assignment(-score)
         for a, b in zip(rows, cols):
             i, j = ro[a], rn[b]
-            same_head = old[i].get("heading", "").strip().lower() == new[j].get("heading", "").strip().lower() != ""
-            if S[i, j] >= config.SIM_MATCH_THRESHOLD or (same_head and S[i, j] >= config.SIM_HEADING_MIN):
+            if S[i, j] >= config.SIM_MATCH_THRESHOLD or (same_head(i, j) and S[i, j] >= config.SIM_HEADING_MIN):
+                matches[i] = j
                 used_o.add(i); used_n.add(j)
-                o, n = old[i], new[j]
-                renum = o["number"] != n["number"]
-                if meaning_changed(o["text"], n["text"]):
-                    ctype, summary = "modified", summarize_change(o["text"], n["text"])
-                elif renum:
-                    ctype, summary = "renumbered", f"Renumbered {o['number']} -> {n['number']}"
-                else:
-                    ctype = "unchanged"
-                    summary = "No change" if o["text"] == n["text"] else "Reworded, same meaning"
-                changes.append(_change([o], [n], ctype, summary, renum))
+
+    # --- absorbed leftovers: a would-be "deleted"/"added" clause whose words sit inside a neighbour ---
+    def absorbed(small, host_after, host_before):
+        """True if `small` was folded into `host_after`: it brings words the neighbour did not have
+        before (`host_before`), and those words now appear in `host_after`. Words the neighbour already
+        had prove nothing (real contracts repeat boilerplate), so they are ignored."""
+        fresh = content_words(small) - content_words(host_before)
+        return (len(fresh) >= config.CONTAIN_MIN_WORDS
+                and len(fresh & content_words(host_after)) / len(fresh) >= config.CONTAIN_MIN)
+
+    for d in range(len(old)):                        # leftover OLD clause inside a matched neighbour -> merged
+        if d in used_o:
+            continue
+        for nb in (d - 1, d + 1):
+            if nb in matches and absorbed(old[d]["text"], new[matches[nb]]["text"], old[nb]["text"]):
+                j = matches.pop(nb); used_o.add(d)
+                oi = sorted((d, nb))
+                changes.append(_change([old[x] for x in oi], [new[j]], "merged",
+                               f"Clauses {', '.join(old[x]['number'] for x in oi)} merged into clause {new[j]['number']}", True))
+                break
+    by_new = {j: i for i, j in matches.items()}
+    for a_ in range(len(new)):                       # leftover NEW clause inside a matched neighbour -> split
+        if a_ in used_n:
+            continue
+        for nb in (a_ - 1, a_ + 1):
+            if nb in by_new and by_new[nb] in matches and absorbed(new[a_]["text"], old[by_new[nb]]["text"], new[nb]["text"]):
+                i = by_new.pop(nb); matches.pop(i); used_n.add(a_)
+                nj = sorted((a_, nb))
+                changes.append(_change([old[i]], [new[x] for x in nj], "split",
+                               f"Clause {old[i]['number']} split into clauses {', '.join(new[x]['number'] for x in nj)}", True))
+                break
+
+    for i, j in matches.items():
+        o, n = old[i], new[j]
+        renum = o["number"] != n["number"]
+        if meaning_changed(o["text"], n["text"]):
+            ctype, summary = "modified", summarize_change(o["text"], n["text"])
+        elif renum:
+            ctype, summary = "renumbered", f"Renumbered {o['number']} -> {n['number']}"
+        else:
+            ctype = "unchanged"
+            summary = "No change" if o["text"] == n["text"] else "Reworded, same meaning"
+        changes.append(_change([o], [n], ctype, summary, renum))
 
     for i in range(len(old)):
         if i not in used_o:
