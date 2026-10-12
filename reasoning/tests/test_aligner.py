@@ -59,3 +59,25 @@ def test_pipeline_end_to_end_matches_schema():
     jsonschema.validate(report, schema)
     top = report["risks"][0]
     assert top["rank"] == 1 and top["trigger_clause"].startswith("p1v2_")
+
+
+def _clause(cid, num, text):
+    return {"clause_id": cid, "number": num, "heading": "", "text": text, "parties": [],
+            "obligation_type": "other", "deadline": None, "defined_terms": [], "references": []}
+
+
+def test_no_false_split_when_an_identical_clause_exists():
+    """Regression (found with SBERT on a real contract): if the new version still contains an
+    identical copy of an old clause, two OTHER clauses must not be reported as its 'split'."""
+    X = "alpha bravo charlie delta echo foxtrot golf hotel india juliet kilo lima"
+    P, Q = "alpha bravo charlie delta echo foxtrot", "golf hotel india juliet kilo lima"
+    old = {"contract_id": "t", "version": "v1", "clauses": [
+        _clause("o1", "1", "intro words about the first topic"), _clause("o2", "2", X),
+        _clause("o3", "3", "closing words about the last topic")]}
+    new = {"contract_id": "t", "version": "v2", "clauses": [
+        _clause("n1", "1", "intro words about the first topic"), _clause("n2", "2", P),
+        _clause("n3", "3", Q), _clause("n4", "4", X), _clause("n5", "5", "closing words about the last topic")]}
+    ch = align_versions(old, new, embedder=EMB)
+    assert not [c for c in ch if c["change_type"] in ("split", "merged")]
+    x = [c for c in ch if c["old_clause_id"] == "o2"][0]
+    assert x["new_clause_ids"] == ["n4"]

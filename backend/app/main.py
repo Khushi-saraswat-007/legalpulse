@@ -6,7 +6,7 @@ from .routers import auth, contracts, alerts
 
 Base.metadata.create_all(engine)
 app = FastAPI(title="LegalPulse API")
-app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:5173"],
+app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:5173", "http://localhost:3000"],
                    allow_methods=["*"], allow_headers=["*"])
 app.include_router(auth.router)
 app.include_router(contracts.router)
