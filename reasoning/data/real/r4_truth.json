@@ -1,0 +1,528 @@
+{
+  "pair": "r4",
+  "description": "Real contract with programmatic edits",
+  "changes": [
+    {
+      "old": [
+        "r4v1_1.1"
+      ],
+      "new": [
+        "r4v2_1.1"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_1.2",
+        "r4v1_1.3"
+      ],
+      "new": [
+        "r4v2_1.2"
+      ],
+      "change_type": "merged",
+      "renumbered": true,
+      "reworded_only": false,
+      "note": "two adjacent clauses merged"
+    },
+    {
+      "old": [
+        "r4v1_2.1"
+      ],
+      "new": [
+        "r4v2_2.1"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_3.1"
+      ],
+      "new": [
+        "r4v2_3.1"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_3.2"
+      ],
+      "new": [
+        "r4v2_3.2"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_3.3"
+      ],
+      "new": [
+        "r4v2_3.3"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": true,
+      "note": "synonym swap, same meaning"
+    },
+    {
+      "old": [],
+      "new": [
+        "r4v2_3.3A"
+      ],
+      "change_type": "added",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "new boilerplate clause"
+    },
+    {
+      "old": [
+        "r4v1_3.4"
+      ],
+      "new": [
+        "r4v2_3.4"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_3.5"
+      ],
+      "new": [
+        "r4v2_3.5"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_3.6"
+      ],
+      "new": [
+        "r4v2_3.6"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_3.7"
+      ],
+      "new": [
+        "r4v2_3.7"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_3.8"
+      ],
+      "new": [
+        "r4v2_3.8"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_3.9"
+      ],
+      "new": [
+        "r4v2_3.9"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_4.1"
+      ],
+      "new": [
+        "r4v2_4.1"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_5.1"
+      ],
+      "new": [
+        "r4v2_5.1"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_5.2"
+      ],
+      "new": [
+        "r4v2_5.2"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": true,
+      "note": "synonym swap, same meaning"
+    },
+    {
+      "old": [
+        "r4v1_5.3"
+      ],
+      "new": [
+        "r4v2_5.3"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_5.4"
+      ],
+      "new": [],
+      "change_type": "deleted",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "clause removed"
+    },
+    {
+      "old": [
+        "r4v1_6.1"
+      ],
+      "new": [
+        "r4v2_6.1"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_6.2"
+      ],
+      "new": [
+        "r4v2_6.2"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_6.3"
+      ],
+      "new": [
+        "r4v2_6.3"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_7.1"
+      ],
+      "new": [
+        "r4v2_7.1"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_7.2"
+      ],
+      "new": [
+        "r4v2_7.2"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_7.3"
+      ],
+      "new": [
+        "r4v2_7.3"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": true,
+      "note": "synonym swap, same meaning"
+    },
+    {
+      "old": [],
+      "new": [
+        "r4v2_7.3A"
+      ],
+      "change_type": "added",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "new boilerplate clause"
+    },
+    {
+      "old": [
+        "r4v1_7.4"
+      ],
+      "new": [
+        "r4v2_7.4"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_7.5"
+      ],
+      "new": [
+        "r4v2_7.5"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_7.6"
+      ],
+      "new": [
+        "r4v2_7.6"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_8.1"
+      ],
+      "new": [
+        "r4v2_8.1"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_8.2"
+      ],
+      "new": [
+        "r4v2_8.2"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_8.3"
+      ],
+      "new": [
+        "r4v2_8.3"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_8.4"
+      ],
+      "new": [
+        "r4v2_8.4"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_8.5"
+      ],
+      "new": [
+        "r4v2_8.5"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_9.1"
+      ],
+      "new": [
+        "r4v2_9.1"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_9.2"
+      ],
+      "new": [
+        "r4v2_9.2"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_9.3"
+      ],
+      "new": [
+        "r4v2_9.3"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_9.4"
+      ],
+      "new": [
+        "r4v2_9.4"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_9.5"
+      ],
+      "new": [
+        "r4v2_9.5"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_9.6"
+      ],
+      "new": [
+        "r4v2_9.6"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_9.7"
+      ],
+      "new": [
+        "r4v2_9.7"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_9.8"
+      ],
+      "new": [
+        "r4v2_9.8"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_9.9"
+      ],
+      "new": [
+        "r4v2_9.9"
+      ],
+      "change_type": "unchanged",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "identical"
+    },
+    {
+      "old": [
+        "r4v1_9.10"
+      ],
+      "new": [],
+      "change_type": "deleted",
+      "renumbered": false,
+      "reworded_only": false,
+      "note": "clause removed"
+    },
+    {
+      "old": [
+        "r4v1_9.11"
+      ],
+      "new": [
+        "r4v2_9.11",
+        "r4v2_9.11A"
+      ],
+      "change_type": "split",
+      "renumbered": true,
+      "reworded_only": false,
+      "note": "split into two clauses"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "embedder": "bow",
+  "precision": 0.997,
+  "recall": 0.994,
+  "f1": 0.996,
+  "type_accuracy": 0.985,
+  "per_pair": {
+    "r1": {
+      "matched": 110,
+      "predicted": 110,
+      "truth": 110,
+      "type_correct": 110
+    },
+    "r2": {
+      "matched": 14,
+      "predicted": 14,
+      "truth": 14,
+      "type_correct": 14
+    },
+    "r3": {
+      "matched": 36,
+      "predicted": 36,
+      "truth": 36,
+      "type_correct": 35
+    },
+    "r4": {
+      "matched": 44,
+      "predicted": 44,
+      "truth": 44,
+      "type_correct": 43
+    },
+    "r5": {
+      "matched": 35,
+      "predicted": 35,
+      "truth": 35,
+      "type_correct": 34
+    },
+    "r6": {
+      "matched": 31,
+      "predicted": 31,
+      "truth": 31,
+      "type_correct": 30
+    },
+    "r7": {
+      "matched": 47,
+      "predicted": 48,
+      "truth": 49,
+      "type_correct": 46
+    },
+    "r8": {
+      "matched": 23,
+      "predicted": 23,
+      "truth": 23,
+      "type_correct": 23
+    }
+  },
+  "per_type_recall": {
+    "added": {
+      "correct": 15,
+      "total": 16
+    },
+    "deleted": {
+      "correct": 14,
+      "total": 15
+    },
+    "merged": {
+      "correct": 7,
+      "total": 7
+    },
+    "modified": {
+      "correct": 15,
+      "total": 15
+    },
+    "split": {
+      "correct": 7,
+      "total": 7
+    },
+    "unchanged": {
+      "correct": 277,
+      "total": 282
+    }
+  },
+  "errors": [
+    "r3: wrong type for ['r3v1_7.3']->['r3v2_7.3']: truth=unchanged pred=modified",
+    "r4: wrong type for ['r4v1_5.2']->['r4v2_5.2']: truth=unchanged pred=modified",
+    "r5: wrong type for ['r5v1_5.1']->['r5v2_5.1']: truth=unchanged pred=modified",
+    "r6: wrong type for ['r6v1_6.2']->['r6v2_6.2']: truth=unchanged pred=modified",
+    "r7: wrong type for ['r7v1_3']->['r7v2_3']: truth=unchanged pred=modified",
+    "r7: MISSED mapping ['r7v1_13.8']->[] (truth=deleted)",
+    "r7: MISSED mapping []->['r7v2_4.6'] (truth=added)",
+    "r7: EXTRA mapping ['r7v1_13.8']->['r7v2_4.6'] (pred=modified)"
+  ]
+}

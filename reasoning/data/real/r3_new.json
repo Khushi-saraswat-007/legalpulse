@@ -1,0 +1,439 @@
+{
+  "contract_id": "r3",
+  "version": "v2",
+  "clauses": [
+    {
+      "clause_id": "r3v2_1.1",
+      "number": "1.1",
+      "heading": "",
+      "text": "The purpose of this content distribution Agreement (hereinafter \"Agreement\") is to set forth the terms and conditions under which plan_b may use the Content (\"Content\" as set forth in APPENDIX 2) owned or licensed by LICENSOR for a commercial distribution to plan_b's End Users in the territory (\"Territory\" as set forth in APPENDIX 2).",
+      "parties": [],
+      "obligation_type": "license",
+      "deadline": null,
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_1.2",
+      "number": "1.2",
+      "heading": "",
+      "text": "End User means any third Party receiving Content on a mobile device for a payment in accordance with the terms and conditions of this Agreement for their own private and non- commercial use.",
+      "parties": [],
+      "obligation_type": "payment",
+      "deadline": null,
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_2.1",
+      "number": "2.1",
+      "heading": "",
+      "text": "LICENSOR shall make a first delivery of Content to plan_b within 28 days after the signing of this Agreement unless separately agreed between the Parties.",
+      "parties": [],
+      "obligation_type": "license",
+      "deadline": "14 days",
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_2.2",
+      "number": "2.2",
+      "heading": "",
+      "text": "LICENSOR shall deliver Content according to the specifications (for example formats, file sizes) set by plan_b or to be agreed between the Parties in writing. LICENSOR grants plan_b for the term of this Agreement the right to produce, market and distribute Content to End Users (in the territory specified in appendix 2) through its own and its partner's platform.",
+      "parties": [],
+      "obligation_type": "license",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_2.2A",
+      "number": "2.2A",
+      "heading": "Non-Waiver",
+      "text": "A failure to enforce any provision of this Agreement shall not be deemed a waiver of that provision.",
+      "parties": [],
+      "obligation_type": "other",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_3.1",
+      "number": "3.1",
+      "heading": "",
+      "text": "plan_b will distribute Content to End Users in the Territory through its distribution channels.",
+      "parties": [],
+      "obligation_type": "other",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_3.2",
+      "number": "3.2",
+      "heading": "",
+      "text": "plan_b shall use reasonable commercial efforts to market and stimulate interest in the Content with its customers.",
+      "parties": [],
+      "obligation_type": "other",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_3.3",
+      "number": "3.3",
+      "heading": "",
+      "text": "plan_b shall provide LICENSOR with a detailed written record, which includes the number of End User downloads and each distribution channel. Such report shall be provided to LICENSOR in electronic format within 12 weeks of the end of a quarter.",
+      "parties": [],
+      "obligation_type": "license",
+      "deadline": "6 weeks",
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_3.4",
+      "number": "3.4",
+      "heading": "",
+      "text": "LICENSOR must have the right to use a certified public accountant to inspect and audit all the related records and books of plan_b to ensure plan_b's compliance with the terms of this Agreement. In the event that any such audit reveals that plan_b has underpaid fees to the value of ten (10) percent or more of the total amount of payments for the period covered by the audit, plan_b must bear the cost of the audit and must in any event immediately pay to LICENSOR Source: DATA CALL TECHNOLOGIES, SB-2/A, 9/18/2006 the full value of the underpaid or under-reported fees. Such audits must normally be conducted during normal business hours at plan_b's premises.",
+      "parties": [],
+      "obligation_type": "license",
+      "deadline": null,
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_4.1",
+      "number": "4.1",
+      "heading": "",
+      "text": "plan_b shall pay LICENSOR a share of its revenues as set forth in APPENDIX 2 (\"REVENUES\").",
+      "parties": [],
+      "obligation_type": "license",
+      "deadline": null,
+      "defined_terms": [
+        "REVENUES"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_4.2",
+      "number": "4.2",
+      "heading": "",
+      "text": "All shares are net, plus the respective applying value added tax (if applicable).",
+      "parties": [],
+      "obligation_type": "other",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_5.2",
+      "number": "5.2",
+      "heading": "",
+      "text": "In the alternative, if LICENSOR is not the sole and exclusive owner of all of the foregoing intellectual property rights to the Content, LICENSOR has been granted by the owner or rightful sub-licensee of the intellectual property of the Content the right to grant the rights provided by LICENSOR to plan_b under this Agreement.",
+      "parties": [],
+      "obligation_type": "license",
+      "deadline": null,
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_5.3",
+      "number": "5.3",
+      "heading": "",
+      "text": "LICENSOR grants to plan_b a license to produce, use, distribute, promote and publicly display the Content in any possible way for distribution and marketing purposes. Additionally, Licensee must have the right to use the trademarks, trade names, or logos relating to Content (the \"TRADEMARKS\").",
+      "parties": [],
+      "obligation_type": "license",
+      "deadline": null,
+      "defined_terms": [
+        "TRADEMARKS"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_5.4",
+      "number": "5.4",
+      "heading": "",
+      "text": "LICENSOR warrants that Content does not infringe an intellectual property right enforceable in the agreed country of delivery or use. LICENSOR indemnifies and holds harmless plan_b against all claims that Content infringes any of the above mentioned rights of a third Party. LICENSOR shall pay all damages awarded in a trial to a third Party.",
+      "parties": [],
+      "obligation_type": "indemnity",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_5.4A",
+      "number": "5.4A",
+      "heading": "Counterparts",
+      "text": "This Agreement may be executed in counterparts, each of which shall be deemed an original.",
+      "parties": [],
+      "obligation_type": "other",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_6.1",
+      "number": "6.1",
+      "heading": "",
+      "text": "Each Party shall keep in confidence all material and information, including without limitation Content, received from the other Party and marked as confidential or which should be understood to be confidential, and may not use such material or information for any other purposes than those set forth in this Agreement.",
+      "parties": [],
+      "obligation_type": "confidentiality",
+      "deadline": null,
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_6.1A",
+      "number": "6.1A",
+      "heading": "",
+      "text": "The confidentiality obligation shall, however, not be applied to material and information, which as shown by the receiving Party,",
+      "parties": [],
+      "obligation_type": "confidentiality",
+      "deadline": null,
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_6.1.2",
+      "number": "6.1.2",
+      "heading": "",
+      "text": "the receiving Party has received from a third party without any obligation of confidentiality; or",
+      "parties": [],
+      "obligation_type": "confidentiality",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_6.1.3",
+      "number": "6.1.3",
+      "heading": "",
+      "text": "was in the possession of the receiving Party prior to receipt of the same from the other Party without any obligation of confidentiality related thereto; or",
+      "parties": [],
+      "obligation_type": "confidentiality",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_6.1.4",
+      "number": "6.1.4",
+      "heading": "",
+      "text": "the receiving party has independently developed without using material or information received from the other Party.",
+      "parties": [],
+      "obligation_type": "other",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_6.2",
+      "number": "6.2",
+      "heading": "",
+      "text": "Each Party shall promptly upon termination of this Agreement or when the Party no longer needs the material or information in question for the purpose stated in this Agreement cease using confidential material and information received from the other Party and, unless the Parties separately agree on destruction of such material, return the material in question (including all copies thereof).",
+      "parties": [],
+      "obligation_type": "termination",
+      "deadline": null,
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_6.3",
+      "number": "6.3",
+      "heading": "",
+      "text": "The rights and responsibilities under this section shall survive any termination or cancellation of this Agreement for 2 years.",
+      "parties": [],
+      "obligation_type": "termination",
+      "deadline": "2 years",
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_7",
+      "number": "7",
+      "heading": "TERM OF THE AGREEMENT AND TERMINATION",
+      "text": "Source: DATA CALL TECHNOLOGIES, SB-2/A, 9/18/2006",
+      "parties": [],
+      "obligation_type": "termination",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_7.1",
+      "number": "7.1",
+      "heading": "",
+      "text": "Unless otherwise stated in the Appendix the term of this letter Agreement shall continue for twenty-four (24) months with the effective date unless terminated sooner or extended pursuant to the terms hereof (\"Initial Term\"). The Initial Term shall automatically be extended for an additional period of half a year unless either party provides the other party with written notification of termination of the letter Agreement at least 90 days prior to end of such period.",
+      "parties": [],
+      "obligation_type": "termination",
+      "deadline": "60 days",
+      "defined_terms": [
+        "Agreement",
+        "Initial Term"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_7.2",
+      "number": "7.2",
+      "heading": "",
+      "text": "Either Party shall be entitled to cancel this Agreement if the other Party is materially in breach of the terms of this Agreement. If the breach of contract is capable of being remedied, this Agreement can be cancelled only provided that the Party in breach has not rectified its breach within thirty (30) days of the written notice by the other Party.",
+      "parties": [],
+      "obligation_type": "notice",
+      "deadline": null,
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_7.3",
+      "number": "7.3",
+      "heading": "",
+      "text": "Either Party may cancel this Agreement already before the date of its fulfillment, if it becomes evident that the other Party will commit a breach of contract entitling to cancellation of this Agreement.",
+      "parties": [],
+      "obligation_type": "other",
+      "deadline": null,
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_7.4",
+      "number": "7.4",
+      "heading": "",
+      "text": "Upon termination or cancellation of this Agreement plan_b shall cease to use Content for any purpose and delete Content from any files and data storage.",
+      "parties": [],
+      "obligation_type": "termination",
+      "deadline": null,
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_7.5",
+      "number": "7.5",
+      "heading": "",
+      "text": "After termination of this contract, there shall be a sell-off period (defined in APPENDIX 2) following the date of termination of this contract.",
+      "parties": [],
+      "obligation_type": "termination",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_8.1",
+      "number": "8.1",
+      "heading": "",
+      "text": "The Parties acknowledge that they act as independent contractors and this Agreement does not constitute any partnership, joint venture, agency relationship or other independent legal entity separate from the Parties.",
+      "parties": [],
+      "obligation_type": "other",
+      "deadline": null,
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_8.2",
+      "number": "8.2",
+      "heading": "",
+      "text": "Neither Party shall assign or transfer to any third party, without the prior written consent of the other Party, this Agreement or any rights granted herein.",
+      "parties": [],
+      "obligation_type": "assignment",
+      "deadline": null,
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_8.3",
+      "number": "8.3",
+      "heading": "",
+      "text": "Any amendments to this Agreement shall be in writing and shall have no effect before signed by the duly authorized representatives of the Parties.",
+      "parties": [],
+      "obligation_type": "other",
+      "deadline": null,
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_8.4",
+      "number": "8.4",
+      "heading": "",
+      "text": "All payments will be made to Licensor in United States dollars.",
+      "parties": [],
+      "obligation_type": "license",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_9.1",
+      "number": "9.1",
+      "heading": "",
+      "text": "In the event that any provision in this Agreement will be subject to an interpretation under which it would be void or unenforceable, such provisions will be construed so as to constitute it a valid and enforceable provision to the fullest extent possible, and in the event that it cannot be so construed, it will, to that extent, be deemed deleted and separable from the other provisions of this Agreement, which will remain in full force and effect and will be construed to effectuate its purposes to the maximum legal extent.",
+      "parties": [],
+      "obligation_type": "other",
+      "deadline": null,
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_10.1",
+      "number": "10.1",
+      "heading": "",
+      "text": "This Agreement shall be governed and construed in accordance with the laws of the United States of America. The courts of competent jurisdiction at New York City, New York, shall have the exclusive jurisdiction over any dispute arising out of or in connection with this Agreement.",
+      "parties": [],
+      "obligation_type": "dispute_resolution",
+      "deadline": null,
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r3v2_10.2",
+      "number": "10.2",
+      "heading": "",
+      "text": "This Agreement has been prepared in two (2) identical copies, one for each Party. PLAN_B MEDIA AG PLAN_B MEDIA AG Source: DATA CALL TECHNOLOGIES, SB-2/A, 9/18/2006 03/24/06 03/24/06 ______________________________ _____________________________ Date Date /s/ Heim Brecht /s/ Stefan Meyes-Sickenagel ______________________________ _____________________________ Signature Signature Heim Brecht Stefan Meyes-Sickenagel ______________________________ _____________________________ Name (Please print) Name (Please print) CIO COO ______________________________ _____________________________ Title/Position Title/Position LICENSOR LICENSOR 3/23/06 ______________________________ _____________________________ Date Date /s/ James Ammons ______________________________ _____________________________ Signature Signature James Ammons ______________________________ _____________________________ Name (Please print) Name (Please print) President and CEO ______________________________ _____________________________ Title/Position Title/Position APPENDIX I 1. CONTACT PLAN_B MEDIA AG Name: Matthias Hellmann Position: Head of Content Phone: XXXXXXXXXXXXX Email: XXXXXXXXXXXXXXX 2 CONTACT LICENSOR Name: Jim Ammons Position: CEO / President Phone: 866-219-2025 Email: ammons@datacalltech.com 3 CONTACT LICENSOR AGENT (IF APPLICABLE) Name: Position: Phone: Email: 4 BANK ACCOUNT LICENSOR Bank name: Bank Of America Bank address: Dallas, Texas Source: DATA CALL TECHNOLOGIES, SB-2/A, 9/18/2006 Country: USA APPENDIX 2 1 CONTENT, SHARE & TERRITORY 1.1 Contract name (for internal plan_b-ware use): Data Call Technologies, Inc. CONTENT LICENSOR TERRITORY TERMINATION SHARE Top News Headlines Top Business Headlines Science/Health News Entertainment Headlines National Football League National Basketball Association National Hockey League Major League Baseball NCAA Football NCAA Men's Basketball Professional Golf Association NASCAR Latest Sports Lines 45% Worldwide 24 months Latest Sports Headlines Thought for Today Market Details World Financial Highlights Weather: Current Conditions 48-Hour Forecast 7-Day Forecast Weather Alerts Doppler Weather Radar 2 TERMS 2.1 Contract start: 04-01-06 2.2 Contract end: 04-01-08 2.3 Commercial distribution possible from: 2.4 Sell-off period: 3 months after termination 3 PAYMENTS AND REPORTS TO LICENSOR 3.1 Reporting: Quarterly; 30 days after end of quarter 3.2 Payment terms: 30 days after receipt of invoice 4 EXCLUSIVITY COPYRIGHT 4.1 Content exclusive: [ ] Yes [ ] No 4.2 Copyright: Source: DATA CALL TECHNOLOGIES, SB-2/A, 9/18/2006",
+      "parties": [],
+      "obligation_type": "termination",
+      "deadline": "24 months",
+      "defined_terms": [
+        "Agreement"
+      ],
+      "references": []
+    }
+  ],
+  "contradictions": [],
+  "meta": {
+    "edited_from": "r3v1",
+    "seed": 7
+  }
+}
