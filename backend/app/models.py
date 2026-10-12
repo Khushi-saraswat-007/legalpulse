@@ -41,3 +41,17 @@ class Alert(Base):
     message: Mapped[str] = mapped_column(String)
     due_date: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
     seen: Mapped[bool] = mapped_column(Boolean, default=False)
+
+
+class Analysis(Base):
+    """One uploaded old/new contract pair and its risk report (this is what the dashboard lists)."""
+    __tablename__ = "analyses"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    contract_key: Mapped[str] = mapped_column(String)
+    old_filename: Mapped[str] = mapped_column(String)
+    new_filename: Mapped[str] = mapped_column(String)
+    n_changes: Mapped[int] = mapped_column(Integer, default=0)       # changes that are not "unchanged"
+    n_risks: Mapped[int] = mapped_column(Integer, default=0)
+    top_severity: Mapped[str] = mapped_column(String, default="none")
+    report_json: Mapped[str] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
