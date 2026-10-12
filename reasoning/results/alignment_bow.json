@@ -30,6 +30,36 @@
       "type_correct": 11
     }
   },
+  "per_type_recall": {
+    "added": {
+      "correct": 4,
+      "total": 4
+    },
+    "deleted": {
+      "correct": 2,
+      "total": 2
+    },
+    "merged": {
+      "correct": 1,
+      "total": 1
+    },
+    "modified": {
+      "correct": 13,
+      "total": 13
+    },
+    "renumbered": {
+      "correct": 5,
+      "total": 5
+    },
+    "split": {
+      "correct": 1,
+      "total": 1
+    },
+    "unchanged": {
+      "correct": 19,
+      "total": 20
+    }
+  },
   "errors": [
     "p3: wrong type for ['p3v1_6']->['p3v2_6']: truth=unchanged pred=modified"
   ]
