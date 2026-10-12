@@ -1,0 +1,96 @@
+{
+  "embedder": "bow",
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1": 1.0,
+  "type_accuracy": 0.973,
+  "per_pair": {
+    "r10": {
+      "matched": 22,
+      "predicted": 22,
+      "truth": 22,
+      "type_correct": 21
+    },
+    "r11": {
+      "matched": 76,
+      "predicted": 76,
+      "truth": 76,
+      "type_correct": 75
+    },
+    "r12": {
+      "matched": 16,
+      "predicted": 16,
+      "truth": 16,
+      "type_correct": 15
+    },
+    "r13": {
+      "matched": 19,
+      "predicted": 19,
+      "truth": 19,
+      "type_correct": 18
+    },
+    "r14": {
+      "matched": 14,
+      "predicted": 14,
+      "truth": 14,
+      "type_correct": 12
+    },
+    "r15": {
+      "matched": 70,
+      "predicted": 70,
+      "truth": 70,
+      "type_correct": 70
+    },
+    "r16": {
+      "matched": 16,
+      "predicted": 16,
+      "truth": 16,
+      "type_correct": 15
+    },
+    "r9": {
+      "matched": 24,
+      "predicted": 24,
+      "truth": 24,
+      "type_correct": 24
+    }
+  },
+  "per_type_recall": {
+    "added": {
+      "correct": 16,
+      "total": 16
+    },
+    "deleted": {
+      "correct": 12,
+      "total": 12
+    },
+    "merged": {
+      "correct": 8,
+      "total": 8
+    },
+    "modified": {
+      "correct": 12,
+      "total": 12
+    },
+    "renumbered": {
+      "correct": 24,
+      "total": 26
+    },
+    "split": {
+      "correct": 8,
+      "total": 8
+    },
+    "unchanged": {
+      "correct": 170,
+      "total": 175
+    }
+  },
+  "errors": [
+    "r10: wrong type for ['r10v1_4.2']->['r10v2_4.2']: truth=unchanged pred=modified",
+    "r11: wrong type for ['r11v1_20.2']->['r11v2_20.2']: truth=unchanged pred=modified",
+    "r12: wrong type for ['r12v1_7']->['r12v2_10']: truth=renumbered pred=modified",
+    "r13: wrong type for ['r13v1_8']->['r13v2_8']: truth=unchanged pred=modified",
+    "r14: wrong type for ['r14v1_2']->['r14v2_2']: truth=unchanged pred=modified",
+    "r14: wrong type for ['r14v1_4']->['r14v2_5']: truth=renumbered pred=modified",
+    "r16: wrong type for ['r16v1_3.8']->['r16v2_3.8']: truth=unchanged pred=modified"
+  ]
+}

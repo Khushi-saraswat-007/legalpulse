@@ -1,0 +1,186 @@
+{
+  "contract_id": "r2",
+  "version": "v2",
+  "clauses": [
+    {
+      "clause_id": "r2v2_3.1",
+      "number": "3.1",
+      "heading": "Term",
+      "text": "This Agreement will be effective beginning on 12:01 a.m., Eastern Time, on the day after the date of last signature to these Base Terms (\"Effective Date\") and ending on the expiration and/or termination of all Service Option Attachments, unless the Agreement is terminated earlier in accordance with the terms herein. The term of each Service Option Attachment is as specified on the applicable Order Form.",
+      "parties": [
+        "Base Terms"
+      ],
+      "obligation_type": "termination",
+      "deadline": null,
+      "defined_terms": [
+        "Effective Date"
+      ],
+      "references": []
+    },
+    {
+      "clause_id": "r2v2_3.2",
+      "number": "3.2",
+      "heading": "Renewal",
+      "text": "Each Service Option Attachment will renew automatically for an additional term equal in duration to the previous term of the applicable Service Option Attachment unless either party notifies the other party in writing at least ninety (90) days prior to the end of the then-current term for the applicable Service Option Attachment that it has elected to terminate such Service Option Attachment.",
+      "parties": [],
+      "obligation_type": "termination",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r2v2_3.3",
+      "number": "3.3",
+      "heading": "Termination for Cause",
+      "text": "Customer or IBM may terminate this Agreement for material breach of this Agreement by the other upon written notice containing the specific nature and dates of the material breach. The breaching party will have thirty (30) days from receipt of notice to cure such breach, except for nonpayment by Customer, which must be cured within seven (7) business days from receipt of notice. If such breach has not been timely cured, then the non-breaching party may immediately terminate this Agreement upon written notice; provided, however, it is understood that in the event IBM has so breached this Agreement IBM must not be entitled to recover the early termination charges described in Section 3.4(b) below.",
+      "parties": [
+        "IBM",
+        "Customer"
+      ],
+      "obligation_type": "termination",
+      "deadline": null,
+      "defined_terms": [],
+      "references": [
+        "r2v2_3.4"
+      ]
+    },
+    {
+      "clause_id": "r2v2_3.4",
+      "number": "3.4",
+      "heading": "Termination for Convenience",
+      "text": "Customer may terminate this Agreement (including all Service Option Attachments) or any Service Option Attachment (with the exception of any Service Option Attachment that is a prerequisite for the provision of Services under a non-terminated Service Option Attachment) for convenience at the end of any calendar month by: a. providing at least one month's prior written notice to IBM; and b. paying the applicable early termination charges, if any, specified in Attachment A and applicable Service Option Attachments. In the event that Customer exercises its rights under this Section 3.4, IBM shall continue to fulfill all of its duties and obligations following the notice date and until the final termination date.",
+      "parties": [
+        "IBM",
+        "Customer"
+      ],
+      "obligation_type": "termination",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r2v2_3.4A",
+      "number": "3.4A",
+      "heading": "Counterparts",
+      "text": "This Agreement may be executed in counterparts, each of which shall be deemed an original.",
+      "parties": [],
+      "obligation_type": "other",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r2v2_3.5",
+      "number": "3.5",
+      "heading": "Effect of&sbsp;Termination",
+      "text": "Upon the date of termination, all Customer payment obligations accrued hereunder through the date of termination will become due and payable. The termination of selected Service Option Attachments will not affect Customer's obligation to pay charges under other Service Option Attachments. -------------------------------------------------------------------------------- 4.0 Charges and Payment",
+      "parties": [
+        "Customer"
+      ],
+      "obligation_type": "termination",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r2v2_4.1",
+      "number": "4.1",
+      "heading": "Charges",
+      "text": "Charges for applicable Services will be specified in Service Option Attachments and Order Forms. Charges can be specified as one-time, installment, recurring, or usage. IBM will invoice such Charges when they begin or are due as set forth in Service Option Attachments.",
+      "parties": [
+        "IBM",
+        "Order Forms"
+      ],
+      "obligation_type": "other",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r2v2_4.2",
+      "number": "4.2",
+      "heading": "Payment",
+      "text": "IBM invoices will specify the amount due. Payment is due upon receipt and payable as specified in such invoice. Customer agrees to pay accordingly, including any late payment fees. Payment will be made in United States dollars.",
+      "parties": [
+        "IBM",
+        "Customer"
+      ],
+      "obligation_type": "payment",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r2v2_4.3",
+      "number": "4.3",
+      "heading": "Taxes",
+      "text": "3 Customer will pay or provide appropriate exemption documentation for all taxes, duties, levies, and any other fees (except for taxes based upon IBM's net income) related to the Services imposed by any governmental authorities. Charges specified herein (including in an Order Form) are exclusive of any such taxes, duties, levies or fees. -------------------------------------------------------------------------------- 5.0 Warranties and Disclaimers",
+      "parties": [
+        "IBM",
+        "Customer"
+      ],
+      "obligation_type": "warranty",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r2v2_5.1",
+      "number": "5.1",
+      "heading": "IBM Representations and Warranties",
+      "text": "IBM represents and warrants that: a. it will perform the Services using reasonable care and skill and in accordance with the applicable Service Option Attachments (which means the degree of knowledge, skill and judgment customarily exercised by members of the applicable profession with respect to work of a similar nature); and that it will provide Customer with competent, fully trained, fully qualified and responsible personnel to perform the Services; and b. it has the requisite corporate power and authority to execute, deliver and perform its obligations under this Agreement. IBM covenants that it will comply with the laws applicable to IBM's business.",
+      "parties": [
+        "IBM",
+        "Customer"
+      ],
+      "obligation_type": "warranty",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r2v2_5.1A",
+      "number": "5.1A",
+      "heading": "Notices",
+      "text": "All notices under this Agreement shall be in writing and delivered to the address of the receiving party.",
+      "parties": [],
+      "obligation_type": "notice",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r2v2_5.2",
+      "number": "5.2",
+      "heading": "Exclusivity of Warranties",
+      "text": "THE WARRANTIES IN SECTION 5.1 ARE THE EXCLUSIVE WARRANTIES FROM IBM. THEY REPLACE ALL OTHER WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY, SATISFACTORY QUALITY, AND FITNESS FOR A PARTICULAR PURPOSE.",
+      "parties": [
+        "IBM"
+      ],
+      "obligation_type": "warranty",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    },
+    {
+      "clause_id": "r2v2_5.3",
+      "number": "5.3",
+      "heading": "Security",
+      "text": "a. Customer acknowledges that IBM does not control the transfer of data over telecommunications facilities, including the Internet. b. Subject to the other disclaimers contained herein, IBM will implement the security features specified herein, including the IBM perform security obligations identified in Section 8.0 of the Facilities Services Service Option Attachment. However, IBM does not warrant secure operation of the Services or that it will be able to prevent third party disruptions of the e-business Hosting Environment or Customer Components. c. Customer acknowledges that IBM offers numerous security options, specified in Service Option Attachments. Customer is responsible for selecting on Order Forms the set of security options that it determines meet Customer's needs. d. Customer agrees that IBM shall have no liability for any provision of security-related services or advice that IBM may voluntarily provide outside the scope of selected Service Option Attachments.",
+      "parties": [
+        "IBM",
+        "Customer",
+        "Order Forms"
+      ],
+      "obligation_type": "warranty",
+      "deadline": null,
+      "defined_terms": [],
+      "references": []
+    }
+  ],
+  "contradictions": [],
+  "meta": {
+    "edited_from": "r2v1",
+    "seed": 7
+  }
+}
