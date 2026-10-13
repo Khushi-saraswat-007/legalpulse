@@ -3,28 +3,36 @@ import sampleReport from "./sampleReport.json";
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK !== "false";
 
-// GET /contracts/{id}/report  (schema: schemas/risk_report.schema.json)
-export async function getReport(contractId) {
+// GET /contracts/{analysis_id}  (saved report)
+export async function getReport(analysisId) {
   if (USE_MOCK) return sampleReport;
-  const { data } = await client.get(`/contracts/${contractId}/report`);
+  const { data } = await client.get(`/contracts/${analysisId}`);
   return data;
 }
 
-// TODO (backend not ready): GET /contracts
+// GET /contracts  (list of saved analyses)
 export async function listContracts() {
   if (USE_MOCK) {
-    return [{ id: sampleReport.contract_id, name: "Supply Agreement", versions: "v1 → v2" }];
+    return [{ id: sampleReport.contract_id, name: "Supply Agreement", versions: "v1 to v2" }];
   }
   const { data } = await client.get("/contracts");
-  return data;
+  return data.map((r) => ({
+    id: r.id,
+    name: r.contract_key,
+    versions: `${r.old_filename} to ${r.new_filename}`,
+    n_changes: r.n_changes,
+    n_risks: r.n_risks,
+    top_severity: r.top_severity,
+    created_at: r.created_at,
+  }));
 }
 
-// TODO (backend not ready): POST /contracts/upload (old + new files)
+// POST /contracts/analyze  (old + new .txt files)
 export async function uploadContracts(oldFile, newFile) {
   if (USE_MOCK) return { id: sampleReport.contract_id };
   const form = new FormData();
   form.append("old_file", oldFile);
   form.append("new_file", newFile);
-  const { data } = await client.post("/contracts/upload", form);
-  return data;
+  const { data } = await client.post("/contracts/analyze", form);
+  return { id: data.analysis_id };
 }
