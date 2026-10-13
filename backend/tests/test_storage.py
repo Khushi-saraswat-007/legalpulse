@@ -1,5 +1,7 @@
 from fastapi.testclient import TestClient
 from backend.app.main import app
+from backend.app.db import get_db
+from backend.app.models import Alert
 
 OLD = b"""AGREEMENT
 
@@ -64,3 +66,30 @@ def test_stats(auth_headers, other_headers):
     assert s["contracts"] == 1 and s["changes"] == 1
     assert c.get("/contracts/stats", headers=other_headers).json()["contracts"] == 0
     assert c.get("/contracts/stats").status_code == 401
+
+
+def test_alert_created_for_risky_analysis(auth_headers):
+    c = TestClient(app)
+    top = _upload(c, auth_headers).json()["risks"][0]["severity"]
+    alerts = c.get("/alerts", headers=auth_headers).json()
+    assert len(alerts) == (1 if top in ("medium", "high", "critical") else 0)
+
+
+def test_alerts_seen_and_isolation(auth_headers, other_headers):
+    c = TestClient(app)
+    uid = c.get("/auth/me", headers=auth_headers).json()["id"]
+    db = next(app.dependency_overrides[get_db]())
+    db.add(Alert(user_id=uid, contract_key="k1", message="test alert"))
+    db.commit()
+    db.close()
+
+    assert len(c.get("/alerts", headers=auth_headers).json()) == 1
+    assert c.get("/alerts", headers=other_headers).json() == []
+    assert c.post("/alerts/1/seen", headers=other_headers).status_code == 404
+    assert c.post("/alerts/1/seen", headers=auth_headers).status_code == 200
+    assert c.get("/alerts", headers=auth_headers).json()[0]["seen"] is True
+
+
+def test_alerts_need_login():
+    c = TestClient(app)
+    assert c.get("/alerts").status_code == 401

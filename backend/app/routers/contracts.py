@@ -9,6 +9,7 @@ from ..db import get_db
 from ..models import Analysis, User
 from ..services.analysis import analyze_texts
 from .auth import get_current_user
+from .alerts import create_risk_alert
 
 router = APIRouter(prefix="/contracts", tags=["contracts"])
 MOCK = pathlib.Path(__file__).resolve().parents[3] / "schemas" / "sample_risk_report.json"
@@ -45,6 +46,7 @@ async def analyze(old_file: UploadFile = File(...), new_file: UploadFile = File(
         report_json=json.dumps(report))
     db.add(row)
     db.commit()
+    create_risk_alert(db, user.id, contract_key, report)
     report["analysis_id"] = row.id
     return report
 
