@@ -184,8 +184,7 @@ export default function Dashboard() {
         <Reveal delay={200} className="dash-panel">
           <div className="dash-panel-head">
             <h2>Top risks</h2>
-            {report && <Link to={`/report/${report.contract_id}`}>View full report <ArrowRight size={14} /></Link>}
-          </div>
+          {report && <Link to={`/report/${report.analysis_id ?? report.contract_id}`}>View full report <ArrowRight size={14} /></Link>}          </div>
           {risks.length === 0 ? (
             <p className="dash-empty">Upload a contract to see its risks here.</p>
           ) : (
