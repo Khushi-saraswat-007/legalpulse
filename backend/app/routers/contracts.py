@@ -6,8 +6,9 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from ..db import get_db
-from ..models import Analysis
+from ..models import Analysis, User
 from ..services.analysis import analyze_texts
+from .auth import get_current_user
 
 router = APIRouter(prefix="/contracts", tags=["contracts"])
 MOCK = pathlib.Path(__file__).resolve().parents[3] / "schemas" / "sample_risk_report.json"
@@ -23,7 +24,8 @@ async def _read_text(f: UploadFile) -> str:
 
 @router.post("/analyze")
 async def analyze(old_file: UploadFile = File(...), new_file: UploadFile = File(...),
-                  contract_key: str = Form("c001"), db: Session = Depends(get_db)):
+                  contract_key: str = Form("c001"), db: Session = Depends(get_db),
+                  user: User = Depends(get_current_user)):
     """Upload the OLD and NEW version of a contract (.txt). Returns the risk report and saves it."""
     for f in (old_file, new_file):
         if not (f.filename or "").lower().endswith(".txt"):
@@ -35,6 +37,7 @@ async def analyze(old_file: UploadFile = File(...), new_file: UploadFile = File(
         raise HTTPException(422, str(e))
 
     row = Analysis(
+        owner_id=user.id,
         contract_key=contract_key, old_filename=old_file.filename, new_filename=new_file.filename,
         n_changes=sum(1 for c in report["changes"] if c["change_type"] != "unchanged"),
         n_risks=len(report["risks"]),
@@ -47,19 +50,22 @@ async def analyze(old_file: UploadFile = File(...), new_file: UploadFile = File(
 
 
 @router.get("")
-def list_analyses(db: Session = Depends(get_db)):
-    """Summaries of all analyses, newest first (for the dashboard)."""
-    rows = db.scalars(select(Analysis).order_by(Analysis.id.desc())).all()
+def list_analyses(db: Session = Depends(get_db), user: User = Depends(get_current_user)):
+    """Summaries of the logged-in user's analyses, newest first (for the dashboard)."""
+    rows = db.scalars(
+        select(Analysis).where(Analysis.owner_id == user.id).order_by(Analysis.id.desc())
+    ).all()
     return [{"id": r.id, "contract_key": r.contract_key, "old_filename": r.old_filename,
              "new_filename": r.new_filename, "n_changes": r.n_changes, "n_risks": r.n_risks,
              "top_severity": r.top_severity, "created_at": r.created_at.isoformat()} for r in rows]
 
 
 @router.get("/{analysis_id}")
-def get_analysis(analysis_id: int, db: Session = Depends(get_db)):
-    """The full saved report for one analysis."""
+def get_analysis(analysis_id: int, db: Session = Depends(get_db),
+                 user: User = Depends(get_current_user)):
+    """The full saved report for one of the user's analyses."""
     row = db.get(Analysis, analysis_id)
-    if row is None:
+    if row is None or row.owner_id != user.id:
         raise HTTPException(404, "analysis not found")
     report = json.loads(row.report_json)
     report["analysis_id"] = row.id

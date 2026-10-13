@@ -22,9 +22,9 @@ OLD = b"""SUPPLY AGREEMENT
 NEW = OLD.replace(b"within 30 days", b"within 60 days").replace(b"on 30 days notice", b"on 90 days notice")
 
 
-def test_analyze_returns_ranked_risks():
+def test_analyze_returns_ranked_risks(auth_headers):
     c = TestClient(app)
-    r = c.post("/contracts/analyze", data={"contract_key": "t1"},
+    r = c.post("/contracts/analyze", data={"contract_key": "t1"}, headers=auth_headers,
                files={"old_file": ("old.txt", OLD, "text/plain"), "new_file": ("new.txt", NEW, "text/plain")})
     assert r.status_code == 200, r.text
     rep = r.json()
@@ -33,7 +33,8 @@ def test_analyze_returns_ranked_risks():
     assert kinds.count("modified") == 2
 
 
-def test_rejects_non_txt():
+def test_rejects_non_txt(auth_headers):
     c = TestClient(app)
-    r = c.post("/contracts/analyze", files={"old_file": ("a.pdf", b"x"), "new_file": ("b.txt", b"x")})
+    r = c.post("/contracts/analyze", headers=auth_headers,
+               files={"old_file": ("a.pdf", b"x"), "new_file": ("b.txt", b"x")})
     assert r.status_code == 400
