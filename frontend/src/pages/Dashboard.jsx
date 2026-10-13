@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { ArrowRight, FileText, GitCompare, Network, ShieldAlert, Upload } from "lucide-react";
-import { getReport, listContracts } from "../api/contracts";
+import { getReport, getStats, listContracts } from "../api/contracts";
 import { useAuth } from "../context/AuthContext";
 import Reveal from "../components/Reveal";
 import RiskBadge from "../components/RiskBadge";
@@ -93,6 +93,7 @@ export default function Dashboard() {
   const { user } = useAuth();
   const [contracts, setContracts] = useState(null);
   const [report, setReport] = useState(null);
+  const [totals, setTotals] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -100,6 +101,7 @@ export default function Dashboard() {
       try {
         const list = await listContracts();
         setContracts(list);
+        setTotals(await getStats());
         if (list.length > 0) setReport(await getReport(list[0].id));
       } catch {
         setError("Could not load your dashboard. Is the backend running?");
@@ -122,11 +124,11 @@ export default function Dashboard() {
 
   const name = user?.email ? user.email.split("@")[0].replace(/[._-]+/g, " ") : "there";
 
-  const stats = [
-    { icon: FileText, tone: "indigo", label: "Contracts analyzed", value: contracts.length },
-    { icon: ShieldAlert, tone: "red", label: "High-risk issues", value: highCount },
-    { icon: GitCompare, tone: "blue", label: "Changes detected", value: changeCount },
-    { icon: Network, tone: "green", label: "Clauses mapped", value: clauseCount },
+    const stats = [
+    { icon: FileText, tone: "indigo", label: "Contracts analyzed", value: totals?.contracts ?? contracts.length },
+    { icon: ShieldAlert, tone: "red", label: "High-risk issues", value: totals?.high_risk ?? highCount },
+    { icon: GitCompare, tone: "blue", label: "Changes detected", value: totals?.changes ?? changeCount },
+    { icon: Network, tone: "green", label: "Clauses mapped", value: totals?.clauses ?? clauseCount },
   ];
 
   return (
