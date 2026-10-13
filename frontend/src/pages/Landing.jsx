@@ -11,8 +11,7 @@ import "../landing/landing2.css";
 export default function Landing() {
   const { user } = useAuth();
   const startTo = user ? "/dashboard" : "/login";
-  const sampleTo = user ? "/report/c001" : "/login";
-
+  const sampleTo = user ? "/dashboard" : "/login";
   return (
     <div className="lp">
       <LandingNav startTo={startTo} />
