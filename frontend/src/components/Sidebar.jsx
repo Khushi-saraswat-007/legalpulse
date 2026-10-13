@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { FileText, GitCompare, LayoutDashboard, LogOut, Network, Scale, Upload } from "lucide-react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Bell, FileText, GitCompare, LayoutDashboard, LogOut, Network, Scale, Upload } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { listContracts } from "../api/contracts";
+import { listAlerts } from "../api/alerts";
 
 const css = `
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
@@ -20,6 +21,7 @@ body:has(.sidebar) { background: #f7f8ff; }
 .sb-nav a { display: flex; align-items: center; gap: .75rem; padding: .7rem .8rem; border-radius: 10px; color: #4a5170; text-decoration: none; font-size: .92rem; font-weight: 600; transition: background .2s, color .2s, transform .2s; }
 .sb-nav a:hover { background: #f1f2ff; color: #4350dc; transform: translateX(3px); }
 .sb-nav a.active { background: #4350dc; color: #fff; box-shadow: 0 6px 16px rgba(67, 80, 220, .25); }
+.sb-badge { margin-left: auto; background: #d9374f; color: #fff; border-radius: 999px; padding: 0 .5rem; font-size: .72rem; font-weight: 700; }
 
 .sb-user { margin-top: auto; padding: .9rem; border: 1px solid #e3e6f3; border-radius: 12px; background: #f7f8ff; }
 .sb-user-row { display: flex; align-items: center; gap: .7rem; min-width: 0; }
@@ -44,13 +46,22 @@ body:has(.sidebar) { background: #f7f8ff; }
 export default function Sidebar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [contractId, setContractId] = useState(null);
+  const [unseen, setUnseen] = useState(0);
 
   useEffect(() => {
     listContracts()
       .then((list) => list.length > 0 && setContractId(list[0].id))
       .catch(() => {});
   }, []);
+
+  // re-check unseen alerts whenever the page changes (e.g. after "Mark seen")
+  useEffect(() => {
+    listAlerts()
+      .then((list) => setUnseen(list.filter((a) => !a.seen).length))
+      .catch(() => {});
+  }, [pathname]);
 
   const handleLogout = () => {
     logout();
@@ -70,6 +81,10 @@ export default function Sidebar() {
       <nav className="sb-nav">
         <NavLink to="/dashboard"><LayoutDashboard size={18} /> Dashboard</NavLink>
         <NavLink to="/upload"><Upload size={18} /> Upload</NavLink>
+        <NavLink to="/alerts">
+          <Bell size={18} /> Alerts
+          {unseen > 0 && <span className="sb-badge">{unseen}</span>}
+        </NavLink>
       </nav>
 
       {contractId && (
