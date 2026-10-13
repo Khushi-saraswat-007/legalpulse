@@ -31,3 +31,24 @@ def test_db():
     app.dependency_overrides[get_db] = override
     yield
     app.dependency_overrides.clear()
+    
+
+from fastapi.testclient import TestClient
+
+
+def _login(client, email):
+    client.post("/auth/register", json={"email": email, "password": "secret123"})
+    r = client.post("/auth/login", data={"username": email, "password": "secret123"})
+    return {"Authorization": f"Bearer {r.json()['access_token']}"}
+
+
+@pytest.fixture
+def auth_headers():
+    """Token header for a logged-in test user."""
+    return _login(TestClient(app), "user1@test.com")
+
+
+@pytest.fixture
+def other_headers():
+    """Token header for a second, different user."""
+    return _login(TestClient(app), "user2@test.com")
