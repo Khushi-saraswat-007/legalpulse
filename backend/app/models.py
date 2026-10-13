@@ -53,5 +53,6 @@ class Analysis(Base):
     n_changes: Mapped[int] = mapped_column(Integer, default=0)       # changes that are not "unchanged"
     n_risks: Mapped[int] = mapped_column(Integer, default=0)
     top_severity: Mapped[str] = mapped_column(String, default="none")
+    owner_id: Mapped[Optional[int]] = mapped_column(ForeignKey("users.id"), nullable=True)  # who uploaded it
     report_json: Mapped[str] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
