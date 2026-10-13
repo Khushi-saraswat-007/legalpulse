@@ -58,6 +58,17 @@ def list_analyses(db: Session = Depends(get_db), user: User = Depends(get_curren
     return [{"id": r.id, "contract_key": r.contract_key, "old_filename": r.old_filename,
              "new_filename": r.new_filename, "n_changes": r.n_changes, "n_risks": r.n_risks,
              "top_severity": r.top_severity, "created_at": r.created_at.isoformat()} for r in rows]
+@router.get("/stats")
+def stats(db: Session = Depends(get_db), user: User = Depends(get_current_user)):
+    """Totals across all of the logged-in user's analyses (for the dashboard cards)."""
+    rows = db.scalars(select(Analysis).where(Analysis.owner_id == user.id)).all()
+    high = changes = clauses = 0
+    for r in rows:
+        rep = json.loads(r.report_json)
+        high += sum(1 for k in rep["risks"] if k["severity"] in ("high", "critical"))
+        changes += r.n_changes
+        clauses += len(rep.get("graph", {}).get("nodes", []))
+    return {"contracts": len(rows), "high_risk": high, "changes": changes, "clauses": clauses}
 
 
 @router.get("/{analysis_id}")
