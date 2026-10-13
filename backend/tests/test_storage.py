@@ -54,3 +54,13 @@ def test_users_only_see_their_own(auth_headers, other_headers):
     assert c.get("/contracts", headers=other_headers).json() == []
     assert c.get("/contracts/1", headers=other_headers).status_code == 404
     assert c.get("/contracts/1", headers=auth_headers).status_code == 200
+
+
+def test_stats(auth_headers, other_headers):
+    c = TestClient(app)
+    assert c.get("/contracts/stats", headers=auth_headers).json()["contracts"] == 0
+    _upload(c, auth_headers)
+    s = c.get("/contracts/stats", headers=auth_headers).json()
+    assert s["contracts"] == 1 and s["changes"] == 1
+    assert c.get("/contracts/stats", headers=other_headers).json()["contracts"] == 0
+    assert c.get("/contracts/stats").status_code == 401
