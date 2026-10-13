@@ -15,17 +15,24 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const [mode, setMode] = useState("login");
+  const [error, setError] = useState("");
+  const { login, register } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
     setLoading(true);
-    // TODO: call POST /auth/login when the backend implements it
-    setTimeout(() => {
-      login(email);
+    try {
+      if (mode === "login") await login(email, password);
+      else await register(email, password);
       navigate("/dashboard");
-    }, 700);
+    } catch (err) {
+      const d = err.response?.data?.detail;
+      setError(typeof d === "string" ? d : "Something went wrong. Is the backend running?");
+      setLoading(false);
+    }
   };
 
   return (
@@ -55,7 +62,7 @@ export default function Login() {
       <main className="auth-form-side">
         <div className="auth-form-box">
           <Link to="/" className="auth-logo auth-logo-mobile"><Scale size={26} strokeWidth={1.8} /> LegalPulse</Link>
-          <h1>Welcome back</h1>
+            <h1>{mode === "login" ? "Welcome back" : "Create your account"}</h1>
           <p className="auth-sub">Log in to analyze your contracts.</p>
 
           <form onSubmit={handleSubmit}>
@@ -77,11 +84,19 @@ export default function Login() {
               </span>
             </label>
             <button className="auth-submit" type="submit" disabled={loading}>
-              {loading ? <span className="auth-spinner" /> : <>Log in <ArrowRight size={18} /></>}
+              {loading ? <span className="auth-spinner" /> : <>{mode === "login" ? "Log in" : "Sign up"} <ArrowRight size={18} /></>}
             </button>
           </form>
 
-          <p className="auth-note">Demo mode: any email and password will work for now.</p>
+          {error && <p className="auth-note" style={{ color: "#dc2626" }}>{error}</p>}
+          <p className="auth-note">
+            {mode === "login" ? "New here? " : "Already have an account? "}
+            <button type="button" style={{ background: "none", border: 0, color: "inherit", textDecoration: "underline", cursor: "pointer" }}
+              onClick={() => { setMode(mode === "login" ? "register" : "login"); setError(""); }}>
+              {mode === "login" ? "Create an account" : "Log in"}
+            </button>
+            {mode === "register" && " (password: at least 8 characters)"}
+          </p>
           <Link to="/" className="auth-back">← Back to home</Link>
         </div>
       </main>
