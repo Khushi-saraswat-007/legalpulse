@@ -8,6 +8,7 @@ import Upload from "./pages/Upload";
 import ReportViewer from "./pages/ReportViewer";
 import DiffView from "./pages/DiffView";
 import GraphView from "./pages/GraphView";
+import Alerts from "./pages/Alerts";
 
 function Protected({ children }) {
   const { user } = useAuth();
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/report/:id" element={<Protected><ReportViewer /></Protected>} />
           <Route path="/diff/:id" element={<Protected><DiffView /></Protected>} />
           <Route path="/graph/:id" element={<Protected><GraphView /></Protected>} />
+          <Route path="/alerts" element={<Protected><Alerts /></Protected>} />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </main>
