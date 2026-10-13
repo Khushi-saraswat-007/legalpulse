@@ -36,3 +36,10 @@ export async function uploadContracts(oldFile, newFile) {
   const { data } = await client.post("/contracts/analyze", form);
   return { id: data.analysis_id };
 }
+
+// GET /contracts/stats  (totals across all of the user's analyses)
+export async function getStats() {
+  if (USE_MOCK) return { contracts: 1, high_risk: 1, changes: 1, clauses: 3 };
+  const { data } = await client.get("/contracts/stats");
+  return data;
+}
