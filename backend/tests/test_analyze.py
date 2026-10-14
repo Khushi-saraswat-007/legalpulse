@@ -3,6 +3,7 @@ import sys
 import pathlib
 
 os.environ["LEGALPULSE_EMBEDDER"] = "bow"          # fast, no model download in tests
+os.environ["LEGALPULSE_NLI"] = "rule"
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
 from fastapi.testclient import TestClient
 from backend.app.main import app
@@ -33,8 +34,16 @@ def test_analyze_returns_ranked_risks(auth_headers):
     assert kinds.count("modified") == 2
 
 
-def test_rejects_non_txt(auth_headers):
+def test_rejects_unsupported_type(auth_headers):
     c = TestClient(app)
     r = c.post("/contracts/analyze", headers=auth_headers,
-               files={"old_file": ("a.pdf", b"x"), "new_file": ("b.txt", b"x")})
+               files={"old_file": ("a.exe", b"x"), "new_file": ("b.txt", b"x")})
     assert r.status_code == 400
+
+
+def test_broken_pdf_gives_clear_422(auth_headers):
+    c = TestClient(app)
+    r = c.post("/contracts/analyze", headers=auth_headers,
+               files={"old_file": ("a.pdf", b"not a real pdf"), "new_file": ("b.txt", NEW)})
+    assert r.status_code == 422
+    assert "a.pdf" in r.json()["detail"]

@@ -14,7 +14,10 @@ Base.metadata.create_all(engine)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Start the monitoring job only when MONITOR_USER_EMAIL is set."""
+    """Load the ML models once at startup; start the monitoring job only when MONITOR_USER_EMAIL is set."""
+    if os.getenv("LEGALPULSE_WARMUP", "1") == "1":
+        from .services.analysis import warm_up
+        warm_up()
     scheduler = None
     if os.getenv("MONITOR_USER_EMAIL"):
         from apscheduler.schedulers.background import BackgroundScheduler
