@@ -1,0 +1,34 @@
+SOFTWARE SERVICES AGREEMENT
+
+This Agreement is made between Nova Tech Pvt Ltd (the "Supplier") and Orbit Retail Ltd (the "Client").
+
+1. Services
+The Supplier shall provide the software services described in Schedule A to the Client.
+
+2. Fees and Payment
+The Client shall pay the Supplier the fees set out in Schedule A within 60 days of receipt of each invoice.
+
+3. Late Payment
+If the Client fails to pay any invoice under Clause 2, interest of 2% per month shall accrue on the overdue amount from the 15th day after the invoice date.
+
+4. Term
+This Agreement shall commence on the Effective Date and continue for a period of 12 months.
+
+5. Termination
+Either party may terminate this Agreement by giving 7 days written notice. Clause 3 shall survive termination.
+
+6. Confidentiality
+Each party shall keep the other party's Confidential Information secret for five years after termination.
+
+7. Indemnity
+The Supplier shall indemnify the Client against third party claims that the Services infringe intellectual property rights.
+
+8. Governing Law
+This Agreement is governed by the laws of India and the courts of Delhi shall have exclusive jurisdiction.
+
+9. Notices
+All notices under this Agreement shall be in writing and delivered to the addresses set out in Schedule A.
+
+10. Data Protection
+Each party shall comply with applicable data protection law and the Supplier shall not transfer personal data outside India without the Client's consent.
+
