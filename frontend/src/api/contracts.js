@@ -27,12 +27,13 @@ export async function listContracts() {
   }));
 }
 
-// POST /contracts/analyze  (old + new .txt files)
-export async function uploadContracts(oldFile, newFile) {
+// POST /contracts/analyze  (old + new .txt / .pdf / .docx files, plus a contract name)
+export async function uploadContracts(oldFile, newFile, contractName) {
   if (USE_MOCK) return { id: sampleReport.contract_id };
   const form = new FormData();
   form.append("old_file", oldFile);
   form.append("new_file", newFile);
+  if (contractName && contractName.trim()) form.append("contract_key", contractName.trim());
   const { data } = await client.post("/contracts/analyze", form);
   return { id: data.analysis_id };
 }
