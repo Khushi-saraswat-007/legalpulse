@@ -10,7 +10,9 @@ from .errors import EmptyDocumentError, ScannedPDFError, UnsupportedFormatError
 SUPPORTED = {".pdf", ".docx", ".txt"}
 
 # "Page 3", "Page 3 of 10", "3 of 10" on a line of their own = page furniture, not contract text.
-_PAGE_FURNITURE = re.compile(r"^\s*(page\s+\d+(\s+of\s+\d+)?|\d+\s+of\s+\d+)\s*$", re.I)
+# NLP-EX-09: also EDGAR print footers such as "Source: COMPANY, 8-K, 8/15/2019" (must end in a date)
+_PAGE_FURNITURE = re.compile(
+    r"^\s*(page\s+\d+(\s+of\s+\d+)?|\d+\s+of\s+\d+|source:\s.{3,150},\s*\d{1,2}/\d{1,2}/\d{4})\s*$", re.I)
 
 
 def read_text(path: str | Path) -> str:

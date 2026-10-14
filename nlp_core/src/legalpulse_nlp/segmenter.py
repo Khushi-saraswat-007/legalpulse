@@ -70,6 +70,7 @@ def segment(text: str) -> SegmentResult:
     result = SegmentResult()
     current: dict | None = None
     preamble: list[str] = []
+    last_top: int | None = None   # highest top-level number seen so far
 
     def flush():
         nonlocal current
@@ -94,9 +95,15 @@ def segment(text: str) -> SegmentResult:
             rest = (m.group("rest") or "").strip()
             if rest[:1].islower():
                 m = None
+        # NLP-EX-07: "1. the services will ..." inside clause 2.1 is a list item, not a new clause.
+        # Only a bare "n." that does not move forward AND continues in lower case is absorbed.
+        if m and m.group("n3") and current is not None and last_top is not None:
+            if int(m.group("n3")) <= last_top and (m.group("rest") or "").strip()[:1].islower():
+                m = None
         if m:
             flush()
             number = m.group("n1") or m.group("n2") or m.group("n3")
+            last_top = int(number.split(".")[0])
             rest = (m.group("rest") or "").strip()
             heading, body = "", rest
             if rest:
@@ -115,8 +122,34 @@ def segment(text: str) -> SegmentResult:
 
     if not result.clauses:
         result = _fallback_paragraphs(text, result)
+    _drop_toc_entries(result)
     _check_numbers(result)
     return result
+
+
+_PAGE_TAIL = re.compile(r"^(?P<h>.*?\S)\s+\d{1,3}$")
+
+
+def _norm_heading(h: str) -> str:
+    m = _PAGE_TAIL.match(h.strip())
+    return re.sub(r"[^a-z0-9]+", " ", (m.group("h") if m else h).lower()).strip()
+
+
+def _drop_toc_entries(result: SegmentResult) -> None:
+    """NLP-EX-06: \"2. Licenses 13\" (heading + page number) is a table-of-contents entry when the same
+    number appears again LATER with the same heading. Both conditions are required, so a real
+    heading that merely ends in a number (\"1. Term 3\") is never dropped."""
+    cl = result.clauses
+    drop = set()
+    for i, c in enumerate(cl):
+        if not c.heading or not _PAGE_TAIL.match(c.heading.strip()):
+            continue
+        key = _norm_heading(c.heading)
+        if key and any(d.number == c.number and d.heading and _norm_heading(d.heading) == key for d in cl[i + 1:]):
+            drop.add(i)
+    if drop:
+        result.clauses = [c for i, c in enumerate(cl) if i not in drop]
+        result.warnings.append(f"Ignored {len(drop)} table-of-contents entries.")
 
 
 def _next_is_body(lines: list[str], idx: int) -> bool:
