@@ -8,12 +8,37 @@ from .comparison.aligner import align_versions
 def run(old_contract: dict, new_contract: dict, embedder=None) -> dict:
     changes = align_versions(old_contract, new_contract, embedder)
     g = build_graph(new_contract)
+    g_old = build_graph(old_contract)      # needed to score DELETED clauses (they are not in the new graph)
+    old_to_new = {}                        # old clause id -> the new clause id that replaced it
+    for ch in changes:
+        for oid in ch.get("old_clause_ids") or []:
+            if ch.get("new_clause_ids"):
+                old_to_new[oid] = ch["new_clause_ids"][0]
     flagged = {c for p in new_contract.get("contradictions", [])
                if p["label"] == "contradiction" for c in (p["clause_a"], p["clause_b"])}
     risks = []
     for ch in changes:
         new_ids = ch.get("new_clause_ids") or []
-        if ch["change_type"] == "unchanged" or not new_ids:
+        if ch["change_type"] == "unchanged":
+            continue
+        if not new_ids:
+            # DELETED clause: it only exists in the old version, so trace its impact in the OLD graph
+            # and report the clauses that depended on it (translated to their ids in the new version).
+            old_ids = ch.get("old_clause_ids") or []
+            if not old_ids:
+                continue
+            dep = {}
+            for oid in old_ids:
+                for r in trace_impact(g_old, oid):
+                    nid = old_to_new.get(r["clause_id"])
+                    if nid and nid not in dep:
+                        dep[nid] = r
+            dep = sorted(dep.values(), key=lambda r: -r["score"])
+            s = score_risk(ch, dep, False)
+            risks.append({"severity": s["severity"], "score": s["score"],
+                          "trigger_clause": old_ids[0],      # the clause only exists in the old version
+                          "impacted_clauses": list(dict.fromkeys(old_to_new[r["clause_id"]] for r in dep)),
+                          "explanation": f"{ch['summary']} (score parts: {s['components']})"})
             continue
         impacted = {}
         for nid in new_ids:
