@@ -3,6 +3,7 @@ import sys
 import pathlib
 
 os.environ["LEGALPULSE_EMBEDDER"] = "bow"          # fast, no model download in tests
+os.environ["LEGALPULSE_NLI"] = "rule"              # rule-based NLI, no model download in tests
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
 
 import pytest

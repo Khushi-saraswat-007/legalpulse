@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 
 from ..db import get_db
 from ..models import Analysis, User
-from ..services.analysis import analyze_texts
+from ..services.analysis import SUPPORTED_EXTENSIONS, analyze_files
 from .auth import get_current_user
 from .alerts import create_risk_alert
 
@@ -15,25 +15,17 @@ router = APIRouter(prefix="/contracts", tags=["contracts"])
 MOCK = pathlib.Path(__file__).resolve().parents[3] / "schemas" / "sample_risk_report.json"
 
 
-async def _read_text(f: UploadFile) -> str:
-    raw = await f.read()
-    try:
-        return raw.decode("utf-8")
-    except UnicodeDecodeError:
-        return raw.decode("latin-1")
-
-
 @router.post("/analyze")
 async def analyze(old_file: UploadFile = File(...), new_file: UploadFile = File(...),
                   contract_key: str = Form("c001"), db: Session = Depends(get_db),
                   user: User = Depends(get_current_user)):
-    """Upload the OLD and NEW version of a contract (.txt). Returns the risk report and saves it."""
+    """Upload the OLD and NEW version of a contract (.txt, .pdf or .docx). Returns the risk report and saves it."""
     for f in (old_file, new_file):
-        if not (f.filename or "").lower().endswith(".txt"):
-            raise HTTPException(400, f"{f.filename}: only .txt files are supported for now")
-    old_text, new_text = await _read_text(old_file), await _read_text(new_file)
+        if not (f.filename or "").lower().endswith(SUPPORTED_EXTENSIONS):
+            raise HTTPException(400, f"{f.filename}: only {', '.join(SUPPORTED_EXTENSIONS)} files are supported")
+    old_data, new_data = await old_file.read(), await new_file.read()
     try:
-        report = analyze_texts(old_text, new_text, contract_key)
+        report = analyze_files(old_file.filename, old_data, new_file.filename, new_data, contract_key)
     except ValueError as e:
         raise HTTPException(422, str(e))
 
