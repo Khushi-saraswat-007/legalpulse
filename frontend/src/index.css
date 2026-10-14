@@ -135,3 +135,5 @@ a:focus-visible, button:focus-visible, input:focus-visible, .dropzone:focus-visi
 @media (max-width: 560px) {
   .how-list { grid-template-columns: 1fr; }
 }
+.name-field { display: flex; flex-direction: column; gap: .3rem; font-weight: 500; max-width: 26rem; margin-bottom: 1rem; }
+.name-field input { padding: .6rem .7rem; border: 1px solid var(--line); border-radius: 4px; font: inherit; }

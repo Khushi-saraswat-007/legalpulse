@@ -64,3 +64,12 @@ def test_old_contract_has_empty_contradictions_and_report_is_marked_experimental
 def test_warm_up_runs_with_rule_models():
     from backend.app.services.analysis import warm_up
     warm_up()
+
+
+def test_contract_name_is_cleaned_and_saved(auth_headers):
+    c = TestClient(app)
+    r = c.post("/contracts/analyze", data={"contract_key": "  Acme / Supply Agreement!! "}, headers=auth_headers,
+               files={"old_file": ("o.txt", OLD.encode()), "new_file": ("n.txt", NEW.encode())})
+    assert r.status_code == 200, r.text
+    names = [x["contract_key"] for x in c.get("/contracts", headers=auth_headers).json()]
+    assert "Acme-Supply-Agreement" in names
