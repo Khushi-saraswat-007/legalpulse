@@ -1,6 +1,6 @@
 """Continuous monitoring job.
 
-Watches a folder for new contract pairs named <key>_v1.txt and <key>_v2.txt.
+Watches a folder for new contract pairs named <key>_v1.<ext> and <key>_v2.<ext> (.txt, .pdf or .docx).
 Each complete pair is analysed, saved for the owner user, and a risk alert is raised.
 Handled files move to processed/ (or failed/), so nothing is analysed twice.
 """
@@ -13,19 +13,11 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from ..models import Analysis, User
-from .analysis import ROOT, analyze_texts
+from .analysis import ROOT, SUPPORTED_EXTENSIONS, analyze_files
 
 log = logging.getLogger("legalpulse.monitor")
 WATCH_DIR = ROOT / "data" / "incoming"
-V1 = re.compile(r"^(?P<key>.+)_v1\.txt$", re.IGNORECASE)
-
-
-def _read(path: pathlib.Path) -> str:
-    raw = path.read_bytes()
-    try:
-        return raw.decode("utf-8")
-    except UnicodeDecodeError:
-        return raw.decode("latin-1")
+V1 = re.compile(r"^(?P<key>.+)_v1(?P<ext>\.(?:txt|pdf|docx))$", re.IGNORECASE)
 
 
 def _move(files, folder: pathlib.Path):
@@ -52,11 +44,13 @@ def scan_and_process(db: Session, owner_email: str, watch_dir: pathlib.Path = WA
         if not m:
             continue
         key = m.group("key")
-        new_path = watch_dir / f"{key}_v2.txt"
-        if not new_path.exists():
+        new_path = next((p for p in sorted(watch_dir.glob(f"{key}_v2.*"))
+                         if p.suffix.lower() in SUPPORTED_EXTENSIONS), None)
+        if new_path is None:
             continue  # wait until the second version arrives
         try:
-            report = analyze_texts(_read(old_path), _read(new_path), key)
+            report = analyze_files(old_path.name, old_path.read_bytes(), new_path.name,
+                                   new_path.read_bytes(), key)
         except Exception as e:  # bad file: park it so it is not retried forever
             log.error("monitor: could not analyse %s: %s", key, e)
             _move([old_path, new_path], watch_dir / "failed")
