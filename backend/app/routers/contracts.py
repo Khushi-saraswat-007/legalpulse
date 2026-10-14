@@ -1,5 +1,6 @@
 import json
 import pathlib
+import re
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from sqlalchemy import select
@@ -20,6 +21,7 @@ async def analyze(old_file: UploadFile = File(...), new_file: UploadFile = File(
                   contract_key: str = Form("c001"), db: Session = Depends(get_db),
                   user: User = Depends(get_current_user)):
     """Upload the OLD and NEW version of a contract (.txt, .pdf or .docx). Returns the risk report and saves it."""
+    contract_key = re.sub(r"[^A-Za-z0-9_-]+", "-", contract_key).strip("-")[:40] or "c001"
     for f in (old_file, new_file):
         if not (f.filename or "").lower().endswith(SUPPORTED_EXTENSIONS):
             raise HTTPException(400, f"{f.filename}: only {', '.join(SUPPORTED_EXTENSIONS)} files are supported")
