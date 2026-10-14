@@ -144,6 +144,18 @@ _REF = re.compile(
     re.I | re.X,
 )
 _NUMTOK = re.compile(r"\d+(?:\.\d+)*")
+# NLP-EX-08: "Section 351 of the PHSA", "Section 5 of the Securities Exchange Act", "Section 42 U.S.C.262"
+# cite external law, not a clause of this contract. Case-sensitive on purpose (Act / PHSA capitals).
+_EXTERNAL_AFTER = re.compile(
+    r"""\s*(?:\([a-z0-9]+\)\s*)*
+    (?:
+        (?:U\.?\s?S\.?\s?C|C\.?\s?F\.?\s?R)\b
+      | (?:U\.S\.C\.|C\.F\.R\.|USC|CFR)
+      | (?:of|under)\s+(?:the\s+)?(?:[A-Z][A-Za-z&.'\-]*\s+){0,4}(?:Act|Code|Law|Laws|Regulations?|Rules?|Statute|Directive|Treaty|Convention|Constitution)\b
+      | (?:of|under)\s+(?:the\s+)?[A-Z]{2,}(?:[&/][A-Z]+)*\b
+    )""",
+    re.X,
+)
 
 
 def extract_references(text: str, own_number: str, number_to_id: dict[str, str]) -> tuple[list[str], list[str]]:
@@ -152,6 +164,8 @@ def extract_references(text: str, own_number: str, number_to_id: dict[str, str])
     unresolved: list[str] = []
     for m in _REF.finditer(text):
         body = m.group("body")
+        if _EXTERNAL_AFTER.match(text, m.end("body")):
+            continue   # NLP-EX-08: external law, not a clause of this contract
         nums = _NUMTOK.findall(body)
         if re.search(r"\b(to|through)\b|\d\s*-\s*\d", body) and len(nums) == 2 and "." not in "".join(nums):
             lo, hi = int(nums[0]), int(nums[1])
