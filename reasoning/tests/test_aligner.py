@@ -58,7 +58,9 @@ def test_pipeline_end_to_end_matches_schema():
     report = pipeline.run(*load("p1"), embedder=EMB)
     jsonschema.validate(report, schema)
     top = report["risks"][0]
-    assert top["rank"] == 1 and top["trigger_clause"].startswith("p1v2_")
+    # the trigger may be a clause of the new version OR a clause deleted from the old version (p1v1_)
+    assert top["rank"] == 1 and top["trigger_clause"].startswith(("p1v1_", "p1v2_"))
+    assert top["severity"] in ("high", "critical")
 
 
 def _clause(cid, num, text):
