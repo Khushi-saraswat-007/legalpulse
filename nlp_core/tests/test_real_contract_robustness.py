@@ -77,3 +77,20 @@ def test_internal_references_still_resolve():
     for text in ("subject to Clause 5.", "as set out in Section 5 of this Agreement.",
                  "see Section 5 of the Agreement."):
         assert extract_references(text, "9", IDS) == (["c_5"], []), text
+
+
+# --- NLP-EX-09: EDGAR page footer "Source: ..., 8-K, 8/15/2019" must not leak into clauses ------
+def test_edgar_source_footer_is_dropped():
+    from legalpulse_nlp.ingest import clean_text
+    text = ("1. Term\nThe term is 2 years.\n"
+            "Source: ALLIED ESPORTS ENTERTAINMENT, INC., 8-K, 8/15/2019\n"
+            "Renewal is automatic.\n")
+    out = clean_text(text)
+    assert "Source:" not in out
+    assert "Renewal is automatic." in out
+
+
+def test_a_sentence_that_starts_with_source_is_kept():
+    from legalpulse_nlp.ingest import clean_text
+    text = "Source: the Licensor's own records shall be used to compute fees.\n"
+    assert "Source:" in clean_text(text)
