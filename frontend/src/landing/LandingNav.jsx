@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Scale } from "lucide-react";
+import { Scale } from "lucide-react";
 
-export default function LandingNav({ startTo }) {
+export default function LandingNav({ startTo, loggedIn }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -15,17 +15,14 @@ export default function LandingNav({ startTo }) {
     <header className={`lp-nav ${scrolled ? "is-scrolled" : ""}`}>
       <div className="lp-container lp-nav-inner">
         <a href="#home" className="lp-logo">
-          <Scale size={26} strokeWidth={1.8} /> LegalPulse
+          <Scale size={24} strokeWidth={1.8} /> LegalPulse
         </a>
         <nav className="lp-nav-links">
-          <a href="#home">Home</a>
+          <a href="#how">How it works</a>
           <a href="#features">Features</a>
-          <a href="#how">How it Works</a>
-          <a href="#about">About</a>
+          <a href="#faq">FAQ</a>
+          <Link to={startTo} className="lp-nav-login">{loggedIn ? "Dashboard" : "Log in"}</Link>
         </nav>
-        <Link to={startTo} className="lp-btn lp-btn-primary">
-          Get Started <ArrowRight size={16} />
-        </Link>
       </div>
     </header>
   );
