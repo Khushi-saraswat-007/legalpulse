@@ -1,71 +1,49 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, FileText, GitFork, BarChart3, Settings, ShieldAlert, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-const summary = [
-  { color: "red", title: "Contradiction Detected", text: "Clauses 4.1 and 7.3" },
-  { color: "yellow", title: "Version Change", text: "Clause updated in v2" },
-  { color: "red", title: "High Impact Clause", text: "May cause financial risk" },
-];
+// A bar standing in for a line of contract text. kind: "" | "r" (changed) | "y" (reworded)
+const Bar = ({ w, kind = "" }) => <i className={`lp-bar ${kind}`} style={{ width: `${w}%` }} />;
+
+function Sheet({ title, bars, tilt }) {
+  return (
+    <div className="lp-sheet" style={{ transform: `rotate(${tilt}deg)` }}>
+      <span className="lp-sheet-title">{title}</span>
+      {bars.map(([w, k], i) => <Bar key={i} w={w} kind={k} />)}
+    </div>
+  );
+}
+
+const V1 = [[92], [78], [55], [88], [70], [85], [62], [90], [48]];
+const V2 = [[92], [78], [55, "y"], [88], [70, "r"], [85], [62, "y"], [90], [48]];
 
 export default function Hero({ startTo, sampleTo }) {
   return (
-    <section className="lp-hero lp-container" id="home">
-      <div className="lp-hero-text">
-        <span className="lp-pill lp-fade" style={{ animationDelay: "0ms" }}>
-          <Sparkles size={14} /> AI-Powered Contract Risk Analysis
-        </span>
+    <section className="lp-hero" id="home">
+      <div className="lp-container lp-hero-inner">
+        <span className="lp-pill lp-fade" style={{ animationDelay: "0ms" }}>Contract risk analysis</span>
         <h1 className="lp-fade" style={{ animationDelay: "100ms" }}>
-          Sensing Risk <span className="lp-accent">Before It Becomes</span> a Problem
+          Sensing risk before it becomes a <span className="lp-accent">problem.</span>
         </h1>
         <p className="lp-lead lp-fade" style={{ animationDelay: "200ms" }}>
-          LegalPulse helps you analyze contracts, detect risks, compare versions and
-          understand real-world impact with explainable AI.
+          Compare two versions of a contract. See what changed, what depends on it, and what to read first.
         </p>
         <div className="lp-btn-row lp-fade" style={{ animationDelay: "300ms" }}>
-          <Link to={startTo} className="lp-btn lp-btn-primary">
-            Get Started <ArrowRight size={16} />
-          </Link>
-          <Link to={sampleTo} className="lp-btn lp-btn-outline">View Sample Report</Link>
+          <Link to={startTo} className="lp-btn lp-btn-primary">Get started <ArrowRight size={16} /></Link>
+          <Link to={sampleTo} className="lp-btn lp-btn-outline">View sample report</Link>
         </div>
-      </div>
 
-      <div className="lp-hero-visual lp-fade" style={{ animationDelay: "250ms" }}>
-        <div className="lp-mock lp-float">
-          <div className="lp-mock-side">
-            <FileText size={18} className="active" />
-            <GitFork size={18} />
-            <BarChart3 size={18} />
-            <Settings size={18} />
-          </div>
-          <div className="lp-mock-doc">
-            <strong>Contract.pdf</strong>
-            <i className="line" style={{ width: "90%" }} />
-            <i className="line" style={{ width: "75%" }} />
-            <i className="line hl-red" style={{ width: "55%" }} />
-            <i className="line" style={{ width: "85%" }} />
-            <i className="line" style={{ width: "70%" }} />
-            <i className="line hl-yellow" style={{ width: "60%" }} />
-            <i className="line" style={{ width: "80%" }} />
-            <i className="line hl-red" style={{ width: "50%", marginLeft: "30%" }} />
-          </div>
-          <div className="lp-mock-summary">
-            <strong>Risk Summary</strong>
-            <div className="lp-summary-top">
-              <span className="lp-shield"><ShieldAlert size={22} /></span>
-              <div>
-                <b>3 High Risk Clauses</b>
-                <small>View details →</small>
-              </div>
+        <div className="lp-hero-visual lp-fade" style={{ animationDelay: "450ms" }} aria-hidden="true">
+          <Sheet title="Agreement · v1" bars={V1} tilt={-3} />
+          <svg className="lp-flow" width="46" height="24" viewBox="0 0 46 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M2 12h38M31 3l9 9-9 9" />
+          </svg>
+          <div className="lp-sheet-wrap">
+            <Sheet title="Agreement · v2" bars={V2} tilt={2} />
+            <div className="lp-chip">
+              <b>HIGH RISK</b>
+              <span>Clause 7 was removed</span>
+              <small>3 clauses relied on it</small>
             </div>
-            {summary.map((s) => (
-              <div className="lp-summary-row" key={s.title}>
-                <span className={`dot ${s.color}`} />
-                <div>
-                  <b>{s.title}</b>
-                  <small>{s.text}</small>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>

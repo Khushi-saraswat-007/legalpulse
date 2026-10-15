@@ -1,12 +1,11 @@
 import { useAuth } from "../context/AuthContext";
 import LandingNav from "../landing/LandingNav";
 import Hero from "../landing/Hero";
+import { Problem, How, Band, Who } from "../landing/Story";
 import Features from "../landing/Features";
-import Demo from "../landing/Demo";
-import Benefits from "../landing/Benefits";
+import Faq from "../landing/Faq";
 import Closing from "../landing/Closing";
 import "../landing/landing.css";
-import "../landing/landing2.css";
 
 export default function Landing() {
   const { user } = useAuth();
@@ -14,11 +13,14 @@ export default function Landing() {
   const sampleTo = user ? "/dashboard" : "/login";
   return (
     <div className="lp">
-      <LandingNav startTo={startTo} />
+      <LandingNav startTo={startTo} loggedIn={!!user} />
       <Hero startTo={startTo} sampleTo={sampleTo} />
+      <Problem />
+      <How />
       <Features />
-      <Demo />
-      <Benefits />
+      <Band />
+      <Who />
+      <Faq />
       <Closing startTo={startTo} />
     </div>
   );
