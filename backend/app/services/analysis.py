@@ -109,7 +109,9 @@ def analyze_texts(old_text: str, new_text: str, contract_key: str = "c001") -> d
                       "contradictions": len(new["contradictions"]),
                       # NLI accuracy is not yet measured on real labelled data: never present it as final
                       "contradictions_status": "experimental",
-                      "warnings": old_warn + new_warn}
+                      "warnings": old_warn + new_warn,
+                      # clause text for the Changes page (side-by-side old / new wording)
+                      "clause_text": {c["clause_id"]: c["text"] for c in old["clauses"] + new["clauses"]}}
     return report
 
 
