@@ -73,3 +73,18 @@ def test_contract_name_is_cleaned_and_saved(auth_headers):
     assert r.status_code == 200, r.text
     names = [x["contract_key"] for x in c.get("/contracts", headers=auth_headers).json()]
     assert "Acme-Supply-Agreement" in names
+
+
+def test_report_carries_clause_text_for_the_changes_page():
+    rep = analyze_texts(OLD, NEW, "t5")
+    texts = rep["meta"]["clause_text"]
+    assert any("90 days" in t for t in texts.values())
+    assert any("30 days" in t for t in texts.values())
+
+
+def test_report_carries_clause_text_for_the_changes_page():
+    rep = analyze_texts(OLD, NEW, "t5")
+    texts = rep["meta"]["clause_text"]
+    assert any("90 days" in t for t in texts.values()) and any("30 days" in t for t in texts.values())
+    changed = next(c for c in rep["changes"] if c["change_type"] == "modified")
+    assert (changed["old_clause_id"] in texts) and (changed["new_clause_id"] in texts)
