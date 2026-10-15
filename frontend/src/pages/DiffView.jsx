@@ -1,9 +1,26 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import ReactDiffViewer from "react-diff-viewer-continued";
 import { getReport } from "../api/contracts";
 import { mockClauses } from "../api/mockClauses";
 import Loader from "../components/Loader";
+import ContractSwitcher from "../components/ContractSwitcher";
+import { cleanName, shortId } from "../lib/format";
+import { wordDiff } from "../lib/wordDiff";
+
+// Old and new wording side by side, with the words that changed highlighted.
+function TextDiff({ oldText, newText }) {
+  const { left, right } = wordDiff(oldText, newText);
+  const render = (tokens, cls) => tokens.map((x, i) => (x.changed ? <mark key={i} className={cls}>{x.t}</mark> : <span key={i}>{x.t}</span>));
+  return (
+    <>
+      <div className="diff-cols"><span>Previous version</span><span>New version</span></div>
+      <div className="diff-pair">
+        <p className="diff-col">{render(left, "del")}</p>
+        <p className="diff-col">{render(right, "ins")}</p>
+      </div>
+    </>
+  );
+}
 
 export default function DiffView() {
   const { id } = useParams();
@@ -18,44 +35,40 @@ export default function DiffView() {
   if (!report) return <Loader text="Loading changes…" />;
 
   const changes = report.changes.filter((c) => c.change_type !== "unchanged");
+  // clause text comes with the report (meta.clause_text); older saved reports fall back to the demo text
+  const textOf = (clauseId) => (clauseId ? report.meta?.clause_text?.[clauseId] ?? mockClauses[clauseId]?.text : undefined);
 
   return (
     <section>
       <div className="page-head">
         <div>
+          <p className="crumb">Changes <span>/</span> <b className="mono">{cleanName(report.contract_id)}</b></p>
           <h1>What changed</h1>
           <p className="muted">{changes.length} clause change{changes.length === 1 ? "" : "s"} between versions</p>
         </div>
-        <Link className="btn" to={`/report/${id}`}>Back to report</Link>
+        <div className="actions">
+          <ContractSwitcher current={id} to={(x) => `/diff/${x}`} />
+          <Link className="btn" to={`/report/${id}`}>Back to report</Link>
+        </div>
       </div>
 
-      {changes.length === 0 && <p className="muted">These versions have no differences.</p>}
+      {changes.length === 0 && <div className="panel"><p className="panel-empty">These versions have no differences.</p></div>}
 
       {changes.map((c, i) => {
-        const oldC = mockClauses[c.old_clause_id];
-        const newC = mockClauses[c.new_clause_id];
+        const oldId = c.old_clause_id ?? c.old_clause_ids?.[0];
+        const newId = c.new_clause_id ?? c.new_clause_ids?.[0];
+        const oldText = textOf(oldId);
+        const newText = textOf(newId);
         return (
           <article key={i} className="change">
-            <h2>
-              {c.change_type}
-              <span className="muted" style={{ textTransform: "none" }}> · {c.old_clause_id || "—"} → {c.new_clause_id || "—"}</span>
-            </h2>
+            <header className="change-head">
+              <span className={`tag tag-${c.change_type}`}>{c.change_type}</span>
+              <span className="mono muted">{oldId ? shortId(oldId) : "—"} → {newId ? shortId(newId) : "—"}</span>
+            </header>
             <p>{c.summary}</p>
-            {oldC && newC && (
-                            <>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", margin: "1rem 0 .4rem", fontSize: ".85rem", fontWeight: 600 }}>
-                  <span>Previous version</span>
-                  <span>New version</span>
-                </div>
-                <ReactDiffViewer
-                  oldValue={oldC.text}
-                  newValue={newC.text}
-                  splitView
-                  hideLineNumbers
-                  styles={{ contentText: { fontSize: "14px", lineHeight: "1.7" } }}
-                />
-              </>
-            )}
+            {oldText && newText && oldText !== newText && <TextDiff oldText={oldText} newText={newText} />}
+            {oldText && !newText && <blockquote className="clause-text removed">{oldText}</blockquote>}
+            {!oldText && newText && <blockquote className="clause-text added">{newText}</blockquote>}
           </article>
         );
       })}
