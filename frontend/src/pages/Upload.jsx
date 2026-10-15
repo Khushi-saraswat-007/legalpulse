@@ -27,8 +27,9 @@ export default function Upload() {
     try {
       const { id } = await uploadContracts(oldFile, newFile, name || suggestName(oldFile));
       navigate(`/report/${id}`);
-    } catch {
-      setError("Upload failed. Check that both files are valid and try again.");
+    } catch (e) {
+      const d = e.response?.data?.detail;
+      setError(typeof d === "string" ? d : "Upload failed. Check that both files are valid and try again.");
       setBusy(false);
     }
   };
@@ -37,23 +38,30 @@ export default function Upload() {
     <section>
       <div className="page-head">
         <div>
-          <h1>Upload contract versions</h1>
-          <p className="muted">Add the earlier version and the revised version to compare them.</p>
+          <p className="crumb">Upload</p>
+          <h1>Upload and analyse</h1>
+          <p className="muted">Add the earlier version and the revised version. PDF, DOCX and TXT are supported.</p>
         </div>
       </div>
-      <label className="name-field">
-        Contract name
-        <input value={name} onChange={(e) => setName(e.target.value)}
-               placeholder={suggestName(oldFile) || "e.g. Acme supply agreement"} maxLength={60} />
-      </label>
-      <div className="drop-row">
-        <FileDropzone label="Previous version" file={oldFile} onFile={setOldFile} />
-        <FileDropzone label="New version" file={newFile} onFile={setNewFile} />
+
+      <div className="panel light upload-panel">
+        <label className="name-field">
+          <span className="label">Contract name</span>
+          <input value={name} onChange={(e) => setName(e.target.value)}
+                 placeholder={suggestName(oldFile) || "e.g. Acme supply agreement"} maxLength={60} />
+        </label>
+        <div className="drop-row">
+          <FileDropzone step="1" label="Previous version" file={oldFile} onFile={setOldFile} />
+          <FileDropzone step="2" label="New version" file={newFile} onFile={setNewFile} />
+        </div>
+        {error && <p className="error">{error}</p>}
+        <div className="upload-actions">
+          <button className="btn btn-primary" disabled={!oldFile || !newFile || busy} onClick={handleSubmit}>
+            {busy ? "Analysing…" : "Analyse contract"}
+          </button>
+          {busy && <span className="muted">This can take a few seconds while the models run.</span>}
+        </div>
       </div>
-      {error && <p className="error">{error}</p>}
-      <button className="btn btn-primary" disabled={!oldFile || !newFile || busy} onClick={handleSubmit}>
-        {busy ? "Analyzing…" : "Analyze contract"}
-      </button>
     </section>
   );
 }

@@ -9,6 +9,7 @@ import ReportViewer from "./pages/ReportViewer";
 import DiffView from "./pages/DiffView";
 import GraphView from "./pages/GraphView";
 import Alerts from "./pages/Alerts";
+import ContractPicker from "./pages/ContractPicker";
 
 function Protected({ children }) {
   const { user } = useAuth();
@@ -31,6 +32,9 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Protected><Dashboard /></Protected>} />
           <Route path="/upload" element={<Protected><Upload /></Protected>} />
+          <Route path="/reports" element={<Protected><ContractPicker kind="report" /></Protected>} />
+          <Route path="/changes" element={<Protected><ContractPicker kind="diff" /></Protected>} />
+          <Route path="/graphs" element={<Protected><ContractPicker kind="graph" /></Protected>} />
           <Route path="/report/:id" element={<Protected><ReportViewer /></Protected>} />
           <Route path="/diff/:id" element={<Protected><DiffView /></Protected>} />
           <Route path="/graph/:id" element={<Protected><GraphView /></Protected>} />
