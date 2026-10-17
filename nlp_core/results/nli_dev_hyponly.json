@@ -1,0 +1,83 @@
+{
+  "csv": "contractnli/dev.csv",
+  "tag": "dev",
+  "hypothesis_only": true,
+  "backends": {
+    "cross-encoder/nli-deberta-v3-small": {
+      "n": 495,
+      "accuracy": 0.34545454545454546,
+      "macro_f1": 0.21889111247947457,
+      "per_class": {
+        "entailment": {
+          "precision": 0.375,
+          "recall": 0.105,
+          "f1": 0.1640625,
+          "support": 200
+        },
+        "contradiction": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 95
+        },
+        "neutral": {
+          "precision": 0.36674816625916873,
+          "recall": 0.75,
+          "f1": 0.49261083743842365,
+          "support": 200
+        }
+      },
+      "confusion": {
+        "entailment": {
+          "entailment": 21,
+          "contradiction": 3,
+          "neutral": 176
+        },
+        "contradiction": {
+          "entailment": 12,
+          "contradiction": 0,
+          "neutral": 83
+        },
+        "neutral": {
+          "entailment": 23,
+          "contradiction": 27,
+          "neutral": 150
+        }
+      },
+      "contradiction_sweep": [
+        {
+          "threshold": 0.5,
+          "tp": 0,
+          "fp": 30,
+          "fn": 95,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "threshold": 0.7,
+          "tp": 0,
+          "fp": 30,
+          "fn": 95,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "threshold": 0.8,
+          "tp": 0,
+          "fp": 30,
+          "fn": 95,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "threshold": 0.9,
+          "tp": 0,
+          "fp": 0,
+          "fn": 95,
+          "precision": 0.0,
+          "recall": 0.0
+        }
+      ]
+    }
+  }
+}
