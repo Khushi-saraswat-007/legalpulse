@@ -98,7 +98,8 @@ _FIRST_N = re.compile(r"\b(?:during|within) the first \d+", re.I)
 
 
 _GENERIC = set("tenant landlord buyer seller supplier licensor licensee provider client party parties agreement lease "
-               "contract termination shall may must will written notice premises".split())
+               "contract termination shall may must will written notice premises "
+               "within day days week weeks month months year years hour hours".split())
 _NUM_UNIT = re.compile(r"\b(\d+(?:,\d+)*)\s+(hour|day|week|month|year|rupee|dollar)s?\b", re.I)
 
 
