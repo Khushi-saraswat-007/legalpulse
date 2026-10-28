@@ -104,3 +104,50 @@ def test_heading_only_parent_clause_is_not_paired():
     pairs = {(i, j) for i, j, _ in candidate_pairs(clauses)}
     assert not any(0 in p for p in pairs)   # the heading-only parent is never paired
     assert (1, 2) in pairs                  # real sibling clauses still are
+
+# ---- P1: candidate admission must not rely on filler words (model-free) ----
+def _mk(cid, num, otype, text, terms=(), refs=()):
+    return {"clause_id": cid, "number": num, "heading": "", "text": text,
+            "obligation_type": otype, "defined_terms": list(terms), "references": list(refs)}
+
+
+def _padded(*targets):
+    """Targets first (indices 0..n-1), then 4 unrelated clauses so TF-IDF weights are realistic
+    (in a 2-clause corpus every shared word has idf 0 and the problem cannot show up)."""
+    pad = [
+        _mk("pad_1", "91", "insurance", "Contractor maintains public liability cover throughout."),
+        _mk("pad_2", "92", "confidentiality", "Secrets remain secret after expiry."),
+        _mk("pad_3", "93", "notices", "Letters go to the registered office address."),
+        _mk("pad_4", "94", "assignment", "Rights pass only with written consent."),
+    ]
+    return list(targets) + pad
+
+
+def _admitted(clauses):
+    return {(i, j) for i, j, _ in candidate_pairs(clauses)}
+
+
+def test_filler_word_overlap_alone_does_not_admit_a_pair():
+    # p4v2_3 vs p4v2_7: different topics; they share only "within / days / of / shall / Licensee"
+    a = _mk("x_3", "3", "payment", "Within 15 days of receiving an invoice, Licensee shall pay the annual fee.")
+    b = _mk("x_7", "7", "data_protection", "Licensor shall delete Licensee data within 30 days of termination.")
+    assert (0, 1) not in _admitted(_padded(a, b))
+
+
+def test_genuinely_related_pairs_are_still_admitted():
+    # control 1: text-only link on content words (invoice, receipt, Buyer), different types
+    a = _mk("x_1", "1", "payment", "Buyer shall pay the invoice within 30 days of receipt.")
+    b = _mk("x_2", "2", "general", "Every invoice is due within 60 days of receipt by Buyer.")
+    assert (0, 1) in _admitted(_padded(a, b))
+    # control 2: explicit reference, no shared words
+    c = _mk("x_3", "3", "general", "Alpha applies.", refs=["x_4"])
+    d = _mk("x_4", "4", "general", "Beta applies.")
+    assert (0, 1) in _admitted(_padded(c, d))
+    # control 3: same obligation type
+    e = _mk("x_5", "5", "termination", "Either party may terminate on notice.")
+    f = _mk("x_6", "6", "termination", "Licensor may not terminate in the first year.")
+    assert (0, 1) in _admitted(_padded(e, f))
+    # control 4: shared defined term
+    g = _mk("x_7", "7", "grant", "Grant of rights.", terms=["Software"])
+    h = _mk("x_8", "8", "restriction", "No copying.", terms=["Software"])
+    assert (0, 1) in _admitted(_padded(g, h))
