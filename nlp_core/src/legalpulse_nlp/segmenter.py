@@ -123,6 +123,7 @@ def segment(text: str) -> SegmentResult:
     if not result.clauses:
         result = _fallback_paragraphs(text, result)
     _drop_toc_entries(result)
+    _move_party_list_to_preamble(result)
     _check_numbers(result)
     return result
 
@@ -191,6 +192,26 @@ def _fallback_paragraphs(text: str, result: SegmentResult) -> SegmentResult:
     result.preamble = ""
     return result
 
+
+_PARTY_WORDS = re.compile(r"registered offices?|represented by|hereinafter|incorporated (?:in|under)", re.I)
+
+
+def _move_party_list_to_preamble(result: SegmentResult) -> None:
+    """NLP-EX-11: parties listed as "1) ... 2) ..." in the preamble are not clauses. If numbering restarts
+    at 1 and the clauses before the restart are consecutive and all read like party descriptions, move them."""
+    cl = result.clauses
+    j = next((i for i in range(1, len(cl)) if cl[i].number == "1"), None)
+    if j is None:
+        return
+    head = cl[:j]
+    if [c.number for c in head] != [str(i) for i in range(1, j + 1)]:
+        return
+    if not all(_PARTY_WORDS.search(c.text) for c in head):
+        return
+    moved = " ".join(f"{c.number}) {c.text}" for c in head)
+    result.preamble = (result.preamble + " " + moved).strip()
+    result.clauses = cl[j:]
+    result.warnings.append(f"Moved {j} numbered party description(s) from the preamble out of the clause list.")
 
 def _check_numbers(result: SegmentResult) -> None:
     seen: dict[str, int] = {}
