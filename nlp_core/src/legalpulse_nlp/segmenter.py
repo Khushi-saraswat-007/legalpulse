@@ -162,8 +162,28 @@ def _next_is_body(lines: list[str], idx: int) -> bool:
     return False
 
 
+def _split_wrapped(text: str) -> list[str]:
+    """PDF text often has wrapped lines and no blank lines. A line that ends a sentence and is clearly
+    shorter than the longest line is treated as the end of a paragraph."""
+    lines = [l.strip() for l in text.split("\n") if l.strip()]
+    if not lines:
+        return []
+    longest = max(len(l) for l in lines)
+    paras: list[str] = []
+    cur: list[str] = []
+    for l in lines:
+        cur.append(l)
+        if l.endswith((".", ":", ";", "!", "?")) and len(l) < 0.8 * longest:
+            paras.append(" ".join(cur))
+            cur = []
+    if cur:
+        paras.append(" ".join(cur))
+    return [re.sub(r"\s+", " ", p).strip() for p in paras]
+
 def _fallback_paragraphs(text: str, result: SegmentResult) -> SegmentResult:
     paras = [re.sub(r"\s+", " ", p).strip() for p in re.split(r"\n\s*\n", text) if p.strip()]
+    if len(paras) == 1:
+        paras = _split_wrapped(text)
     if not paras:
         raise NoClausesFoundError("No clauses could be found in the text.")
     result.warnings.append("No clause numbering detected; split by paragraphs instead. Numbers are sequential guesses.")
