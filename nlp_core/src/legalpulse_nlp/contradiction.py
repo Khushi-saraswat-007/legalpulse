@@ -25,7 +25,8 @@ _EXC = re.compile("|".join(config.EXCEPTION_MARKERS), re.I)
 
 # ------------------------------------------------------------------ candidate pairs
 def _tfidf_vectors(clauses: list[dict]) -> list[dict[str, float]]:
-    docs = [Counter(_TOKEN.findall(c["text"].lower())) for c in clauses]
+    docs = [Counter(t for t in _TOKEN.findall(c["text"].lower()) if t not in config.GENERIC_TOKENS)
+            for c in clauses]
     df: Counter = Counter()
     for d in docs:
         df.update(d.keys())

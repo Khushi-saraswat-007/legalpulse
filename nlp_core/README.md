@@ -41,7 +41,7 @@ Any object with `.predict(pairs)` works, so a fine-tuned Legal-BERT can be dropp
 
 ## Evaluation (`python nlp_core/scripts/evaluate_extraction.py [--backend rule|hf]`)
 Run against the teammate's mock contracts. They are hand-made, same-author, tiny: a sanity check, not a benchmark.
-Latest run, rule-based NLI baseline (HF model NOT yet evaluated; run `--backend hf` and paste the numbers here):
+Latest run, rule-based NLI baseline on the mock set (the Hugging Face model is evaluated separately below, on ContractNLI):
 
 | Field | Exact match |
 |---|---|
@@ -54,9 +54,39 @@ Latest run, rule-based NLI baseline (HF model NOT yet evaluated; run `--backend 
 
 Contradictions (rule baseline): p1-p3 TP=1 FP=3 FN=0; held-out p4 TP=0 FP=2. Only ONE labelled positive pair exists, so no precision/recall claim is meaningful yet.
 
+### NLI model evaluation (ContractNLI dev, a proxy)
+
+Scored with `nlp_core/scripts/evaluate_nli.py` on a sample of the ContractNLI dev split: 495 examples (200 entailment, 95 contradiction, 200 neutral). Results are stored in `nlp_core/results/`.
+
+| Backend | Accuracy | Macro-F1 | Contradiction precision / recall |
+|---|---|---|---|
+| Rule-based baseline | 0.525 | 0.433 | 0.375 / 0.663 |
+| `cross-encoder/nli-deberta-v3-small` | 0.651 | 0.624 | 0.511 / 0.505 |
+| DeBERTa, hypothesis-only (premise blanked) | 0.345 | 0.219 | 0.000 / 0.000 |
+
+How to read it:
+* The model beats the rule baseline. The hypothesis-only ablation (Gururangan et al., 2018) falls below the share of the largest class (200/495 = 0.404), so the model is using the premise and not only the hypothesis wording.
+* Raising the contradiction threshold from 0.5 to 0.9 lifts contradiction precision from about 0.52 to 0.61 while recall stays near 0.5 (see `contradiction_sweep` in the JSON). The configured threshold is 0.80.
+
+Caveats:
+* ContractNLI is a proxy. It scores hypothesis vs contract, not clause vs clause inside one contract, and its neutral premises are random spans, not human-checked.
+* Contradiction accuracy on real contracts is NOT measured: only one labelled positive pair exists in the mock set. The UI labels contradictions "experimental".
+* The mock pair p4 is no longer a clean held-out set. It was used to find and fix a false positive (p4v2_3 / p4v2_7, scored 0.976 by the Hugging Face model); the fix ignores generic words when admitting candidate pairs.
+
+Reproduce (from the repo root):
+
+```
+python nlp_core/scripts/prepare_contractnli.py <ContractNLI dev json> --out contractnli/dev.csv
+python nlp_core/scripts/evaluate_nli.py --csv contractnli/dev.csv --backend both --tag dev --out nlp_core/results/nli_dev.json
+python nlp_core/scripts/evaluate_nli.py --csv contractnli/dev.csv --backend hf --hypothesis-only --tag dev --out nlp_core/results/nli_dev_hyponly.json
+```
+
+Tune on dev; run the test split once, at the very end.
+
 ## Known limitations
 * Scanned PDFs are detected, not OCR'd. Two-column or table-heavy layouts may split wrongly. Test on real contracts.
 * Cross-references to unknown clauses are reported as warnings, not guessed.
 * Only the first deadline per clause is kept (schema has one string).
 * Exception handling is limited to explicit "notwithstanding / except as provided / subject to Clause N" patterns.
 * Fine-tuning Legal-BERT is NOT done yet (needs a label mapping from CUAD / ContractNLI and a GPU: use Colab/Kaggle).
+* Candidate pairs ignore generic words (within, days, shall, ...). How many real conflicting pairs this filter keeps (its   recall) is not measured yet; it needs labelled real clause pairs.

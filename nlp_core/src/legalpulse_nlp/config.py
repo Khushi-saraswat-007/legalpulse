@@ -67,6 +67,14 @@ EMIT_LABELS = ("contradiction",)  # which labels are written to contract["contra
 MAX_CANDIDATE_PAIRS = 400
 MIN_TEXT_SIMILARITY = 0.12       # TF-IDF cosine; pairs with no other link need at least this
 SKIP_TYPES_FOR_PAIRS = {"definition", "governing_law"}
+# Words that carry no topic. Used ONLY for the candidate-admission similarity, so two clauses
+# are not paired just because both say "within 30 days of ... shall ...". (P1, 26 Oct)
+GENERIC_TOKENS = frozenset(
+    "a an the of in on at to for by with from and or nor but as is are be been being was were "
+    "this that these those it its any all each every such other not no may must shall will would "
+    "should can could upon under over into than then there their his her which who whom whose "
+    "within after before during day days week weeks month months year years hour hours "
+    "party parties licensee licensor".split())
 
 # Explicit exception / override markers. If clause B uses one of these AND cites clause A,
 # B is an intentional carve-out of A, so the pair is NOT reported as an accidental contradiction.
