@@ -3,6 +3,8 @@ import { useAuth } from "./context/AuthContext";
 import Sidebar from "./components/Sidebar";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import Upload from "./pages/Upload";
 import ReportViewer from "./pages/ReportViewer";
@@ -23,6 +25,8 @@ export default function App() {
   // The landing page and login page are public and have their own layouts
   if (pathname === "/") return <Landing />;
   if (pathname === "/login") return <Login />;
+    if (pathname === "/forgot-password") return <ForgotPassword />;
+  if (pathname === "/reset-password") return <ResetPassword />;
 
   return (
     <div className={user ? "shell" : ""}>
