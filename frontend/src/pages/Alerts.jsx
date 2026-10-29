@@ -11,8 +11,8 @@ export default function Alerts() {
   useEffect(() => {
     listAlerts()
       .then(setAlerts)
-      .catch(() => setError("Could not load alerts. Is the backend running?"));
-  }, []);
+      .catch(() => setError("Something went wrong. Please try again."));
+    }, []);
 
   const markSeen = async (id) => {
     try {
