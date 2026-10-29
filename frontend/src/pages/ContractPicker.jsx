@@ -23,7 +23,7 @@ export default function ContractPicker({ kind }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    listContracts().then(setContracts).catch(() => setError("Could not load your contracts. Is the backend running?"));
+    listContracts().then(setContracts).catch(() => setError("Something went wrong. Please try again."));
   }, []);
 
   if (error) return <p className="error">{error}</p>;
