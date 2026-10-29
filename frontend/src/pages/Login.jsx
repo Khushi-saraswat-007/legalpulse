@@ -30,7 +30,7 @@ export default function Login() {
       navigate("/dashboard");
     } catch (err) {
       const d = err.response?.data?.detail;
-      setError(typeof d === "string" ? d : "Something went wrong. Is the backend running?");
+      setError(typeof d === "string" ? d : "Something went wrong. Please try again.");
       setLoading(false);
     }
   };
@@ -83,6 +83,11 @@ export default function Login() {
                 </button>
               </span>
             </label>
+                        {mode === "login" && (
+              <Link to="/forgot-password" style={{ alignSelf: "flex-end", fontSize: ".85rem", fontWeight: 600, color: "var(--p)", textDecoration: "none" }}>
+                Forgot password?
+              </Link>
+            )}
             <button className="auth-submit" type="submit" disabled={loading}>
               {loading ? <span className="auth-spinner" /> : <>{mode === "login" ? "Log in" : "Sign up"} <ArrowRight size={18} /></>}
             </button>

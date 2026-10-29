@@ -24,7 +24,7 @@ export default function Dashboard() {
         if (list.length > 0) setReport(await getReport(list[0].id));
         listAlerts().then(setAlerts).catch(() => {});
       } catch {
-        setError("Could not load your dashboard. Is the backend running?");
+        setError("Something went wrong . Please try again .");
       }
     }
     load();
