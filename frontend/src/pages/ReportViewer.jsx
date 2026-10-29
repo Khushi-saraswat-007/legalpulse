@@ -12,7 +12,7 @@ export default function ReportViewer() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getReport(id).then(setReport).catch(() => setError("Could not load this report. Is the backend running?"));
+    getReport(id).then(setReport).catch(() => setError("Something went wrong. Please try again."));
   }, [id]);
 
   if (error) return <p className="error">{error}</p>;
