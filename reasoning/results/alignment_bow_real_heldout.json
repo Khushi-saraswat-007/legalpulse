@@ -89,8 +89,8 @@
     "r11: wrong type for ['r11v1_20.2']->['r11v2_20.2']: truth=unchanged pred=modified",
     "r12: wrong type for ['r12v1_7']->['r12v2_10']: truth=renumbered pred=modified",
     "r13: wrong type for ['r13v1_8']->['r13v2_8']: truth=unchanged pred=modified",
-    "r14: wrong type for ['r14v1_2']->['r14v2_2']: truth=unchanged pred=modified",
     "r14: wrong type for ['r14v1_4']->['r14v2_5']: truth=renumbered pred=modified",
+    "r14: wrong type for ['r14v1_2']->['r14v2_2']: truth=unchanged pred=modified",
     "r16: wrong type for ['r16v1_3.8']->['r16v2_3.8']: truth=unchanged pred=modified"
   ]
 }

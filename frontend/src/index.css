@@ -360,3 +360,6 @@ body:has(.shell) { background: var(--bg); }
 .tag-latest { background: #e6ebff; border-color: #c3ccf7; color: var(--accent-dark); }
 .pick-side { padding: 1rem 1.1rem 1.2rem; }
 .pick-side p { font-size: .92rem; }
+
+.reasons { margin: .5rem 0 0 !important; padding: 0 1.1rem; }
+.change > p.reasons { padding-top: .6rem; }

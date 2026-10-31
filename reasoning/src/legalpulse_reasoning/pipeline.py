@@ -5,8 +5,15 @@ from .risk.scorer import score_risk
 from .comparison.aligner import align_versions
 
 
-def run(old_contract: dict, new_contract: dict, embedder=None) -> dict:
-    changes = align_versions(old_contract, new_contract, embedder)
+def _explain(ch: dict, s: dict) -> str:
+    """Plain-language reasons first (what the change means), then the word-level summary, then the score parts."""
+    reasons = (ch.get("semantic") or {}).get("reasons") or []
+    text = ("; ".join(reasons[:3]) + ". " + ch["summary"]) if reasons else ch["summary"]
+    return f"{text} (score parts: {s['components']})"
+
+
+def run(old_contract: dict, new_contract: dict, embedder=None, semantic_scorer=None) -> dict:
+    changes = align_versions(old_contract, new_contract, embedder, semantic_scorer)
     g = build_graph(new_contract)
     g_old = build_graph(old_contract)      # needed to score DELETED clauses (they are not in the new graph)
     old_to_new = {}                        # old clause id -> the new clause id that replaced it
@@ -38,7 +45,7 @@ def run(old_contract: dict, new_contract: dict, embedder=None) -> dict:
             risks.append({"severity": s["severity"], "score": s["score"],
                           "trigger_clause": old_ids[0],      # the clause only exists in the old version
                           "impacted_clauses": list(dict.fromkeys(old_to_new[r["clause_id"]] for r in dep)),
-                          "explanation": f"{ch['summary']} (score parts: {s['components']})"})
+                          "explanation": _explain(ch, s)})
             continue
         impacted = {}
         for nid in new_ids:
@@ -50,7 +57,7 @@ def run(old_contract: dict, new_contract: dict, embedder=None) -> dict:
         risks.append({"severity": s["severity"], "score": s["score"],
                       "trigger_clause": new_ids[0],
                       "impacted_clauses": [i["clause_id"] for i in impacted],
-                      "explanation": f"{ch['summary']} (score parts: {s['components']})"})
+                      "explanation": _explain(ch, s)})
     risks.sort(key=lambda r: -r["score"])
     for i, r in enumerate(risks, 1):
         r["rank"] = i

@@ -41,6 +41,7 @@ export function parseExplanation(raw = "") {
       change: num("change_weight"),
       impact: num("impact_breadth"),
       contradiction: /'contradiction':\s*True/.test(body),
+      semantic: num("semantic"),
     },
   };
 }
