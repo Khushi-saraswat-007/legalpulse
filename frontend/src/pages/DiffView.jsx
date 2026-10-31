@@ -28,7 +28,7 @@ export default function DiffView() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getReport(id).then(setReport).catch(() => setError("Something went wrong. Please try again."));
+    getReport(id).then(setReport).catch(() => setError("Could not load the changes."));
   }, [id]);
 
   if (error) return <p className="error">{error}</p>;
@@ -66,6 +66,9 @@ export default function DiffView() {
               <span className="mono muted">{oldId ? shortId(oldId) : "—"} → {newId ? shortId(newId) : "—"}</span>
             </header>
             <p>{c.summary}</p>
+            {c.semantic?.reasons?.length > 0 && (
+              <p className="reasons">{c.semantic.reasons.map((r) => <span className="chip" key={r}>{r}</span>)}{c.match_basis === "structure" && <span className="chip">matched by position and heading</span>}</p>
+            )}
             {oldText && newText && oldText !== newText && <TextDiff oldText={oldText} newText={newText} />}
             {oldText && !newText && <blockquote className="clause-text removed">{oldText}</blockquote>}
             {!oldText && newText && <blockquote className="clause-text added">{newText}</blockquote>}

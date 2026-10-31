@@ -66,6 +66,28 @@ class _SafeNLI:
         return self._rule.predict(pairs)
 
 
+    @property
+    def is_model(self) -> bool:
+        """True while the real NLI model is in use (not the rule-based fallback)."""
+        return self._hf is not None
+
+
+def get_semantic_scorer():
+    """NLI scorer for the version comparison: lets the aligner confirm that a reworded clause kept its meaning.
+    Only used with the real model; the rule-based fallback cannot judge entailment, so then there is no scorer.
+    LEGALPULSE_SEMANTIC_NLI=0 switches it off."""
+    nli = get_nli()
+    if os.environ.get("LEGALPULSE_SEMANTIC_NLI", "1") != "1" or not nli.is_model:
+        return None
+
+    def score(pairs):
+        out = nli.predict(pairs)
+        if not nli.is_model:       # the model failed half way and the fallback answered: ignore it
+            return [{"entailment": 0.0, "neutral": 1.0, "contradiction": 0.0} for _ in pairs]
+        return out
+    return score
+
+
 def get_nli():
     global _nli
     if _nli is None:
@@ -103,12 +125,14 @@ def analyze_texts(old_text: str, new_text: str, contract_key: str = "c001") -> d
     except NLPCoreError as e:
         raise ValueError(str(e)) from e
     emb = get_embedder()
-    report = pipeline.run(old, new, embedder=emb)
+    scorer = get_semantic_scorer()
+    report = pipeline.run(old, new, embedder=emb, semantic_scorer=scorer)
     report["meta"] = {"embedder": emb.name, "nli": get_nli().name,
                       "old_clauses": len(old["clauses"]), "new_clauses": len(new["clauses"]),
                       "contradictions": len(new["contradictions"]),
                       # NLI accuracy is not yet measured on real labelled data: never present it as final
                       "contradictions_status": "experimental",
+                      "semantic_nli": scorer is not None,
                       "warnings": old_warn + new_warn,
                       # clause text for the Changes page (side-by-side old / new wording)
                       "clause_text": {c["clause_id"]: c["text"] for c in old["clauses"] + new["clauses"]}}

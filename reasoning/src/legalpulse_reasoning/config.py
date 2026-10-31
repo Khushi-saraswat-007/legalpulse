@@ -23,4 +23,16 @@ ADJ_MARGIN = 0.02            # ...and beat the single clause by at least this mu
 CONTAIN_MIN = 0.80           # share of a leftover clause's NEW words that must appear in the merged/split text
 CONTAIN_MIN_WORDS = 3        # a leftover must bring at least this many words its neighbour did not already have
 
+# Structure-aware matching: a clause left over between two matched neighbours is paired with the clause that
+# sits in the same gap if it has a structural cue (heading, number or clause type) and some text overlap.
+USE_STRUCTURE_PASS = True    # switch off to reproduce the similarity-only baseline (ablation)
+SIM_STRUCT_MIN = 0.20        # same heading: minimum similarity for a structure-based match (far below SIM_MATCH_THRESHOLD)
+SIM_STRUCT_WEAK_MIN = 0.50   # only the same number / clause type (weaker cue): needs more text overlap (0.35 gave 5% false matches)
+
+# Semantic change layer (comparison/semantic.py): what a modification MEANS, added on top of the base score
+SEMANTIC_BONUS_MAX = 0.20    # a change with maximal semantic severity adds this much to the risk score
+NLI_SAME_MEANING = 0.85      # both directions must entail each other at least this strongly to call a rewording harmless
+NLI_CONTRADICTION = 0.60     # old -> new (or new -> old) contradiction probability that is reported
+NLI_MAX_PAIRS = 60           # cap on clause pairs sent to the NLI model per analysis (speed)
+
 SEVERITY_BANDS = [(0.75, "critical"), (0.5, "high"), (0.25, "medium"), (0.0, "low")]

@@ -37,6 +37,38 @@ class SBertEmbedder:
         return np.asarray(self.model.encode(list(texts), normalize_embeddings=True))
 
 
+class LegalBertEmbedder:
+    """LEGAL-BERT (Chalkidis et al., 2020) as a clause embedder: mean-pooled last hidden state, L2-normalised.
+    Needs `pip install transformers torch`; downloads the model once. Used as a comparison baseline in the
+    evaluation: it was pre-trained on legal text but, unlike Sentence-BERT, not trained to compare sentences."""
+    name = "legalbert"
+
+    def __init__(self, model_name: str = "nlpaueb/legal-bert-base-uncased", max_length: int = 256):
+        import torch
+        from transformers import AutoModel, AutoTokenizer
+        self._torch = torch
+        self.max_length = max_length
+        self.tok = AutoTokenizer.from_pretrained(model_name)
+        self.model = AutoModel.from_pretrained(model_name).eval()
+
+    def encode(self, texts):
+        torch, out = self._torch, []
+        for i in range(0, len(texts), 16):
+            batch = self.tok(list(texts[i:i + 16]), padding=True, truncation=True,
+                             max_length=self.max_length, return_tensors="pt")
+            with torch.no_grad():
+                hidden = self.model(**batch).last_hidden_state
+            mask = batch["attention_mask"].unsqueeze(-1).float()
+            pooled = (hidden * mask).sum(1) / mask.sum(1).clamp(min=1e-9)
+            out.append(torch.nn.functional.normalize(pooled, dim=1).numpy())
+        return np.vstack(out) if out else np.zeros((0, 768), dtype=np.float32)
+
+
+def make_embedder(name: str):
+    """'bow' | 'sbert' | 'legalbert'"""
+    return {"bow": BagOfWordsEmbedder, "sbert": SBertEmbedder, "legalbert": LegalBertEmbedder}[name]()
+
+
 def get_default_embedder():
     try:
         return SBertEmbedder()
