@@ -14,7 +14,7 @@ import argparse, json, pathlib, sys, collections
 ROOT = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "src"))
 from legalpulse_reasoning.comparison.aligner import align_versions
-from legalpulse_reasoning.comparison.embedders import BagOfWordsEmbedder, SBertEmbedder
+from legalpulse_reasoning.comparison.embedders import BagOfWordsEmbedder, make_embedder
 
 DATA = ROOT / "data"
 
@@ -74,10 +74,10 @@ def evaluate(embedder, folder="mock", verbose=True):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--embedder", choices=["bow", "sbert"], default="bow")
+    ap.add_argument("--embedder", choices=["bow", "sbert", "legalbert"], default="bow")
     ap.add_argument("--dir", default="mock", help="folder under reasoning/data: 'mock', 'real' or 'real_heldout'")
     a = ap.parse_args()
-    emb = BagOfWordsEmbedder() if a.embedder == "bow" else SBertEmbedder()
+    emb = make_embedder(a.embedder)
     res = evaluate(emb, a.dir)
     out = ROOT / "results"; out.mkdir(exist_ok=True)
     fname = f"alignment_{a.embedder}.json" if a.dir == "mock" else f"alignment_{a.embedder}_{a.dir}.json"

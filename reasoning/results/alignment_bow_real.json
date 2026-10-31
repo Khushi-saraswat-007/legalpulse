@@ -86,8 +86,8 @@
     "r5: wrong type for ['r5v1_5.1']->['r5v2_5.1']: truth=unchanged pred=modified",
     "r6: wrong type for ['r6v1_6.2']->['r6v2_6.2']: truth=unchanged pred=modified",
     "r7: wrong type for ['r7v1_3']->['r7v2_3']: truth=unchanged pred=modified",
-    "r7: MISSED mapping ['r7v1_13.8']->[] (truth=deleted)",
     "r7: MISSED mapping []->['r7v2_4.6'] (truth=added)",
+    "r7: MISSED mapping ['r7v1_13.8']->[] (truth=deleted)",
     "r7: EXTRA mapping ['r7v1_13.8']->['r7v2_4.6'] (pred=modified)"
   ]
 }

@@ -1,0 +1,11 @@
+{
+  "legal synonyms swapped (same meaning)": {
+    "auc": 1.0,
+    "mean_similarity_same_clause": 0.996,
+    "mean_similarity_different_clause": 0.89,
+    "pairs": [
+      96,
+      576
+    ]
+  }
+}

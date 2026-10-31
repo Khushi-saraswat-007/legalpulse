@@ -12,7 +12,7 @@ export default function ReportViewer() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getReport(id).then(setReport).catch(() => setError("Something went wrong. Please try again."));
+    getReport(id).then(setReport).catch(() => setError("Could not load this report. Is the backend running?"));
   }, [id]);
 
   if (error) return <p className="error">{error}</p>;
@@ -75,7 +75,7 @@ export default function ReportViewer() {
                         )}
                         {ex.parts && (
                           <p className="parts mono">
-                            change {ex.parts.change?.toFixed(2)} · impact {ex.parts.impact?.toFixed(2)} · contradiction {ex.parts.contradiction ? "yes" : "no"}
+                            change {ex.parts.change?.toFixed(2)} · impact {ex.parts.impact?.toFixed(2)} · contradiction {ex.parts.contradiction ? "yes" : "no"}{ex.parts.semantic != null && <> · meaning +{ex.parts.semantic.toFixed(2)}</>}
                           </p>
                         )}
                       </td>
