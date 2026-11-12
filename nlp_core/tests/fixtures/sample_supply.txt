@@ -1,0 +1,24 @@
+SUPPLY AGREEMENT
+
+This Agreement is made on 1 January 2026 between Acme Foods Pvt Ltd (the "Supplier") and Bright Retail Ltd (the "Buyer").
+
+1. Definitions
+"Effective Date" means the date of signing. "Goods" means the products listed in Schedule 1.
+
+2. Payment
+Buyer shall pay invoices within 30 days of the Effective Date.
+
+3. Penalty
+A penalty applies if payment under Clause 2 is late.
+
+4. Termination
+4.1 Either party may terminate with 30 days notice.
+4.2 Clause 3 penalties survive termination, subject to Clause 9.
+(a) outstanding invoices remain payable.
+
+Page 2 of 3
+
+5. Confidentiality: Neither party shall disclose the other's confidential information.
+
+6. Governing Law
+This agreement is governed by the laws of India.

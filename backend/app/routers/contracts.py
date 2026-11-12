@@ -1,14 +1,87 @@
-import json, pathlib
-from fastapi import APIRouter, HTTPException
+import json
+import pathlib
+import re
+
+from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
+from sqlalchemy import select
+from sqlalchemy.orm import Session
+
+from ..db import get_db
+from ..models import Analysis, User
+from ..services.analysis import SUPPORTED_EXTENSIONS, analyze_files
+from .auth import get_current_user
+from .alerts import create_risk_alert
 
 router = APIRouter(prefix="/contracts", tags=["contracts"])
 MOCK = pathlib.Path(__file__).resolve().parents[3] / "schemas" / "sample_risk_report.json"
 
 
-# TODO: POST /contracts/upload (old + new files), GET /contracts, GET /contracts/{id}
+@router.post("/analyze")
+async def analyze(old_file: UploadFile = File(...), new_file: UploadFile = File(...),
+                  contract_key: str = Form("c001"), db: Session = Depends(get_db),
+                  user: User = Depends(get_current_user)):
+    """Upload the OLD and NEW version of a contract (.txt, .pdf or .docx). Returns the risk report and saves it."""
+    contract_key = re.sub(r"[^A-Za-z0-9_-]+", "-", contract_key).strip("-")[:40] or "c001"
+    for f in (old_file, new_file):
+        if not (f.filename or "").lower().endswith(SUPPORTED_EXTENSIONS):
+            raise HTTPException(400, f"{f.filename}: only {', '.join(SUPPORTED_EXTENSIONS)} files are supported")
+    old_data, new_data = await old_file.read(), await new_file.read()
+    try:
+        report = analyze_files(old_file.filename, old_data, new_file.filename, new_data, contract_key)
+    except ValueError as e:
+        raise HTTPException(422, str(e))
+
+    row = Analysis(
+        owner_id=user.id,
+        contract_key=contract_key, old_filename=old_file.filename, new_filename=new_file.filename,
+        n_changes=sum(1 for c in report["changes"] if c["change_type"] != "unchanged"),
+        n_risks=len(report["risks"]),
+        top_severity=report["risks"][0]["severity"] if report["risks"] else "none",
+        report_json=json.dumps(report))
+    db.add(row)
+    db.commit()
+    create_risk_alert(db, user.id, contract_key, report)
+    report["analysis_id"] = row.id
+    return report
+
+
+@router.get("")
+def list_analyses(db: Session = Depends(get_db), user: User = Depends(get_current_user)):
+    """Summaries of the logged-in user's analyses, newest first (for the dashboard)."""
+    rows = db.scalars(
+        select(Analysis).where(Analysis.owner_id == user.id).order_by(Analysis.id.desc())
+    ).all()
+    return [{"id": r.id, "contract_key": r.contract_key, "old_filename": r.old_filename,
+             "new_filename": r.new_filename, "n_changes": r.n_changes, "n_risks": r.n_risks,
+             "top_severity": r.top_severity, "created_at": r.created_at.isoformat()} for r in rows]
+@router.get("/stats")
+def stats(db: Session = Depends(get_db), user: User = Depends(get_current_user)):
+    """Totals across all of the logged-in user's analyses (for the dashboard cards)."""
+    rows = db.scalars(select(Analysis).where(Analysis.owner_id == user.id)).all()
+    high = changes = clauses = 0
+    for r in rows:
+        rep = json.loads(r.report_json)
+        high += sum(1 for k in rep["risks"] if k["severity"] in ("high", "critical"))
+        changes += r.n_changes
+        clauses += len(rep.get("graph", {}).get("nodes", []))
+    return {"contracts": len(rows), "high_risk": high, "changes": changes, "clauses": clauses}
+
+
+@router.get("/{analysis_id}")
+def get_analysis(analysis_id: int, db: Session = Depends(get_db),
+                 user: User = Depends(get_current_user)):
+    """The full saved report for one of the user's analyses."""
+    row = db.get(Analysis, analysis_id)
+    if row is None or row.owner_id != user.id:
+        raise HTTPException(404, "analysis not found")
+    report = json.loads(row.report_json)
+    report["analysis_id"] = row.id
+    return report
+
+
 @router.get("/{contract_key}/report")
 def get_report(contract_key: str):
-    """Serves mock report until the real pipeline is wired in, so the frontend can build now."""
+    """Mock report (kept so the frontend can still be built without uploading anything)."""
     if not MOCK.exists():
         raise HTTPException(404, "no report")
     return json.loads(MOCK.read_text())

@@ -1,0 +1,38 @@
+{
+  "30% of the words replaced": {
+    "auc": 0.998,
+    "mean_similarity_same_clause": 0.843,
+    "mean_similarity_different_clause": 0.254,
+    "pairs": [
+      96,
+      576
+    ]
+  },
+  "50% of the words replaced": {
+    "auc": 0.99,
+    "mean_similarity_same_clause": 0.7,
+    "mean_similarity_different_clause": 0.245,
+    "pairs": [
+      96,
+      576
+    ]
+  },
+  "70% of the words replaced": {
+    "auc": 0.937,
+    "mean_similarity_same_clause": 0.543,
+    "mean_similarity_different_clause": 0.241,
+    "pairs": [
+      96,
+      576
+    ]
+  },
+  "85% of the words replaced": {
+    "auc": 0.802,
+    "mean_similarity_same_clause": 0.43,
+    "mean_similarity_different_clause": 0.246,
+    "pairs": [
+      96,
+      576
+    ]
+  }
+}

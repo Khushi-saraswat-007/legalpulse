@@ -3,8 +3,18 @@ uvicorn[standard]
 sqlalchemy>=2.0
 pydantic>=2.6
 python-multipart
-passlib[bcrypt]
+bcrypt
 python-jose[cryptography]
 apscheduler
 pytest
+python-dotenv
 httpx
+networkx
+scikit-learn
+sentence-transformers>=2.7
+# nlp_core (Part B): file reading, schema check, contradiction detection
+pdfplumber>=0.11
+python-docx>=1.1
+jsonschema>=4.20
+torch>=2.2
+transformers>=4.40

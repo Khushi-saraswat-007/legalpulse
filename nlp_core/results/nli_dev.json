@@ -1,0 +1,159 @@
+{
+  "csv": "contractnli/dev.csv",
+  "tag": "dev",
+  "hypothesis_only": false,
+  "backends": {
+    "rule-based-baseline": {
+      "n": 495,
+      "accuracy": 0.5252525252525253,
+      "macro_f1": 0.4328934612932301,
+      "per_class": {
+        "entailment": {
+          "precision": 0.9090909090909091,
+          "recall": 0.05,
+          "f1": 0.09478672985781991,
+          "support": 200
+        },
+        "contradiction": {
+          "precision": 0.375,
+          "recall": 0.6631578947368421,
+          "f1": 0.47908745247148293,
+          "support": 95
+        },
+        "neutral": {
+          "precision": 0.5917721518987342,
+          "recall": 0.935,
+          "f1": 0.7248062015503876,
+          "support": 200
+        }
+      },
+      "confusion": {
+        "entailment": {
+          "entailment": 10,
+          "contradiction": 92,
+          "neutral": 98
+        },
+        "contradiction": {
+          "entailment": 1,
+          "contradiction": 63,
+          "neutral": 31
+        },
+        "neutral": {
+          "entailment": 0,
+          "contradiction": 13,
+          "neutral": 187
+        }
+      },
+      "contradiction_sweep": [
+        {
+          "threshold": 0.5,
+          "tp": 63,
+          "fp": 105,
+          "fn": 32,
+          "precision": 0.375,
+          "recall": 0.6631578947368421
+        },
+        {
+          "threshold": 0.7,
+          "tp": 63,
+          "fp": 105,
+          "fn": 32,
+          "precision": 0.375,
+          "recall": 0.6631578947368421
+        },
+        {
+          "threshold": 0.8,
+          "tp": 63,
+          "fp": 105,
+          "fn": 32,
+          "precision": 0.375,
+          "recall": 0.6631578947368421
+        },
+        {
+          "threshold": 0.9,
+          "tp": 0,
+          "fp": 0,
+          "fn": 95,
+          "precision": 0.0,
+          "recall": 0.0
+        }
+      ]
+    },
+    "cross-encoder/nli-deberta-v3-small": {
+      "n": 495,
+      "accuracy": 0.6505050505050505,
+      "macro_f1": 0.6244364831642842,
+      "per_class": {
+        "entailment": {
+          "precision": 0.873015873015873,
+          "recall": 0.55,
+          "f1": 0.6748466257668712,
+          "support": 200
+        },
+        "contradiction": {
+          "precision": 0.5106382978723404,
+          "recall": 0.5052631578947369,
+          "f1": 0.5079365079365079,
+          "support": 95
+        },
+        "neutral": {
+          "precision": 0.5963636363636363,
+          "recall": 0.82,
+          "f1": 0.6905263157894737,
+          "support": 200
+        }
+      },
+      "confusion": {
+        "entailment": {
+          "entailment": 110,
+          "contradiction": 19,
+          "neutral": 71
+        },
+        "contradiction": {
+          "entailment": 7,
+          "contradiction": 48,
+          "neutral": 40
+        },
+        "neutral": {
+          "entailment": 9,
+          "contradiction": 27,
+          "neutral": 164
+        }
+      },
+      "contradiction_sweep": [
+        {
+          "threshold": 0.5,
+          "tp": 48,
+          "fp": 45,
+          "fn": 47,
+          "precision": 0.5161290322580645,
+          "recall": 0.5052631578947369
+        },
+        {
+          "threshold": 0.7,
+          "tp": 47,
+          "fp": 37,
+          "fn": 48,
+          "precision": 0.5595238095238095,
+          "recall": 0.49473684210526314
+        },
+        {
+          "threshold": 0.8,
+          "tp": 47,
+          "fp": 32,
+          "fn": 48,
+          "precision": 0.5949367088607594,
+          "recall": 0.49473684210526314
+        },
+        {
+          "threshold": 0.9,
+          "tp": 46,
+          "fp": 29,
+          "fn": 49,
+          "precision": 0.6133333333333333,
+          "recall": 0.4842105263157895
+        }
+      ]
+    }
+  }
+}

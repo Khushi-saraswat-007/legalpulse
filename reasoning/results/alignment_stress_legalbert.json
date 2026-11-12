@@ -1,0 +1,94 @@
+{
+  "similarity_only": {
+    "sentence inserted": {
+      "correct": 60,
+      "total": 60
+    },
+    "last sentence dropped": {
+      "correct": 60,
+      "total": 60
+    },
+    "sentences reordered + one added": {
+      "correct": 60,
+      "total": 60
+    },
+    "heading renamed": {
+      "correct": 60,
+      "total": 60
+    },
+    "heading renamed + sentence added": {
+      "correct": 60,
+      "total": 60
+    },
+    "clause moved and renumbered": {
+      "correct": 16,
+      "total": 16
+    },
+    "replaced by an unrelated clause (must NOT match)": {
+      "correct": 4,
+      "total": 64
+    },
+    "30% of the words replaced": {
+      "correct": 63,
+      "total": 64
+    },
+    "50% of the words replaced": {
+      "correct": 63,
+      "total": 64
+    },
+    "70% of the words replaced": {
+      "correct": 63,
+      "total": 64
+    },
+    "85% of the words replaced": {
+      "correct": 58,
+      "total": 64
+    }
+  },
+  "with_structure_pass": {
+    "sentence inserted": {
+      "correct": 60,
+      "total": 60
+    },
+    "last sentence dropped": {
+      "correct": 60,
+      "total": 60
+    },
+    "sentences reordered + one added": {
+      "correct": 60,
+      "total": 60
+    },
+    "heading renamed": {
+      "correct": 60,
+      "total": 60
+    },
+    "heading renamed + sentence added": {
+      "correct": 60,
+      "total": 60
+    },
+    "clause moved and renumbered": {
+      "correct": 16,
+      "total": 16
+    },
+    "replaced by an unrelated clause (must NOT match)": {
+      "correct": 0,
+      "total": 64
+    },
+    "30% of the words replaced": {
+      "correct": 63,
+      "total": 64
+    },
+    "50% of the words replaced": {
+      "correct": 63,
+      "total": 64
+    },
+    "70% of the words replaced": {
+      "correct": 64,
+      "total": 64
+    },
+    "85% of the words replaced": {
+      "correct": 61,
+      "total": 64
+    }
+  }
+}
