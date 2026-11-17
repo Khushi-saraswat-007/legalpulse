@@ -1,11 +1,17 @@
 """Tunable constants. Keep every magic number here so it is easy to defend and tune."""
 
-# Edge weights: how strongly a change travels along each edge type (0..1)
+# Edge weights: base value for each edge type (0..1). With WEIGHT_MODE = "idf" ONLY the shared_party weight is
+# scaled per edge by how common the party is (graph/weights.py); shared_term and cross_reference are used as is.
+# After labelling, fit these on data and put the result in WEIGHTS_FILE (json: {"cross_reference": 0.87, ...}).
 EDGE_WEIGHTS = {
     "cross_reference": 0.9,   # clause explicitly cites another clause
     "shared_term": 0.6,       # clauses use the same defined term
     "shared_party": 0.5,      # clauses involve the same party (via party node)
 }
+
+WEIGHT_MODE = "idf"     # "idf" = weights computed from the contract; "fixed" = the constants above (paper, commit 1e8bb95)
+WEIGHTS_FILE = None     # optional path to a json with fitted base weights
+TERM_EDGES = "directed" # "directed" = definition clause -> clauses that use the term; "undirected" = both ways (paper)
 
 MAX_DEPTH = 3           # how many hops a change may propagate
 MIN_IMPACT_SCORE = 0.2  # ignore weaker impacts

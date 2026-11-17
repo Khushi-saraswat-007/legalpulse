@@ -6,19 +6,19 @@ If clause X changes, which clauses are affected?
   - shared_term edges are symmetric: traverse forward.
   - shared_party edges go clause -> party: a change reaches other clauses of the
     same party by going clause -> party (forward) then party -> clause (reverse).
-Impact score of a path = product of edge weights; each clause keeps its best path.
+Impact score of a path = product of edge weights (stored on each edge by graph/weights.py); each clause keeps its best path.
 """
 from .. import config
 
 
 def _neighbors(g, node):
-    """Yield (next_node, edge_type) pairs along which a change propagates."""
+    """Yield (next_node, edge_type, weight) along which a change propagates."""
     for _, v, d in g.out_edges(node, data=True):
         if d["type"] in ("shared_term", "shared_party"):
-            yield v, d["type"]
+            yield v, d["type"], d.get("weight", config.EDGE_WEIGHTS[d["type"]])
     for u, _, d in g.in_edges(node, data=True):
         if d["type"] in ("cross_reference", "shared_party"):
-            yield u, d["type"]
+            yield u, d["type"], d.get("weight", config.EDGE_WEIGHTS[d["type"]])
 
 
 def trace_impact(g, changed_clause, max_depth=config.MAX_DEPTH, min_score=config.MIN_IMPACT_SCORE):
@@ -31,10 +31,10 @@ def trace_impact(g, changed_clause, max_depth=config.MAX_DEPTH, min_score=config
         nxt = []
         for node in frontier:
             score, path, etypes = best[node]
-            for nb, et in _neighbors(g, node):
+            for nb, et, w in _neighbors(g, node):
                 if nb in path:
                     continue
-                s = score * config.EDGE_WEIGHTS[et]
+                s = score * w
                 if s >= min_score and (nb not in best or s > best[nb][0]):
                     best[nb] = (s, path + [nb], etypes + [et])
                     nxt.append(nb)
