@@ -1,0 +1,111 @@
+{
+  "reference": "idf on party (current)",
+  "contracts": 12,
+  "rows": [
+    {
+      "setting": "fixed 0.9/0.6/0.5 (paper)",
+      "spread_pct": 34.4,
+      "overlap_with_reference": 0.45
+    },
+    {
+      "setting": "idf on party (current)",
+      "spread_pct": 13.9,
+      "overlap_with_reference": 1.0
+    },
+    {
+      "setting": "no party edges",
+      "spread_pct": 13.9,
+      "overlap_with_reference": 1.0
+    },
+    {
+      "setting": "fixed, no party edges",
+      "spread_pct": 13.9,
+      "overlap_with_reference": 1.0
+    },
+    {
+      "setting": "fixed, party 0.3",
+      "spread_pct": 13.9,
+      "overlap_with_reference": 1.0
+    },
+    {
+      "setting": "uniform weights 0.5 (GCN-like)",
+      "spread_pct": 33.0,
+      "overlap_with_reference": 0.44
+    },
+    {
+      "setting": "cross-reference only",
+      "spread_pct": 0.5,
+      "overlap_with_reference": 0.14
+    },
+    {
+      "setting": "no graph (depth 0)",
+      "spread_pct": 0.0,
+      "overlap_with_reference": 0.0
+    },
+    {
+      "setting": "depth 1",
+      "spread_pct": 7.6,
+      "overlap_with_reference": 0.66
+    },
+    {
+      "setting": "depth 2",
+      "spread_pct": 12.5,
+      "overlap_with_reference": 0.93
+    },
+    {
+      "setting": "sens: cross_ref 0.7",
+      "spread_pct": 13.9,
+      "overlap_with_reference": 1.0
+    },
+    {
+      "setting": "sens: cross_ref 1.0",
+      "spread_pct": 13.9,
+      "overlap_with_reference": 1.0
+    },
+    {
+      "setting": "sens: term 0.4",
+      "spread_pct": 9.0,
+      "overlap_with_reference": 0.74
+    },
+    {
+      "setting": "sens: term 0.8",
+      "spread_pct": 13.9,
+      "overlap_with_reference": 1.0
+    },
+    {
+      "setting": "sens: party 0.3",
+      "spread_pct": 13.9,
+      "overlap_with_reference": 1.0
+    },
+    {
+      "setting": "sens: party 0.7",
+      "spread_pct": 14.2,
+      "overlap_with_reference": 0.91
+    },
+    {
+      "setting": "sens: min_score 0.1",
+      "spread_pct": 14.2,
+      "overlap_with_reference": 0.91
+    },
+    {
+      "setting": "sens: min_score 0.3",
+      "spread_pct": 13.5,
+      "overlap_with_reference": 0.98
+    },
+    {
+      "setting": "directed term edges (new)",
+      "spread_pct": 2.2,
+      "overlap_with_reference": 0.25
+    },
+    {
+      "setting": "directed, term 0.8",
+      "spread_pct": 2.2,
+      "overlap_with_reference": 0.25
+    },
+    {
+      "setting": "directed, depth 1",
+      "spread_pct": 1.5,
+      "overlap_with_reference": 0.22
+    }
+  ]
+}
