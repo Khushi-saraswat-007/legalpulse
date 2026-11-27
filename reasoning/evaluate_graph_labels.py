@@ -1,9 +1,9 @@
 """Score every graph setting against labelled sheets.
 
 Usage (from reasoning/):
-  python evaluate_graph_labels.py results/labelling/labelling_sheet_CLAUDE.csv
+  python evaluate_graph_labels.py results/labelling/Labelling_sheet.csv
   python evaluate_graph_labels.py sheetA.csv sheetB.csv        # two reviewers: gold y = both said y, prints kappa
-  python evaluate_graph_labels.py my.xlsx results/labelling/labelling_sheet_CLAUDE.csv   # xlsx also works (needs: pip install openpyxl)
+  python evaluate_graph_labels.py my.xlsx results/labelling/Labelling_sheet.csv   # xlsx also works (needs: pip install openpyxl)
 Only rows that have a y/n label in EVERY given sheet are used.
 
 Numbers are measured inside the candidate pool (what the sheets contained), not over the whole contract:
@@ -102,4 +102,4 @@ def main(paths):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:] or [str(ROOT / "results" / "labelling" / "labelling_sheet_CLAUDE.csv")])
+    main(sys.argv[1:] or [str(ROOT / "results" / "labelling" / "Labelling_sheet.csv")])
